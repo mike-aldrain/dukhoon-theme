@@ -10,6 +10,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useMotionAllowed } from '../../../hooks/useMotionAllowed';
+import { useStoreImages } from '../../../hooks/useStoreProducts';
 import { artFor, itemsOf, MjArt, SectionHead, urlOf, useBlockText } from './shared';
 
 interface Reel {
@@ -27,6 +28,7 @@ export interface ProductReelsData {
 }
 
 export function ProductReels({ data }: { data: ProductReelsData }) {
+  const storeImages = useStoreImages();
   const tx = useBlockText();
   const { t } = useTranslation();
   const motionAllowed = useMotionAllowed();
@@ -82,6 +84,8 @@ export function ProductReels({ data }: { data: ProductReelsData }) {
                   />
                 ) : r.poster ? (
                   <img className="mj-reels__video" src={r.poster} alt={caption} loading="lazy" />
+                ) : storeImages.length ? (
+                  <img className="mj-reels__video mj-reels__video--product" src={storeImages[(i + 1) % storeImages.length]} alt={caption} loading="lazy" />
                 ) : (
                   <MjArt kind={artFor(i)} className="mj-reels__video" />
                 )}

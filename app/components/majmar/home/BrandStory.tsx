@@ -36,7 +36,7 @@ export function BrandStory({ data }: { data: BrandStoryData }) {
     <section className={`mj-section mj-story mj-story--${side}`}>
       <div className="mj-container mj-story__grid">
         <figure className="mj-story__figure" data-mj-reveal="">
-          <MjMedia src={data.image} alt="" art="mabkhara" sizes="(min-width: 1024px) 50vw, 100vw" className="mj-story__media" />
+          <MjMedia src={data.image} alt="" art="mabkhara" fallback={1} sizes="(min-width: 1024px) 50vw, 100vw" className="mj-story__media" />
         </figure>
         <div className="mj-story__copy">
           <SectionHead

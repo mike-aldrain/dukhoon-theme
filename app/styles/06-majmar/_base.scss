@@ -163,13 +163,15 @@ html[dir='rtl'] .mj-tagline {
     font-size: 0.75rem;
   }
 
+  /* Primary call to action: ink fill (gold in the Oud palette); turns gold on hover. */
   &--gold {
-    background: var(--mj-gold);
-    color: var(--mj-on-gold);
+    background: var(--mj-cta);
+    color: var(--mj-on-cta);
 
     &:hover {
-      background: var(--mj-gold-hover);
-      box-shadow: 0 10px 30px -10px rgb(var(--mj-gold-rgb) / 0.5);
+      background: var(--mj-gold);
+      color: var(--mj-on-gold);
+      box-shadow: 0 12px 30px -10px rgb(var(--mj-gold-rgb) / 0.6);
     }
   }
 

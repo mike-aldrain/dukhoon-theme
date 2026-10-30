@@ -40,7 +40,7 @@ export function SocialGrid({ data }: { data: SocialGridData }) {
         <ul className="mj-social__grid">
           {list.map((post, i) => {
             const href = urlOf(post.url) || profile;
-            const tile = <MjMedia src={post.image} alt="" art={artFor(i)} ratio="1/1" sizes="(min-width: 1024px) 16vw, 33vw" />;
+            const tile = <MjMedia src={post.image} alt="" art={artFor(i)} fallback={i + 4} ratio="1/1" sizes="(min-width: 1024px) 16vw, 33vw" />;
             return (
               <li key={i} data-mj-reveal="" style={{ ['--mj-i' as string]: i }}>
                 {href ? (

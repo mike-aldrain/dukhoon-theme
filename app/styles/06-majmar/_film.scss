@@ -2,53 +2,13 @@
  * Majmar cinematic layer: the WebGL hero stage and the Scroll Film block.
  */
 
-/* ---------- Hero stage: CSS still life first, WebGL fades in over it ---------- */
-.mj-hero__stage {
-  .mj-hero__fallback {
-    position: absolute;
-    inset: 0;
-    transition: opacity 1200ms var(--mj-ease);
-  }
-  .mj-hero__canvas {
-    position: absolute;
-    inset: -10% -14% -6%;
-    width: 128%;
-    height: 116%;
-    opacity: 0;
-    transition: opacity 1400ms var(--mj-ease);
-    pointer-events: none;
-  }
-  &.is-live {
-    .mj-hero__canvas {
-      opacity: 1;
-    }
-    .mj-hero__fallback {
-      opacity: 0;
-    }
-  }
-  /* With a merchant render, WebGL draws only light, smoke and the plinth behind it. */
-  &.has-render.is-live .mj-hero__fallback {
-    opacity: 0;
-  }
-  .mj-hero__render--product {
-    position: absolute;
-    inset: 4% 14% 16%;
-    z-index: 1;
-    filter: drop-shadow(0 40px 50px rgb(0 0 0 / 0.55));
-    animation: mj-float 9s ease-in-out infinite;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-}
-
 /* ---------- Scroll Film ---------- */
 .mj-film {
   position: relative;
-  background: #0b0907;
-  color: #f3eadf;
+  background:
+    radial-gradient(55% 60% at 50% 42%, rgb(var(--mj-gold-rgb) / var(--mj-glow-strength)), transparent 72%),
+    var(--mj-bg);
+  color: var(--mj-ivory);
 
   &__pin {
     position: sticky;
@@ -70,8 +30,8 @@
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(70% 60% at 50% 45%, transparent 40%, rgb(11 9 7 / 0.85) 100%),
-      linear-gradient(to top, rgb(11 9 7 / 0.7), transparent 30%);
+      radial-gradient(75% 65% at 50% 45%, transparent 45%, rgb(var(--mj-bg-rgb) / 0.9) 100%),
+      linear-gradient(to top, rgb(var(--mj-bg-rgb) / 0.85), transparent 30%);
   }
 
   /* Opening title */
@@ -95,17 +55,17 @@
       transform: none;
     }
     .mj-overline {
-      color: #d4a35a;
+      color: var(--mj-gold-ink);
     }
     .mj-display {
-      color: #f3eadf;
+      color: var(--mj-ivory);
       text-wrap: balance;
     }
   }
   &__hint {
     margin-top: 1rem;
     font-size: var(--mj-fs-caption);
-    color: rgb(243 234 223 / 0.6);
+    color: var(--mj-muted);
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -115,7 +75,7 @@
       content: '';
       width: 1px;
       height: 36px;
-      background: linear-gradient(to bottom, #d4a35a, transparent);
+      background: linear-gradient(to bottom, var(--mj-gold-ink), transparent);
       animation: mj-scroll-cue 2.4s var(--mj-ease) infinite;
     }
   }
@@ -147,17 +107,17 @@
       filter: none;
     }
     .mj-h1 {
-      color: #f3eadf;
+      color: var(--mj-ivory);
     }
     p {
-      color: rgb(243 234 223 / 0.75);
+      color: var(--mj-muted);
     }
   }
   &__num {
     font-family: 'Manrope', var(--mj-font-body);
     font-size: 0.75rem;
     letter-spacing: 0.2em;
-    color: #d4a35a;
+    color: var(--mj-gold-ink);
     direction: ltr;
     unicode-bidi: isolate;
   }
@@ -172,12 +132,12 @@
     gap: 0.9rem;
     padding: clamp(1.25rem, 3vw, 2rem);
     border-radius: var(--mj-radius-card);
-    background: rgb(20 16 13 / 0.6);
+    background: rgb(var(--mj-surface-rgb) / 0.8);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
     box-shadow:
-      inset 0 0 0 1px rgb(212 163 90 / 0.3),
-      0 40px 80px -30px rgb(0 0 0 / 0.8);
+      inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.45),
+      0 40px 80px -30px rgb(40 24 8 / 0.35);
     opacity: 0;
     transform: translate3d(0, calc(-50% + 40px), 0);
     transition:
@@ -191,10 +151,10 @@
       pointer-events: auto;
     }
     .mj-overline {
-      color: #d4a35a;
+      color: var(--mj-gold-ink);
     }
     .mj-h2 {
-      color: #f3eadf;
+      color: var(--mj-ivory);
     }
     @media (max-width: 767.98px) {
       top: auto;
@@ -210,11 +170,11 @@
     align-items: baseline;
     gap: 0.75rem;
     font-size: var(--mj-fs-h3);
-    color: #d4a35a;
+    color: var(--mj-gold-ink);
     font-weight: 600;
     s {
       font-size: 0.65em;
-      color: rgb(243 234 223 / 0.55);
+      color: var(--mj-muted);
       font-weight: 400;
     }
   }
@@ -233,11 +193,11 @@
     inset-inline: 0;
     bottom: 0;
     height: 2px;
-    background: rgb(243 234 223 / 0.08);
+    background: var(--mj-line);
     span {
       display: block;
       height: 100%;
-      background: linear-gradient(90deg, #8c5a3c, #d4a35a, #e8be7a);
+      background: linear-gradient(90deg, var(--mj-copper), var(--mj-gold), var(--mj-gold-hover));
       transform: scaleX(0);
       transform-origin: left;
     }
@@ -262,7 +222,7 @@
     aspect-ratio: 4 / 5;
     border-radius: var(--mj-radius-card);
     overflow: hidden;
-    background: #14100d;
+    background: var(--mj-surface);
     video,
     .mj-art {
       width: 100%;
@@ -274,10 +234,10 @@
     display: grid;
     gap: 1.25rem;
     .mj-overline {
-      color: #d4a35a;
+      color: var(--mj-gold-ink);
     }
     .mj-h1 {
-      color: #f3eadf;
+      color: var(--mj-ivory);
     }
     .mj-film__buy {
       position: static;
@@ -295,14 +255,14 @@
       grid-template-columns: auto 1fr;
       gap: 1rem;
       padding-block: 1rem;
-      border-top: 1px solid rgb(243 234 223 / 0.1);
+      border-top: 1px solid var(--mj-line);
     }
     .mj-h3 {
-      color: #f3eadf;
+      color: var(--mj-ivory);
       margin-bottom: 0.25rem;
     }
     p {
-      color: rgb(243 234 223 / 0.7);
+      color: var(--mj-muted);
     }
   }
 }
@@ -312,19 +272,9 @@
   max-width: none;
 }
 
-/* Phones and tablets: the 3D still life sits above the hero copy instead of beside it. */
+/* Phones and tablets: the 3D showcase sits above the hero copy. */
 @media (max-width: 1023.98px) {
-  .mj-hero__inner {
-    grid-template-rows: auto auto;
-  }
   .mj-hero .mj-hero__stage {
-    display: block;
     order: -1;
-    height: clamp(220px, 36svh, 380px);
-    margin-bottom: -1rem;
-  }
-  .mj-hero .mj-hero__stage .mj-hero__canvas {
-    inset: -8% -20% -4%;
-    width: 140%;
   }
 }

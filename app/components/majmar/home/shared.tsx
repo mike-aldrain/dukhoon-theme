@@ -11,6 +11,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { Image, Link } from '@salla.sa/twilight-theme-engine/common';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { text } from '../../../lib/majmarSettings';
+import { useStoreImages } from '../../../hooks/useStoreProducts';
 
 export type ArtKind = 'bottle' | 'flacon' | 'mabkhara' | 'oud' | 'rose' | 'giftbox' | 'smoke';
 
@@ -131,10 +132,21 @@ interface MjMediaProps {
   sizes?: string;
   className?: string;
   style?: CSSProperties;
+  /** Without `src`, show the store's product photo at this index (before drawn art). */
+  fallback?: number;
 }
 
 /** A merchant image through the engine Image (srcset, lazy), or placeholder art. */
-export function MjMedia({ src, mobileSrc, alt, ratio, art = 'bottle', priority, sizes, className = '' }: MjMediaProps) {
+export function MjMedia({ src, mobileSrc, alt, ratio, art = 'bottle', priority, sizes, className = '', fallback }: MjMediaProps) {
+  const storeImages = useStoreImages();
+  if (!src && fallback !== undefined && storeImages.length) {
+    // No merchant image: show one of the store's real product photos.
+    return (
+      <div className={`mj-media mj-media--product ${className}`} data-ratio={ratio}>
+        <img src={storeImages[fallback % storeImages.length]} alt={alt} loading="lazy" decoding="async" crossOrigin="anonymous" />
+      </div>
+    );
+  }
   if (!src) {
     return (
       <div className={`mj-media mj-media--art ${className}`} data-ratio={ratio}>

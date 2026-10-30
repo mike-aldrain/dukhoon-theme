@@ -25,7 +25,8 @@ export interface CinematicHeroData {
   image?: string;
   mobile_image?: string;
   video?: string;
-  product_image?: string;
+  /** Picked products shown in the 3D showcase (latest products when empty). */
+  products?: unknown;
   /** Block switch: WebGL 3D still life (default on). */
   webgl?: boolean;
   cta_primary_text?: unknown;
@@ -145,14 +146,14 @@ export function CinematicHero({ data }: { data: CinematicHeroData }) {
               </svg>
             </Link>
             {secondary.url && (
-              <Link to={secondary.url} className="mj-btn mj-btn--on-image">
+              <Link to={secondary.url} className="mj-btn mj-btn--ghost">
                 {secondary.label}
               </Link>
             )}
           </div>
         </div>
 
-        <HeroStage productImage={data.product_image} webgl={data.webgl !== false} />
+        <HeroStage products={data.products} webgl={data.webgl !== false} />
       </div>
 
       <span className="mj-hero__progress" aria-hidden="true" />

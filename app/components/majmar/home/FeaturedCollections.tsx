@@ -53,6 +53,7 @@ export function FeaturedCollections({ data }: { data: FeaturedCollectionsData })
                 <Link to={url} className="mj-tile">
                   <MjMedia
                     src={item.image}
+                    fallback={i}
                     alt=""
                     art={artFor(i + 1)}
                     sizes="(min-width: 1024px) 33vw, 100vw"

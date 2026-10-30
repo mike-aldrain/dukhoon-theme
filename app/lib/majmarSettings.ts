@@ -77,7 +77,7 @@ export function readMajmarSettings(settings: Settings, locale: string): MajmarSe
   const s = settings ?? {};
   const frames = Number(s.mj_pdp_360_min_frames);
   return {
-    palette: pick(s.mj_palette, ['oud', 'musk'] as const, 'oud'),
+    palette: pick(s.mj_palette, ['oud', 'musk'] as const, 'musk'),
     accentFromStore: pick(s.mj_accent_source, ['amber', 'store'] as const, 'amber') === 'store',
     storeFonts: pick(s.mj_fonts, ['majmar', 'store'] as const, 'majmar') === 'store',
     customColors: flag(s.mj_custom_colors, false),

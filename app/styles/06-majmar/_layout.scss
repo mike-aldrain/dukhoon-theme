@@ -135,7 +135,8 @@
    rows stay in the flow; when the lead block is the hero, <main> is pulled up under
    them by `--mj-header-stack` (measured in Header.tsx) and the rows sit above it. */
 .mj-header--overlay {
-  --mj-header-ink: #f4efe6;
+  /* The hero is now a light stage, so the floating header keeps the palette ink. */
+  --mj-header-ink: var(--mj-ivory);
 
   > .site-header__topnav,
   > .site-header__bar-outer {
@@ -144,20 +145,15 @@
     color: var(--mj-header-ink);
   }
   > .site-header__topnav {
-    background: rgb(11 11 13 / 0.35);
+    background: transparent;
   }
-
   .site-header__bar:not(.is-scrolled) {
-    background: linear-gradient(to bottom, rgb(11 11 13 / 0.55), transparent);
-    border-color: rgb(244 239 230 / 0.1);
-  }
-  .site-header__bar.is-scrolled {
-    --mj-header-ink: var(--mj-ivory);
-    color: var(--mj-ivory);
+    background: transparent;
+    border-color: var(--mj-line);
   }
   [class*='topnav'] {
-    color: rgb(244 239 230 / 0.75);
-    border-color: rgb(244 239 230 / 0.1);
+    color: var(--mj-muted);
+    border-color: var(--mj-line);
   }
 }
 /* With a lead hero, the hero carries the brand message; Raed's intro row would

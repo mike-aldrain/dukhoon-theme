@@ -58,7 +58,7 @@ export function ScentFamilies({ data }: { data: ScentFamiliesData }) {
           <li key={i} className="mj-families__item" data-mj-reveal="" style={{ ['--mj-i' as string]: i }}>
             <Link to={f.url || '/products'} className="mj-families__link">
               <span className="mj-families__disc">
-                <MjMedia src={f.image} alt="" art={f.art} ratio="1/1" sizes="160px" />
+                <MjMedia src={f.image} alt="" art={f.art} fallback={i} ratio="1/1" sizes="160px" />
               </span>
               <span className="mj-families__name">{f.name}</span>
             </Link>

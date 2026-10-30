@@ -22,7 +22,9 @@ import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { useMajmar } from '../../../hooks/useMajmar';
 import { useMotionAllowed } from '../../../hooks/useMotionAllowed';
 import { useHydrated } from '../../../hooks/useHydrated';
-import type { HeroSceneHandle } from '../../../lib/heroScene';
+import type { ProductSceneHandle } from '../../../lib/productScene';
+import { imageOf, useLatestProducts, useProductGallery } from '../../../hooks/useStoreProducts';
+import { canUseWebGL, sceneTokens } from './HeroStage';
 import { openMiniCart } from '../MiniCart';
 import { itemsOf, MjArt, urlOf, useBlockText } from './shared';
 
@@ -85,7 +87,8 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   const videoUrl = urlOf(data.video);
   const source: 'frames' | 'video' | 'webgl' =
     framesPattern.includes('{n}') && framesCount > 1 ? 'frames' : videoUrl ? 'video' : 'webgl';
-  const animate = hydrated && motionAllowed && motion !== 'off' && (source !== 'webgl' || data.webgl !== false);
+  const animate =
+    hydrated && motionAllowed && motion !== 'off' && (source !== 'webgl' || (data.webgl !== false && canUseWebGL()));
   const screens = LENGTHS[(choice(data.length) as keyof typeof LENGTHS) || 'medium'] ?? LENGTHS.medium;
 
   const chapters = useMemo(() => {
@@ -107,9 +110,19 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
     ...productApi.queries.list({ source: productId ? 'selected' : 'latest', sourceValue: productId ? [productId] : undefined, perPage: 1 }),
   });
   const item = picked?.items?.[0];
+  // The film turns through the featured product's gallery, topped up with other real
+  // products so the carousel always has depth.
+  const gallery = useProductGallery(item ? Number(item.id) : null);
+  const latest = useLatestProducts();
+  const filmImages = useMemo(() => {
+    const extra = latest.filter((p) => p.id !== item?.id).map(imageOf);
+    const all = Array.from(new Set([...(gallery.length ? gallery : [imageOf(item)]), ...extra].filter(Boolean)));
+    return all.slice(0, 5);
+  }, [gallery, latest, item]);
+  const imagesKey = filmImages.join('|');
 
   // ---- Progress from scroll (rAF-throttled), feeding the active source.
-  const sceneRef = useRef<HeroSceneHandle | null>(null);
+  const sceneRef = useRef<ProductSceneHandle | null>(null);
   const framesRef = useRef<HTMLImageElement[]>([]);
   const onProgress = useCallback(
     (p: number) => {
@@ -177,17 +190,16 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
     };
     const start = () => {
       if (source === 'webgl') {
-        import('../../../lib/heroScene')
-          .then(({ mountHeroScene }) => {
+        if (!filmImages.length) return;
+        import('../../../lib/productScene')
+          .then(({ mountProductScene }) => {
             if (cancelled) return;
-            const accent = getComputedStyle(canvas).getPropertyValue('--mj-gold-rgb') || '212 163 90';
-            sceneRef.current = mountHeroScene(canvas, {
-              bottle: true,
-              accent,
+            sceneRef.current = mountProductScene(canvas, {
+              images: filmImages,
+              ...sceneTokens(canvas),
               rtl: isRTL,
               intensity: motion === 'subtle' ? 'subtle' : 'cinematic',
               mode: 'scroll',
-              plinth: false,
             });
             window.dispatchEvent(new Event('scroll'));
           })
@@ -227,7 +239,9 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
       sceneRef.current?.dispose();
       sceneRef.current = null;
     };
-  }, [animate, source, framesPattern, framesCount, isRTL, motion]);
+    // `imagesKey` stands for filmImages.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [animate, source, framesPattern, framesCount, isRTL, motion, imagesKey]);
 
   const addToBag = async () => {
     if (!item) return;
@@ -260,7 +274,7 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
           {t('mj.film.add', 'Add to bag')}
         </button>
         {item.url && (
-          <Link to={item.url} className="mj-btn mj-btn--on-image">
+          <Link to={item.url} className="mj-btn mj-btn--ghost">
             {t('mj.film.details', 'View details')}
           </Link>
         )}
@@ -270,13 +284,13 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
 
   if (!animate) {
     return (
-      <section className="mj-film mj-film--static mj-stage-dark" aria-label={title}>
+      <section className="mj-film mj-film--static" aria-label={title}>
         <div className="mj-container mj-film__static">
           <div className="mj-film__poster">
             {videoUrl ? (
               <video src={videoUrl} muted playsInline preload="metadata" />
             ) : (
-              <MjArt kind="flacon" />
+              filmImages[0] ? <img src={filmImages[0]} alt="" loading="lazy" /> : <MjArt kind="flacon" />
             )}
           </div>
           <div className="mj-film__static-copy">
@@ -303,7 +317,7 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   return (
     <section
       ref={sectionRef}
-      className={`mj-film mj-stage-dark${ended ? ' is-ended' : ''}`}
+      className={`mj-film${ended ? ' is-ended' : ''}`}
       style={{ height: `${screens * 100}svh` }}
       aria-label={title}
     >

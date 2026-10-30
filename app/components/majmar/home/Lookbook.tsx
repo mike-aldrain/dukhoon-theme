@@ -6,6 +6,7 @@
  */
 import { useCallback, useEffect, useRef, useState, type TouchEvent } from 'react';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
+import { useStoreImages } from '../../../hooks/useStoreProducts';
 import { artFor, itemsOf, MjArt, MjMedia, SectionHead, useBlockText } from './shared';
 
 interface LookItem {
@@ -23,6 +24,7 @@ export interface LookbookData {
 const RATIOS = ['4/5', '1/1', '3/4', '4/5', '2/3', '1/1'];
 
 export function Lookbook({ data }: { data: LookbookData }) {
+  const storeImages = useStoreImages();
   const tx = useBlockText();
   const { t, isRTL } = useTranslation();
   const items = itemsOf<LookItem>(data.images, 'images');
@@ -80,7 +82,7 @@ export function Lookbook({ data }: { data: LookbookData }) {
                   setIndex(i);
                 }}
               >
-                <MjMedia src={item.image} alt="" art={artFor(i + 2)} ratio={RATIOS[i % RATIOS.length]} sizes="(min-width: 1024px) 33vw, 50vw" />
+                <MjMedia src={item.image} alt="" art={artFor(i + 2)} fallback={i + 2} ratio={RATIOS[i % RATIOS.length]} sizes="(min-width: 1024px) 33vw, 50vw" />
                 <span className="mj-masonry__zoom" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24">
                     <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.2" />
@@ -109,6 +111,8 @@ export function Lookbook({ data }: { data: LookbookData }) {
           <figure className="mj-lightbox__figure">
             {current.image ? (
               <img src={current.image} alt={captionOf(current, index)} className="mj-lightbox__img" />
+            ) : storeImages.length ? (
+              <img src={storeImages[(index + 2) % storeImages.length]} alt={captionOf(current, index)} className="mj-lightbox__img" />
             ) : (
               <MjArt kind={artFor(index + 2)} className="mj-lightbox__img" />
             )}

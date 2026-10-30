@@ -362,21 +362,21 @@
       "required": false,
       "options": [
         {
-          "label": "عود (داكن دافئ) · Oud (warm dark)",
-          "value": "oud"
+          "label": "فخامة فاتحة · Light luxury",
+          "value": "musk"
         },
         {
-          "label": "مسك (فاتح) · Musk (light)",
-          "value": "musk"
+          "label": "عود (داكن دافئ) · Oud (warm dark)",
+          "value": "oud"
         }
       ],
       "selected": [
         {
-          "label": "عود (داكن دافئ) · Oud (warm dark)",
-          "value": "oud"
+          "label": "فخامة فاتحة · Light luxury",
+          "value": "musk"
         }
       ],
-      "value": "oud"
+      "value": "musk"
     },
     {
       "id": "mj_accent_source",
@@ -442,7 +442,7 @@
       "format": "color",
       "label": "الخلفية · Background",
       "required": false,
-      "value": "#14100D",
+      "value": "#FBF8F3",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -457,7 +457,7 @@
       "format": "color",
       "label": "الأسطح والبطاقات · Surfaces and cards",
       "required": false,
-      "value": "#1E1814",
+      "value": "#FFFFFF",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -472,7 +472,7 @@
       "format": "color",
       "label": "اللون الكهرماني · Amber accent",
       "required": false,
-      "value": "#D4A35A",
+      "value": "#C8952E",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -487,7 +487,7 @@
       "format": "color",
       "label": "لون النص · Text colour",
       "required": false,
-      "value": "#F3EADF",
+      "value": "#12100E",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -916,13 +916,18 @@
           "value": null
         },
         {
-          "id": "product_image",
-          "type": "string",
-          "label": "صورة منتج شفافة (PNG) · Floating product render (transparent PNG)",
+          "id": "products",
+          "type": "items",
+          "label": "المنتجات المعروضة في العرض ثلاثي الأبعاد · Products in the 3D showcase",
           "required": false,
-          "format": "image",
-          "value": null,
-          "description": "Shown in a 3D layer beside the copy on desktop."
+          "format": "dropdown-list",
+          "source": "products",
+          "multichoice": true,
+          "searchable": true,
+          "options": [],
+          "selected": [],
+          "value": [],
+          "description": "Up to 5. Leave empty to show your latest products."
         },
         {
           "id": "cta_primary_text",
@@ -1015,7 +1020,7 @@
         {
           "id": "webgl",
           "type": "boolean",
-          "label": "قارورة ثلاثية الأبعاد متحركة (WebGL) · Animated 3D bottle (WebGL)",
+          "label": "عرض المنتجات ثلاثي الأبعاد (WebGL) · 3D product showcase (WebGL)",
           "required": false,
           "format": "switch",
           "value": true,
@@ -1111,7 +1116,7 @@
           "required": false,
           "format": "url",
           "value": null,
-          "description": "Example: https://cdn.example.com/film/frame-{n}.webp (numbered 0001, 0002 ...). Leave empty to use the 3D bottle."
+          "description": "Example: https://cdn.example.com/film/frame-{n}.webp (numbered 0001, 0002 ...). Leave empty to use the 3D product showcase."
         },
         {
           "id": "frames_count",
@@ -1161,7 +1166,7 @@
         {
           "id": "webgl",
           "type": "boolean",
-          "label": "القارورة ثلاثية الأبعاد عند عدم وجود فيديو · 3D bottle when there is no video",
+          "label": "عرض المنتج ثلاثي الأبعاد عند عدم وجود فيديو · 3D product showcase when there is no video",
           "required": false,
           "format": "switch",
           "value": true,

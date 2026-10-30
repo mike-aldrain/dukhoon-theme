@@ -68,6 +68,9 @@
       position: absolute;
       top: 0;
       bottom: 0;
+      /* Physical left on purpose: the sweep transform is physical too, so in RTL it
+         must still start off the left edge, not sit mid-card. */
+      left: 0;
       width: 40%;
       background: linear-gradient(90deg, transparent, rgb(var(--mj-gold-rgb) / 0.18), transparent);
       transform: translateX(-120%) skewX(-18deg);

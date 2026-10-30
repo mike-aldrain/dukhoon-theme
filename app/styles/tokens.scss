@@ -11,9 +11,9 @@
  * `ivory` the primary text, `muted` the secondary text, `copper` the secondary accent.
  *
  * Contrast (WCAG 2.2, against the palette background):
- *   Oud:  sand 16.3:1, muted 7.9:1, amber 8.9:1, amber-hover 11.6:1, error 6.6:1
- *   Musk: ink 16.7:1, muted 6.4:1, amber-ink 6.1:1 (amber fill #B98A44 is 2.9:1,
- *         so on Musk amber is used for fills, rules and icons only).
+ *   Light (default): ink 17.9:1, muted 7.0:1, gold-ink 5.6:1, ink on gold 7.1:1,
+ *         white on ink buttons 19:1. Gold #C8952E is for fills, rules and icons only.
+ *   Oud:  sand ~16:1, muted ~8:1, gold ~9:1.
  */
 
 @use 'sass:math';
@@ -25,45 +25,51 @@
   @return clamp(#{math.div($min-px, 16)}rem, #{math.div($base, 16)}rem + #{$slope * 100}vw, #{math.div($max-px, 16)}rem);
 }
 
+/* Light luxury (default): warm white, ink black, vivid gold. */
 :root,
+html[data-mj-palette='musk'] {
+  --mj-bg-rgb: 251 248 243; /* #FBF8F3 */
+  --mj-surface-rgb: 255 255 255;
+  --mj-raised-rgb: 244 238 228; /* #F4EEE4 */
+  --mj-gold-rgb: 200 149 46; /* vivid gold #C8952E (fills, rules, icons) */
+  --mj-gold-hover-rgb: 224 169 59; /* #E0A93B */
+  --mj-gold-ink-rgb: 138 90 18; /* #8A5A12 gold as text, 5.6:1 */
+  --mj-copper-rgb: 168 82 45;
+  --mj-ivory-rgb: 18 16 14; /* ink #12100E takes the text role, 17.9:1 */
+  --mj-muted-rgb: 91 84 76; /* #5B544C, 7.0:1 */
+  --mj-on-gold-rgb: 18 16 14;
+  --mj-cta-rgb: 18 16 14; /* primary buttons: ink fill */
+  --mj-on-cta-rgb: 255 255 255;
+  --mj-line-rgb: 18 16 14;
+  --mj-line-alpha: 0.1;
+  --mj-success-rgb: 31 122 82;
+  --mj-warning-rgb: 140 102 30;
+  --mj-error-rgb: 179 38 30;
+  --mj-glow-strength: 0.22;
+  color-scheme: light;
+}
+
+/* Oud (dark warm) alternative. */
 html[data-mj-palette='oud'] {
-  --mj-bg-rgb: 20 16 13; /* smoked oud #14100D */
-  --mj-surface-rgb: 30 24 20; /* #1E1814 */
-  --mj-raised-rgb: 42 34 28; /* #2A221C */
-  --mj-gold-rgb: 212 163 90; /* amber #D4A35A */
-  --mj-gold-hover-rgb: 232 190 122; /* #E8BE7A */
-  --mj-gold-ink-rgb: 212 163 90;
-  --mj-copper-rgb: 140 90 60; /* #8C5A3C */
-  --mj-ivory-rgb: 243 234 223; /* sand ivory #F3EADF */
-  --mj-muted-rgb: 179 164 147; /* #B3A493 */
+  --mj-bg-rgb: 20 16 13;
+  --mj-surface-rgb: 30 24 20;
+  --mj-raised-rgb: 42 34 28;
+  --mj-gold-rgb: 224 169 59;
+  --mj-gold-hover-rgb: 240 196 110;
+  --mj-gold-ink-rgb: 224 169 59;
+  --mj-copper-rgb: 168 102 60;
+  --mj-ivory-rgb: 247 240 230;
+  --mj-muted-rgb: 184 170 152;
   --mj-on-gold-rgb: 20 16 13;
-  --mj-line-rgb: 243 234 223;
+  --mj-cta-rgb: 224 169 59;
+  --mj-on-cta-rgb: 20 16 13;
+  --mj-line-rgb: 247 240 230;
   --mj-line-alpha: 0.1;
   --mj-success-rgb: 134 180 154;
   --mj-warning-rgb: 224 178 94;
   --mj-error-rgb: 217 130 114;
   --mj-glow-strength: 0.2;
   color-scheme: dark;
-}
-
-html[data-mj-palette='musk'] {
-  --mj-bg-rgb: 247 241 232; /* #F7F1E8 */
-  --mj-surface-rgb: 255 253 249;
-  --mj-raised-rgb: 238 228 214;
-  --mj-gold-rgb: 185 138 68; /* #B98A44 */
-  --mj-gold-hover-rgb: 160 116 52;
-  --mj-gold-ink-rgb: 126 90 36; /* #7E5A24 */
-  --mj-copper-rgb: 140 90 60;
-  --mj-ivory-rgb: 31 24 19; /* ink #1F1813 takes the text role */
-  --mj-muted-rgb: 102 90 78;
-  --mj-on-gold-rgb: 31 24 19;
-  --mj-line-rgb: 31 24 19;
-  --mj-line-alpha: 0.11;
-  --mj-success-rgb: 47 112 82;
-  --mj-warning-rgb: 140 102 30;
-  --mj-error-rgb: 166 63 55;
-  --mj-glow-strength: 0.12;
-  color-scheme: light;
 }
 
 :root {
@@ -77,6 +83,8 @@ html[data-mj-palette='musk'] {
   --mj-ivory: rgb(var(--mj-ivory-rgb));
   --mj-muted: rgb(var(--mj-muted-rgb));
   --mj-on-gold: rgb(var(--mj-on-gold-rgb));
+  --mj-cta: rgb(var(--mj-cta-rgb));
+  --mj-on-cta: rgb(var(--mj-on-cta-rgb));
   --mj-line: rgb(var(--mj-line-rgb) / var(--mj-line-alpha));
   --mj-success: rgb(var(--mj-success-rgb));
   --mj-warning: rgb(var(--mj-warning-rgb));
@@ -156,12 +164,10 @@ html[dir='ltr'] {
   }
 }
 
-/* Dark stages: hero, image tiles, lightboxes and the WebGL stage keep the Oud values in
-   both palettes, so sand copy over imagery keeps its contrast. */
-.mj-hero,
+/* Dark stages: image tiles and lightboxes keep dark values in both palettes, so light
+   copy over photography keeps its contrast. */
 .mj-tile,
 .mj-lightbox,
-.mj-masonry__btn,
 .mj-stage-dark {
   --mj-bg-rgb: 20 16 13;
   --mj-surface-rgb: 30 24 20;
