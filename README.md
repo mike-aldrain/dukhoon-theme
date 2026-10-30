@@ -11,21 +11,30 @@ glass and brass, slow smoke. Arabic and right-to-left first, English verified.
 
 ## What makes it cinematic
 
-1. **3D hero (WebGL).** A faceted crystal flacon with amber liquid and a brass cap
-   turns on a stone plinth under warm studio light, with incense smoke and embers.
-   It loads after the page appears (the first paint is a light CSS/SVG still life),
-   pauses when off-screen, and is skipped for reduced motion, data saver, low-memory
-   devices and when the merchant switches it off.
-2. **Scroll Product Film.** A pinned, scroll-driven film: the bottle turns, the cap
-   lifts toward the camera, the camera pushes in through four chapters (the scent
-   notes), then the bottle settles and the buy panel lands. Merchants can replace the
-   3D bottle with their own **frame sequence** (`frame-{n}.webp`) or an **MP4**, which
-   scroll exactly the same way.
-3. CSS depth everywhere else: card tilt with amber edge light, reveal-on-scroll, mask
-   wipes on headlines, glass header and drawers.
+1. **3D product showcase (WebGL hero).** The store's real products float on lit cards in a
+   slow 3D carousel: a gold halo behind the front product, floor reflections, depth fog,
+   gold dust and a light sweep. It holds on each product, then turns to the next, and a
+   caption shows the front product's name, price and link. Merchants pick the products
+   (or it uses the latest ones). The first paint is a plain CSS card with the first
+   product's photo, so it never slows the first screen.
+2. **Scroll Product Film.** A pinned, scroll-driven film of the featured product: it flies
+   in, the carousel turns through its gallery and other real products while the camera
+   pushes in through four chapters (scent notes), then it settles beside the buy panel.
+   A frame sequence or MP4 can replace the 3D showcase.
+3. **Light luxury palette** (default): warm white, ink-black buttons, vivid gold accents;
+   all text pairs 5.6:1 or higher. The dark "Oud" palette remains a setting.
+4. Every block falls back to the store's real product photos when the merchant has not
+   uploaded images.
 
-The 3D code ships as its own chunk (121 KB gzipped, Three.js 0.170) and is never part
-of the first page load.
+The 3D code ships as its own chunk (118 KB gzipped, Three.js 0.170) and is never part of
+the first page load. Product photos come from Salla's CDN, which allows WebGL use (CORS).
+
+## Demo pack
+
+`C:/Users/Mike/Downloads/majmar-demo-pack`: nine perfume-house products (sheet with
+Arabic/English names, prices, scent tags), two photos each (original 3D studio renders, free
+to use), two CC0 lifestyle photos, and step-by-step instructions. Load it into the preview
+store so the marketplace preview shows perfume.
 
 ## Run it
 

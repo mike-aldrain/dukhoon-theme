@@ -173,3 +173,12 @@ Intensity: `data-mj-motion` = `cinematic` | `subtle` (shorter travel, no Ken Bur
 
 Do: keep the bottle on the inline-end side of copy, the buy panel on the inline-start side.
 Don't: animate the LCP element, add shadow maps, or load Three.js in the main bundle.
+
+## 9. Revision: light luxury and real products (31 Oct 2026)
+
+- Default palette is **Light luxury**: background `#FBF8F3`, surface `#FFFFFF`, ink text
+  `#12100E`, muted `#5B544C`, vivid gold `#C8952E` (fills) with `#8A5A12` for gold text.
+  Primary buttons are ink with white text (`--mj-cta`) and turn gold on hover.
+- The 3D layer (`app/lib/productScene.ts`) shows the store's product photos on cards and
+  takes its background, surface and gold from the same tokens, so it matches the page.
+- Product photos on white sit on the card surface with padding (`.mj-media--product`).

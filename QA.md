@@ -33,6 +33,20 @@ Found and fixed during QA:
 - Hydration mismatch from Organization JSON-LD in a home hook slot: moved into the layout.
 - Product rail cards stayed invisible (reveal never fired inside the horizontal scroller): rails now reveal their items together.
 
+## 2b. Revision 31 Oct 2026 (light luxury, real products)
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Hero shows real store products in 3D | Pass | Demo store furniture, and perfume via a test-only API rewrite with the demo pack |
+| Film tours the product gallery and ends on the featured product | Pass | Fixed: card shown from the back after a full turn (angle wrap) |
+| Product photos as WebGL textures | Pass | Salla CDN sends `Access-Control-Allow-Origin: *`; CORS-mode loading with a cache-busting retry |
+| Blocks fall back to store product photos | Pass | Collections, families, story, lookbook, social, reels, film poster |
+| Light palette contrast | Pass | Ink 17.9:1, muted 7.0:1, gold text 5.6:1, ink on gold 7.1:1 |
+| RTL card light sweep | Pass | Fixed: streak stuck mid-card in Arabic |
+| Mobile 390 | Pass | Fixed: fog washing out cards when the camera is further back |
+| 3D chunk size | Pass | 118 KB gzipped |
+| Add to bag from film / ritual / gift box | Not run | Demo store blocks cart calls from localhost |
+
 ## 3. RTL / LTR and breakpoints
 
 | Page | 390 | 1280 / 1440 | Notes |
