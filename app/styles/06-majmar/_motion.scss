@@ -1,0 +1,132 @@
+/*
+ * Majmar motion: reveals, mask wipes, page transitions, studio light.
+ * Intensity comes from `data-mj-motion` on <html> (off | subtle | cinematic).
+ * `prefers-reduced-motion` and `off` both fall back to plain opacity.
+ */
+
+/* Scroll reveal: elements start hidden only after JS marks the page ready, so a
+   no-JS or server snapshot never shows a blank page. */
+html.mj-js [data-mj-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity var(--mj-dur-reveal) var(--mj-ease),
+    transform var(--mj-dur-reveal) var(--mj-ease);
+  transition-delay: calc(var(--mj-i, 0) * var(--mj-stagger));
+}
+
+html.mj-js [data-mj-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Headline mask wipe: text is revealed by a clip that moves with reading direction. */
+html.mj-js [data-mj-wipe] {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 900ms var(--mj-ease);
+  transition-delay: calc(var(--mj-i, 0) * var(--mj-stagger));
+}
+html.mj-js[dir='rtl'] [data-mj-wipe] {
+  clip-path: inset(0 0 0 100%);
+}
+html.mj-js [data-mj-wipe].is-in {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Page transition: 300ms fade and 12px rise on each route change. */
+@keyframes mj-page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--mj-rise), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.mj-page-enter {
+  animation: mj-page-in var(--mj-dur-page) var(--mj-ease) both;
+}
+
+/* Slow Ken Burns for hero media. */
+@keyframes mj-kenburns {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-1.5%, -1.5%, 0);
+  }
+}
+
+/* Thin gold line that draws as the page loads. */
+@keyframes mj-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Gold edge light sweeping across a card. */
+@keyframes mj-sweep {
+  from {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+/* Subtle: shorter travel, no Ken Burns or tilt. */
+html[data-mj-motion='subtle'] {
+  --mj-tilt-max: 0deg;
+
+  &.mj-js [data-mj-reveal] {
+    transform: translate3d(0, 10px, 0);
+  }
+  .mj-hero__media img,
+  .mj-hero__media video {
+    animation: none !important;
+  }
+}
+
+/* Off, or the visitor prefers reduced motion: opacity only. */
+@mixin mj-motion-reduced {
+  --mj-tilt-max: 0deg;
+
+  &.mj-js [data-mj-reveal] {
+    transform: none;
+    transition: opacity 200ms linear;
+    transition-delay: 0ms;
+  }
+  /* [dir] matches the specificity of the RTL wipe rule above. */
+  &.mj-js[dir] [data-mj-wipe] {
+    clip-path: none;
+    opacity: 0;
+    transition: opacity 200ms linear;
+  }
+  &.mj-js[dir] [data-mj-wipe].is-in {
+    opacity: 1;
+  }
+  .mj-page-enter {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html[data-mj-motion='off'] {
+  @include mj-motion-reduced;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    @include mj-motion-reduced;
+  }
+}

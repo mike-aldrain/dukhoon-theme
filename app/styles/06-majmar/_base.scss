@@ -1,0 +1,342 @@
+/*
+ * Majmar base: page colours, typography scale, controls, focus and selection.
+ * Loaded after Raed's layers so it wins on order, not on !important.
+ */
+
+:root {
+  --main-text-color: var(--mj-ivory);
+  --main-text-color-dark: var(--mj-ivory);
+  --color-text: var(--mj-muted);
+  --bg-gray: var(--mj-raised);
+  --color-grey: var(--mj-raised);
+  --color-light-grey: var(--mj-line);
+  --infinte-color: var(--mj-muted);
+}
+
+html[data-mj-fonts='majmar'] {
+  --font-main: var(--mj-font-body);
+  --font-ar: var(--mj-font-body);
+}
+
+html,
+body {
+  background-color: var(--mj-bg);
+}
+
+body {
+  color: var(--mj-ivory);
+  font-size: var(--mj-fs-body);
+  line-height: var(--mj-lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.app-inner {
+  background-color: var(--mj-bg);
+}
+
+::selection {
+  background: rgb(var(--mj-gold-rgb) / 0.35);
+  color: var(--mj-ivory);
+}
+
+/* Headings: display face, generous leading, no letter spacing on Arabic. */
+/* El Messiri reads best at 500 for Arabic headings. */
+html[dir='rtl'] :is(h1, h2, h3, .mj-display, .mj-h1, .mj-h2, .mj-h3) {
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+.mj-display,
+.mj-h1,
+.mj-h2,
+.mj-h3 {
+  font-family: var(--mj-font-display);
+  font-weight: 500;
+  line-height: var(--mj-lh-heading);
+  color: var(--mj-ivory);
+}
+
+.mj-display {
+  font-size: var(--mj-fs-display);
+  line-height: var(--mj-lh-display);
+  font-weight: 400;
+}
+.mj-h1 {
+  font-size: var(--mj-fs-h1);
+}
+.mj-h2 {
+  font-size: var(--mj-fs-h2);
+}
+.mj-h3 {
+  font-size: var(--mj-fs-h3);
+}
+.mj-body-l {
+  font-size: var(--mj-fs-body-l);
+  line-height: var(--mj-lh-body);
+}
+.mj-caption {
+  font-size: var(--mj-fs-caption);
+  color: var(--mj-muted);
+}
+.mj-measure {
+  max-width: var(--mj-measure);
+}
+
+/* Overline: small caps-like label. Tracking is Latin only; Arabic stays unspaced. */
+.mj-overline {
+  font-family: var(--mj-font-body);
+  font-size: var(--mj-fs-overline);
+  font-weight: 500;
+  color: var(--mj-gold-ink);
+  line-height: 1.4;
+}
+html[dir='ltr'] .mj-overline {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+html[dir='rtl'] .mj-overline {
+  font-size: calc(var(--mj-fs-overline) + 2px);
+  letter-spacing: 0;
+}
+
+/* Latin italic tagline */
+.mj-tagline {
+  font-family: 'Bodoni Moda', var(--mj-font-display);
+  font-style: italic;
+}
+html[dir='rtl'] .mj-tagline {
+  font-style: normal;
+}
+
+.mj-container {
+  width: 100%;
+  max-width: calc(var(--mj-container) + var(--mj-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--mj-gutter);
+}
+
+.mj-section {
+  /* Top padding only: two stacked sections would otherwise leave 240px between them.
+     Banded sections (testimonials) and the last block add their own bottom space. */
+  padding-top: var(--mj-section);
+}
+.s-block--mj:last-child .mj-section,
+.mj-section.mj-testimonials {
+  padding-bottom: var(--mj-section);
+}
+
+.mj-rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mj-gold), transparent);
+}
+
+/* ---------- Controls ---------- */
+
+.mj-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 48px;
+  padding-inline: 1.75rem;
+  border-radius: var(--mj-radius-control);
+  font-family: var(--mj-font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color var(--mj-dur-ui) var(--mj-ease),
+    color var(--mj-dur-ui) var(--mj-ease),
+    box-shadow var(--mj-dur-ui) var(--mj-ease),
+    transform var(--mj-dur-ui) var(--mj-ease);
+  cursor: pointer;
+
+  html[dir='ltr'] & {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  &--gold {
+    background: var(--mj-gold);
+    color: var(--mj-on-gold);
+
+    &:hover {
+      background: var(--mj-gold-hover);
+      box-shadow: 0 10px 30px -10px rgb(var(--mj-gold-rgb) / 0.5);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--mj-ivory);
+    box-shadow: inset 0 0 0 1px rgb(var(--mj-ivory-rgb) / 0.4);
+
+    &:hover {
+      box-shadow: inset 0 0 0 1px var(--mj-gold);
+      color: var(--mj-gold-ink);
+    }
+  }
+
+  /* Ghost button that always sits on a dark image (hero, banners). */
+  &--on-image {
+    background: rgb(11 11 13 / 0.2);
+    color: #f4efe6;
+    box-shadow: inset 0 0 0 1px rgb(244 239 230 / 0.5);
+    backdrop-filter: blur(6px);
+
+    &:hover {
+      box-shadow: inset 0 0 0 1px #c9a96e;
+      color: #e2c891;
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  .mj-icon-flip {
+    transition: transform var(--mj-dur-ui) var(--mj-ease);
+  }
+  &:hover .mj-icon-flip {
+    transform: translateX(4px);
+  }
+  html[dir='rtl'] & .mj-icon-flip {
+    transform: scaleX(-1);
+  }
+  html[dir='rtl'] &:hover .mj-icon-flip {
+    transform: scaleX(-1) translateX(4px);
+  }
+}
+
+.mj-link {
+  color: var(--mj-gold-ink);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  transition: background-size var(--mj-dur-reveal) var(--mj-ease);
+
+  html[dir='ltr'] & {
+    background-position: 0% 100%;
+  }
+  &:hover {
+    background-size: 100% 1px;
+  }
+}
+
+.mj-input {
+  width: 100%;
+  min-height: 48px;
+  padding-inline: 1rem;
+  border-radius: var(--mj-radius-control);
+  border: 1px solid rgb(var(--mj-line-rgb) / 0.2);
+  background: transparent;
+  color: var(--mj-ivory);
+  font-size: 1rem; /* 16px stops iOS zoom on focus */
+
+  &::placeholder {
+    color: var(--mj-muted);
+  }
+  &:focus {
+    border-color: var(--mj-gold);
+    box-shadow: none;
+  }
+}
+
+/* Engine form fields follow the same look. */
+.form-input,
+.form-select,
+.form-textarea,
+input[type='text'].s-form-control,
+.s-form-control {
+  background-color: rgb(var(--mj-surface-rgb));
+  border-color: rgb(var(--mj-line-rgb) / 0.18);
+  color: var(--mj-ivory);
+  border-radius: var(--mj-radius-control);
+}
+
+/* Visible gold focus ring for every keyboard focus. */
+/* :is() (not :where()) so it outranks Raed's `a:focus` resets. */
+html :is(a, button, input, select, textarea, summary, [tabindex], salla-button, [role='button']):focus-visible {
+  outline: 2px solid var(--mj-gold);
+  outline-offset: 3px;
+  border-radius: var(--mj-radius-control);
+}
+
+.mj-skip-link {
+  position: fixed;
+  inset-inline-start: 1rem;
+  top: 0.75rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  padding: 0.75rem 1.25rem;
+  background: var(--mj-gold);
+  color: var(--mj-on-gold);
+  border-radius: var(--mj-radius-control);
+  font-weight: 600;
+
+  &:focus {
+    transform: none;
+  }
+}
+
+.mj-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Cards share one surface treatment. */
+.mj-card {
+  background: var(--mj-surface);
+  border-radius: var(--mj-radius-card);
+  box-shadow: var(--mj-edge);
+  transition: box-shadow var(--mj-dur-reveal) var(--mj-ease);
+
+  &:hover {
+    box-shadow: var(--mj-glow-hover);
+  }
+}
+
+/* SVG placeholder art: a quiet still life drawn in tokens (see NaPlaceholder). */
+.mj-ph {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgb(var(--mj-gold-rgb) / 0.14), transparent 60%),
+    linear-gradient(160deg, var(--mj-raised), var(--mj-bg));
+}
+
+/* Engine and Raed buttons follow the sharp 2px control radius. */
+.btn,
+.s-button-btn,
+salla-button .s-button-element,
+.s-quantity-input-container {
+  border-radius: var(--mj-radius-control);
+}
+
+/* 404: atelier still life above the engine's message. */
+.mj-notfound-art {
+  width: min(220px, 50vw);
+  margin: 3rem auto 0;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--mj-radius-card);
+  overflow: hidden;
+  box-shadow: var(--mj-edge);
+
+  .mj-art {
+    width: 100%;
+    height: 100%;
+  }
+}

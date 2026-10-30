@@ -1,0 +1,120 @@
+/*
+ * Salla web components (<salla-*>) ship their own CSS with fixed light-theme colours.
+ * These overrides bring the ones a shopper meets (comments, offers, slider headings,
+ * pagination dots, quantity input, search results) onto the palette and raise their
+ * tap targets to at least 24px.
+ */
+
+/* Product card old price (engine applies a low opacity) */
+.mj-card .s-product-card-sale-price span,
+.s-product-card-sale-price span {
+  color: var(--mj-muted);
+  opacity: 1;
+}
+
+/* Reviews / comments */
+.s-comments-title,
+.s-comments-count-label,
+[class*='s-comments-item-user-info-name'],
+.s-comments-item-content,
+.s-comments-item-text {
+  color: var(--mj-ivory);
+}
+.s-comments-item,
+.s-comments-header {
+  border-color: var(--mj-line);
+}
+.s-comments-item-date,
+.s-comments-item-time {
+  color: var(--mj-muted);
+}
+
+/* Slider block headings (e.g. related products) */
+.s-slider-block__title,
+.s-slider-block__title-right {
+  background: transparent;
+  h2 {
+    font-family: var(--mj-font-display);
+    font-weight: 400;
+    color: var(--mj-ivory);
+  }
+  p {
+    color: var(--mj-muted);
+  }
+}
+
+/* Offers */
+.s-offer-wrapper,
+.s-offer-percentage-fixed-content,
+[class*='s-offer-modal'] .s-modal-body {
+  background: var(--mj-surface);
+  color: var(--mj-ivory);
+}
+.s-offer-min-items,
+[class*='s-offer'] .text-gray-400 {
+  color: var(--mj-muted);
+}
+
+/* Pagination dots: 6px visible dot inside a 24px tap area */
+.carousel-dots__dot,
+.swiper-pagination-bullet {
+  position: relative;
+  margin-inline: 9px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -9px;
+  }
+}
+.swiper-pagination-bullet-active,
+.carousel-dots__dot.is-active {
+  background: var(--mj-gold);
+}
+
+/* Search modal results */
+.s-search-results,
+.s-search-product,
+.s-search-container {
+  background: var(--mj-surface);
+  color: var(--mj-ivory);
+}
+.s-search-input {
+  background: transparent;
+  color: var(--mj-ivory);
+}
+
+/* Quantity input */
+.s-quantity-input-input {
+  background: transparent;
+  color: var(--mj-ivory);
+}
+
+/* Modal close button: a quiet round control instead of the white square. */
+salla-modal .s-modal-close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--mj-raised);
+  color: var(--mj-ivory);
+  inset-inline-end: 0.75rem;
+  inset-inline-start: auto;
+}
+
+/* Login: Salla renders the sign-in form itself (always light, not themeable), so the
+   theme drops its dark frame here and lets that form be the card. */
+salla-login-modal .s-modal-body,
+salla-login-modal salla-modal .s-modal-body {
+  background: #fff;
+  color: #16161a;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
+}
+salla-login-modal .s-modal-close {
+  background: rgb(22 22 26 / 0.06);
+  color: #16161a;
+}

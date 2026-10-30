@@ -1,0 +1,414 @@
+/*
+ * Majmar product surfaces: the product card (tilt, edge light, second image,
+ * badges, quick add), the product page, listings and the 360° viewer.
+ */
+
+/* ---------- Product card ---------- */
+.mj-card {
+  --rx: 0;
+  --ry: 0;
+  position: relative;
+  height: 100%;
+  perspective: 1200px;
+  border-radius: var(--mj-radius-card);
+
+  .s-product-card-entry {
+    height: 100%;
+    background: var(--mj-surface);
+    border-radius: var(--mj-radius-card);
+    box-shadow: var(--mj-edge);
+    overflow: hidden;
+    transition: box-shadow var(--mj-dur-reveal) var(--mj-ease);
+  }
+  &:hover .s-product-card-entry {
+    box-shadow: var(--mj-glow-hover);
+  }
+
+  .s-product-card-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--mj-raised);
+    border-radius: 0;
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--rx) * var(--mj-tilt-max))) rotateY(calc(var(--ry) * var(--mj-tilt-max)));
+    transition: transform 500ms var(--mj-ease);
+
+    img {
+      transition:
+        transform 1200ms var(--mj-ease),
+        opacity var(--mj-dur-reveal) var(--mj-ease);
+    }
+  }
+
+  /* Second image cross-fade */
+  .mj-card__alt {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity var(--mj-dur-reveal) var(--mj-ease);
+    pointer-events: none;
+  }
+  &.has-alt:hover .mj-card__alt {
+    opacity: 1;
+  }
+
+  /* Gold edge light sweeping across on hover */
+  &__sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40%;
+      background: linear-gradient(90deg, transparent, rgb(var(--mj-gold-rgb) / 0.18), transparent);
+      transform: translateX(-120%) skewX(-18deg);
+    }
+  }
+  &:hover &__sweep::before {
+    animation: mj-sweep 1100ms var(--mj-ease) both;
+  }
+
+  .s-product-card-content {
+    padding: 1rem 1.125rem 1.125rem;
+    background: transparent;
+  }
+  .s-product-card-content-title,
+  .s-product-card-content-title a {
+    font-family: var(--mj-font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--mj-ivory);
+  }
+  .s-product-card-content-subtitle {
+    color: var(--mj-muted);
+  }
+  .s-product-card-price,
+  .s-product-card-sale-price h4,
+  .s-product-card-starting-price h4 {
+    color: var(--mj-gold-ink);
+    font-weight: 500;
+  }
+  .s-product-card-sale-price span {
+    color: var(--mj-muted);
+  }
+  /* Sale price in gold, not the engine's red; the struck-through old price stays muted. */
+  .s-product-card-sale-price h4,
+  .s-product-card-sale-price :is(.text-red-500, .text-red-600, .text-red-800) {
+    color: var(--mj-gold-ink);
+  }
+
+  /* Add to cart: quiet outline that fills gold on hover */
+  salla-add-product-button .s-button-btn,
+  .s-product-card-content-footer .s-button-btn {
+    min-height: 44px;
+    border-radius: var(--mj-radius-control);
+    font-weight: 500;
+  }
+}
+
+/* Hover styles chosen in settings */
+html[data-mj-card='tilt'] .mj-card:hover .s-product-card-image img,
+html[data-mj-card='zoom'] .mj-card:hover .s-product-card-image img {
+  transform: scale(1.05);
+}
+html[data-mj-card='zoom'],
+html[data-mj-card='none'] {
+  .mj-card .s-product-card-image {
+    transform: none;
+  }
+}
+html[data-mj-card='none'] .mj-card {
+  &__sweep {
+    display: none;
+  }
+  .mj-card .s-product-card-image img {
+    transform: none;
+  }
+}
+
+/* Only fine pointers tilt; touch devices keep a flat card. */
+@media (hover: none), (pointer: coarse) {
+  .mj-card .s-product-card-image {
+    transform: none;
+  }
+  .mj-card__sweep {
+    display: none;
+  }
+}
+
+/* Badges */
+.s-product-card-promotion-title,
+.promotion-title {
+  border-radius: var(--mj-radius-control);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 0.3rem 0.6rem;
+  backdrop-filter: blur(6px);
+}
+html[data-mj-badge='outline'] :is(.s-product-card-promotion-title, .promotion-title) {
+  background: rgb(var(--mj-bg-rgb) / 0.6);
+  color: var(--mj-gold-ink);
+  box-shadow: inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.6);
+}
+html[data-mj-badge='solid'] :is(.s-product-card-promotion-title, .promotion-title) {
+  background: var(--mj-gold);
+  color: var(--mj-on-gold);
+}
+html[dir='ltr'] :is(.s-product-card-promotion-title, .promotion-title) {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Quick add switched off: the card links to the product page only. */
+html[data-mj-quickadd='off'] .mj-card :is(salla-add-product-button, .s-product-card-content-footer > salla-button:not(.s-product-card-wishlist-btn)) {
+  display: none;
+}
+
+/* ---------- Product page ---------- */
+.mj-buybox {
+  h1 {
+    font-family: var(--mj-font-display);
+    font-size: var(--mj-fs-h1);
+    font-weight: 400;
+    line-height: var(--mj-lh-heading);
+    color: var(--mj-ivory);
+  }
+}
+.mj-buybox {
+  /* ProductDetails prints the sale price as a large red paragraph; gold reads as luxury.
+     Out-of-stock notices (also red) are not text-xl, so they keep the error tone. */
+  p.text-red-800.text-xl {
+    color: var(--mj-gold-ink);
+  }
+  @media (min-width: 768px) {
+    padding-inline-start: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  .price-wrapper,
+  .total-price,
+  .product-price,
+  [class*='price'] h4 {
+    color: var(--mj-gold-ink);
+  }
+  .s-product-options-wrapper,
+  .s-product-options-option-container {
+    border-color: var(--mj-line);
+  }
+  salla-add-product-button .s-button-btn,
+  .s-button-primary {
+    min-height: 52px;
+    border-radius: var(--mj-radius-control);
+  }
+}
+
+/* Gallery */
+.details-slider,
+.image-slider {
+  border-radius: var(--mj-radius-card);
+  background: var(--mj-raised);
+  overflow: hidden;
+}
+.product-gallery__bar-btn {
+  background: rgb(var(--mj-bg-rgb) / 0.55);
+  color: var(--mj-ivory);
+  backdrop-filter: blur(8px);
+  min-width: 44px;
+  min-height: 44px;
+}
+.details-slider [slot='thumbs'] img,
+.details-slider .swiper-slide-thumb-active {
+  border-radius: 8px;
+}
+.details-slider .swiper-slide-thumb-active {
+  box-shadow: 0 0 0 1px var(--mj-gold);
+}
+
+/* Mobile sticky add-to-cart bar (Raed keeps it white). */
+body .sticky-product-bar {
+  background: rgb(var(--mj-bg-rgb) / 0.88);
+  backdrop-filter: blur(18px) saturate(140%);
+  border-top: 1px solid var(--mj-line);
+}
+
+.mj-spin-launch {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+.mj-spin__stage {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  padding: 4rem 1rem 2rem;
+}
+.mj-spin__frame {
+  width: min(640px, 90vw);
+  aspect-ratio: 1;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  &:active {
+    cursor: grabbing;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+}
+.mj-spin__range input {
+  width: min(420px, 80vw);
+  accent-color: #c9a96e;
+}
+
+/* ---------- Listings (category, search, tag, brand) ---------- */
+.s-products-list-wrapper,
+.products-list,
+salla-products-list {
+  --gap: 1.5rem;
+}
+.product-list-toolbar,
+[class*='list-toolbar'] {
+  border-color: var(--mj-line);
+}
+salla-filters,
+.s-filters-wrapper {
+  color: var(--mj-ivory);
+
+  input {
+    background: var(--mj-surface);
+    color: var(--mj-ivory);
+    border-color: rgb(var(--mj-line-rgb) / 0.18);
+    border-radius: var(--mj-radius-control);
+  }
+}
+/* Listing title */
+#page-main-title {
+  font-family: var(--mj-font-display);
+  font-size: var(--mj-fs-h2);
+  font-weight: 400;
+  margin-block: 1rem 1.5rem;
+}
+.s-filters-widget,
+.s-filters-widget-title {
+  border-color: var(--mj-line);
+}
+
+/* Add-to-cart confirmation: sale price in gold like the rest of the store. */
+.s-add-product-toast__price-sale {
+  color: var(--mj-gold-ink);
+}
+
+/* ---------- Scent profile (product page) ---------- */
+.mj-notes {
+  display: grid;
+  gap: 1.25rem;
+  margin-block: 1.5rem;
+  padding: 1.25rem;
+  border-radius: var(--mj-radius-card);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(var(--mj-gold-rgb) / 0.1), transparent 60%),
+    var(--mj-surface);
+  box-shadow: var(--mj-edge);
+
+  &__pyramid {
+    display: grid;
+    gap: 0.6rem;
+  }
+  /* Pyramid: each tier a little wider, like the notes settling down the skin. */
+  &__tier {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    background: rgb(var(--mj-gold-rgb) / calc(0.05 + var(--mj-i, 0) * 0.04));
+    margin-inline: calc((2 - var(--mj-i, 0)) * 0.9rem);
+    @media (max-width: 479.98px) {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+      margin-inline: 0;
+    }
+  }
+  &__label {
+    display: grid;
+    strong {
+      color: var(--mj-gold-ink);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    span {
+      color: var(--mj-muted);
+      font-size: var(--mj-fs-caption);
+    }
+  }
+  &__chips,
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    li {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      color: var(--mj-ivory);
+      box-shadow: inset 0 0 0 1px rgb(var(--mj-line-rgb) / 0.18);
+    }
+  }
+  &__tags li {
+    color: var(--mj-gold-ink);
+    box-shadow: inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.4);
+  }
+  &__meters {
+    display: grid;
+    gap: 1rem;
+    @media (min-width: 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+.mj-meter {
+  display: grid;
+  gap: 0.4rem;
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--mj-ivory);
+  }
+  &__value {
+    color: var(--mj-gold-ink);
+    direction: ltr;
+  }
+  &__track {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    span {
+      height: 6px;
+      border-radius: 3px;
+      background: rgb(var(--mj-line-rgb) / 0.14);
+    }
+    span.is-on {
+      background: linear-gradient(90deg, var(--mj-copper), var(--mj-gold));
+    }
+  }
+  &__ends {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--mj-muted);
+  }
+}

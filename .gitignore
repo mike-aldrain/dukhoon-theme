@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.wrangler/
+wrangler.jsonc
+.env
+.env.*
+.DS_Store
+stats.html
+coverage/
+tsconfig.tsbuildinfo
+.tanstack/
+app/routeTree.gen.ts
+
+# Local dev editor state (Noir Atelier preview layout)
+twilight.preview.json
+twilight-preview-assets/

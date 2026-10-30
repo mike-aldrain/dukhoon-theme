@@ -1,0 +1,123 @@
+"""
+Merges the Majmar strings (`mj.*` keys) into locales/ar.json and locales/en.json.
+Run from the theme root:  python scripts/locales-mj.py
+Keys are flat, as the engine expects. Arabic is written as Arabic copy, not a literal
+translation of the English.
+"""
+import io
+import json
+
+NA = {
+    # key: (ar, en)
+    'mj.skip_to_content': ('تخطَّ إلى المحتوى', 'Skip to content'),
+    'mj.close': ('إغلاق', 'Close'),
+    'mj.prev': ('السابق', 'Previous'),
+    'mj.next': ('التالي', 'Next'),
+    'mj.view_all': ('عرض الكل', 'View all'),
+    'mj.whatsapp': ('تحدث معنا عبر واتساب', 'Chat with us on WhatsApp'),
+    'mj.announcement.label': ('إعلان', 'Announcement'),
+    'mj.announcement.default': ('توصيل مجاني لجميع مناطق المملكة للطلبات فوق 500 ر.س', 'Complimentary delivery across the Kingdom on orders above 500 SAR'),
+    'mj.cookie.label': ('تنبيه ملفات الارتباط', 'Cookie notice'),
+    'mj.cookie.text': ('نستخدم ملفات ارتباط أساسية لحفظ سلتك وتفضيلاتك. باستمرارك في التصفح فأنت توافق عليها.', 'We use essential cookies to keep your bag and preferences. By continuing you accept them.'),
+    'mj.cookie.accept': ('موافق', 'Accept'),
+    # Mini cart
+    'mj.cart.open': ('فتح الحقيبة', 'Open bag'),
+    'mj.cart.title': ('حقيبتك', 'Your bag'),
+    'mj.cart.empty': ('حقيبتك بانتظار أول قطعة.', 'Your bag is waiting to be filled.'),
+    'mj.cart.continue': ('متابعة التصفح', 'Continue browsing'),
+    'mj.cart.quantity': ('الكمية', 'Quantity'),
+    'mj.cart.decrease': ('إنقاص الكمية', 'Decrease quantity'),
+    'mj.cart.increase': ('زيادة الكمية', 'Increase quantity'),
+    'mj.cart.remove': ('إزالة {{name}}', 'Remove {{name}}'),
+    'mj.cart.subtotal': ('المجموع', 'Subtotal'),
+    'mj.cart.taxes_note': ('تُحتسب رسوم التوصيل والضريبة عند إتمام الطلب.', 'Delivery and taxes are confirmed at checkout.'),
+    'mj.cart.checkout': ('مراجعة الحقيبة وإتمام الطلب', 'Review bag and checkout'),
+    'mj.cart.free_ship_left': ('المتبقي للتوصيل المجاني:', 'Remaining for complimentary delivery:'),
+    # Hero
+    'mj.hero.overline': ('دار القطع النادرة', 'Maison of rare objects'),
+    'mj.hero.title': ('صُنعت في ضوءٍ هادئ', 'Crafted in quiet light'),
+    'mj.hero.subtitle': ('عطور ومجوهرات وقطع منزلية تُصنع بتأنٍّ وباليد، لمن يلاحظ التفاصيل.', 'Fragrance, jewellery and objects made slowly, by hand, for those who notice.'),
+    'mj.hero.cta_primary': ('اكتشف المجموعة', 'Discover the collection'),
+    'mj.hero.cta_secondary': ('قصتنا', 'Our story'),
+    # Collections
+    'mj.collections.overline': ('المجموعات', 'The collections'),
+    'mj.collections.title': ('مختارات الموسم', 'Chosen for the season'),
+    'mj.collections.demo1_title': ('عود وعنبر', 'Oud & Amber'),
+    'mj.collections.demo1_caption': ('عطور المساء', 'Evening fragrances'),
+    'mj.collections.demo2_title': ('مجوهرات راقية', 'Fine Jewellery'),
+    'mj.collections.demo2_caption': ('ذهب ولؤلؤ وأحجار', 'Gold, pearl, stone'),
+    'mj.collections.demo3_title': ('لمسات المنزل', 'The Home Edit'),
+    'mj.collections.demo3_caption': ('قطع لغرف هادئة', 'Objects for slow rooms'),
+    # Showcase
+    'mj.showcase.overline': ('وصل حديثاً', 'New in'),
+    'mj.showcase.title': ('مختارات الأتيليه', 'The atelier selection'),
+    # Story
+    'mj.story.overline': ('ورشتنا', 'Our atelier'),
+    'mj.story.title': ('تُصنع بتأنٍّ وتبقى مدى العمر', 'Made slowly, kept for life'),
+    'mj.story.body': ('تبدأ كل قطعة في ورشة صغيرة يُقاس فيها الوقت بالطبقات لا بالساعات. نختار خامات نادرة، ونشكّلها باليد، ونُنهيها تحت ضوء ناعم، لتصلك القطعة وهي تحمل الصبر الذي صُنعت به.', 'Every piece begins in a small studio where time is measured in layers, not hours. We source rare materials, work them by hand and finish each object under soft light, so that what reaches you carries the patience it was made with.'),
+    'mj.story.quote': ('الفخامة عناية تشعر بها قبل أن تجد لها اسماً.', 'Luxury is the care you can feel before you can name it.'),
+    'mj.story.quote_author': ('المؤسِّسة', 'The founder'),
+    'mj.story.link': ('اقرأ قصتنا', 'Read our story'),
+    # Lookbook
+    'mj.lookbook.overline': ('كتالوج الصور', 'Lookbook'),
+    'mj.lookbook.title': ('دراسات في الضوء', 'Studies in light'),
+    'mj.lookbook.image': ('الإطلالة {{n}}', 'Look {{n}}'),
+    'mj.lookbook.open': ('فتح الصورة: {{caption}}', 'Open image: {{caption}}'),
+    # Testimonials
+    'mj.testimonials.overline': ('كلمات لطيفة', 'Kind words'),
+    'mj.testimonials.title': ('من عملائنا', 'From our clients'),
+    'mj.testimonials.rating': ('التقييم {{n}} من 5', 'Rated {{n}} out of 5'),
+    'mj.testimonials.demo1_name': ('نورة ع.', 'Noura A.'),
+    'mj.testimonials.demo1_city': ('الرياض', 'Riyadh'),
+    'mj.testimonials.demo1_quote': ('وصلت القارورة مغلّفة كهدية لنفسي، والرائحة تدوم من الصباح حتى العشاء.', 'The bottle arrived wrapped like a gift to myself. The scent lasts from morning prayer to dinner.'),
+    'mj.testimonials.demo2_name': ('فيصل ك.', 'Faisal K.'),
+    'mj.testimonials.demo2_city': ('جدة', 'Jeddah'),
+    'mj.testimonials.demo2_quote': ('خدمة هادئة ودقيقة، والنقش على الأزرار جاء تماماً كما طلبت.', 'Quiet, precise service. The engraving on the cufflinks was exactly as I asked.'),
+    'mj.testimonials.demo3_name': ('ليلى م.', 'Layla M.'),
+    'mj.testimonials.demo3_city': ('دبي', 'Dubai'),
+    'mj.testimonials.demo3_quote': ('كل قطعة في مجلسنا اليوم من هنا، والضيوف يسألون دائماً.', 'Every object in our majlis now comes from here. Guests always ask.'),
+    # Social
+    'mj.social.overline': ('تابع الأتيليه', 'Follow the atelier'),
+    'mj.social.title': ('خلف الزجاج', 'Behind the glass'),
+    'mj.social.handle': ('@noiratelier', '@noiratelier'),
+    # Newsletter
+    'mj.newsletter.overline': ('القائمة الخاصة', 'The private list'),
+    'mj.newsletter.title': ('أول من يرى القطع الجديدة', 'First light on new pieces'),
+    'mj.newsletter.text': ('وصول مبكر للإصدارات المحدودة والعروض الخاصة، بما لا يزيد على رسالتين في الشهر.', 'Early access to limited editions and private previews. No more than twice a month.'),
+    'mj.newsletter.label': ('البريد الإلكتروني', 'Email address'),
+    'mj.newsletter.placeholder': ('بريدك الإلكتروني', 'Your email address'),
+    'mj.newsletter.button': ('اشترك', 'Join'),
+    'mj.newsletter.thanks': ('شكراً لك، تمت إضافتك إلى القائمة.', 'Thank you. You are on the list.'),
+    # Trust
+    'mj.trust.label': ('وعدنا', 'Our promise'),
+    'mj.trust.payments': ('وسائل الدفع', 'Payment methods'),
+    'mj.trust.delivery': ('توصيل لدول الخليج', 'Delivery across the GCC'),
+    'mj.trust.delivery_text': ('مؤمَّن ومتتبَّع ومغلّف كهدية', 'Insured, tracked, gift-wrapped'),
+    'mj.trust.returns': ('إرجاع خلال 14 يوماً', '14-day returns'),
+    'mj.trust.returns_text': ('بسهولة ولباقة', 'Simple and courteous'),
+    'mj.trust.secure': ('دفع آمن', 'Secure payment'),
+    'mj.trust.secure_text': ('ادفع الآن أو على أقساط', 'Pay now or in instalments'),
+    'mj.trust.gift': ('تغليف خاص', 'Signature wrapping'),
+    'mj.trust.gift_text': ('مع بطاقة مكتوبة باليد', 'With a handwritten card'),
+}
+
+# --- Majmar copy (generated) ---
+NA.update({'mj.announcement.default': ('توصيل مجاني لجميع مناطق المملكة للطلبات فوق 300 ر.س · تغليف هدايا مجاني', 'Free delivery across the Kingdom over 300 SAR · complimentary gift wrap'), 'mj.hero.overline': ('دار العود والعنبر', 'House of oud and amber'), 'mj.hero.title': ('عطرٌ يبقى بعدك', 'A scent that stays'), 'mj.hero.subtitle': ('دهن عود وعطور وبخور تُمزج باليد، لتبقى حاضرة بعد أن تغادر.', 'Oud oils, perfumes and bakhoor blended by hand, made to linger long after you leave.'), 'mj.hero.cta_primary': ('اكتشف العطور', 'Discover the scents'), 'mj.hero.cta_secondary': ('اعثر على عطرك', 'Find your scent'), 'mj.collections.overline': ('المجموعات', 'The collections'), 'mj.collections.title': ('لكل لحظة عطرها', 'A scent for every moment'), 'mj.collections.demo1_title': ('دهن العود', 'Oud oils'), 'mj.collections.demo1_caption': ('معتّق وثمين', 'Aged and rare'), 'mj.collections.demo2_title': ('البخور والمباخر', 'Bakhoor and burners'), 'mj.collections.demo2_caption': ('لمجلس يعبق بالترحيب', 'For a welcoming majlis'), 'mj.collections.demo3_title': ('أطقم الهدايا', 'Gift sets'), 'mj.collections.demo3_caption': ('جاهزة للإهداء', 'Ready to give'), 'mj.showcase.overline': ('الأكثر مبيعاً', 'Best sellers'), 'mj.showcase.title': ('عطور يعود إليها عملاؤنا', 'Scents our clients come back to'), 'mj.story.overline': ('حكايتنا', 'Our story'), 'mj.story.title': ('من خشب العود إلى قارورتك', 'From oud wood to your bottle'), 'mj.story.body': ('نختار خشب العود من مصادره، ونقطّره ببطء، ونتركه يعتّق حتى ينضج. ثم نمزجه باليد مع الورد والعنبر والمسك، لنصنع عطوراً تحمل دفء المجلس وكرم الضيافة.', 'We source oud wood at origin, distil it slowly and let it age until it is ready. Then we blend it by hand with rose, amber and musk, to make scents that carry the warmth of the majlis.'), 'mj.story.quote': ('العطر أول ما يصل، وآخر ما يُنسى.', 'Scent is the first to arrive and the last to be forgotten.'), 'mj.story.quote_author': ('صانع العطور', 'The perfumer'), 'mj.story.link': ('اقرأ حكايتنا', 'Read our story'), 'mj.lookbook.overline': ('معرض الصور', 'Gallery'), 'mj.lookbook.title': ('طقوس العطر', 'Rituals of scent'), 'mj.social.overline': ('تابعنا', 'Follow us'), 'mj.social.title': ('من مجلسنا إليكم', 'From our majlis to you'), 'mj.social.handle': ('@majmar', '@majmar'), 'mj.newsletter.overline': ('القائمة الخاصة', 'The private list'), 'mj.newsletter.title': ('أول من يجرّب الإصدارات الجديدة', 'First to try new releases'), 'mj.testimonials.demo1_quote': ('العطر ثابت من الصباح إلى المساء، والتغليف يليق بهدية.', 'The scent lasts from morning to evening, and the wrapping is gift-worthy.'), 'mj.testimonials.demo2_quote': ('دهن العود أصلي وفخم، والطلب وصل في يومين.', 'The oud oil is genuine and rich; the order arrived in two days.'), 'mj.testimonials.demo3_quote': ('البخور صار عادة في مجلسنا، والضيوف يسألون عنه دائماً.', 'The bakhoor is now a ritual in our majlis; guests always ask about it.'), 'mj.film.overline': ('الفيلم', 'The film'), 'mj.film.title': ('داخل القارورة', 'Inside the flacon'), 'mj.film.hint': ('مرّر للمشاهدة', 'Scroll to play'), 'mj.film.ch1_title': ('زجاج منفوخ', 'Blown glass'), 'mj.film.ch1_text': ('كل قارورة تُنفخ وتُصقل يدوياً.', 'Each flacon is mouth-blown and polished by hand.'), 'mj.film.ch2_title': ('القمة: زعفران وبرغموت', 'Top: saffron and bergamot'), 'mj.film.ch2_text': ('افتتاحية دافئة ومشرقة تستقبلك أولاً.', 'A bright, warm opening that greets you first.'), 'mj.film.ch3_title': ('القلب: ورد الطائف', 'Heart: Taif rose'), 'mj.film.ch3_text': ('ورد من مرتفعات الطائف يُقطف عند الفجر.', 'Rose from the Taif highlands, picked at dawn.'), 'mj.film.ch4_title': ('القاعدة: عود معتّق', 'Base: aged oud'), 'mj.film.ch4_text': ('اثنتا عشرة ساعة على البشرة، ويبقى العطر عطرك.', 'Twelve hours on skin, and the scent is still yours.'), 'mj.film.buy_overline': ('متوفر الآن', 'Now available'), 'mj.film.add': ('أضف إلى الحقيبة', 'Add to bag'), 'mj.film.details': ('التفاصيل', 'View details'), 'mj.notes.title': ('هوية العطر', 'Scent profile'), 'mj.notes.top': ('القمة', 'Top notes'), 'mj.notes.top_hint': ('الانطباع الأول', 'The first impression'), 'mj.notes.heart': ('القلب', 'Heart notes'), 'mj.notes.heart_hint': ('بعد دقائق', 'After a few minutes'), 'mj.notes.base': ('القاعدة', 'Base notes'), 'mj.notes.base_hint': ('ما يبقى لساعات', 'What stays for hours'), 'mj.notes.longevity': ('الثبات', 'Longevity'), 'mj.notes.longevity_low': ('خفيف', 'Light'), 'mj.notes.longevity_high': ('طوال اليوم', 'All day'), 'mj.notes.sillage': ('الفوحان', 'Sillage'), 'mj.notes.sillage_low': ('قريب من البشرة', 'Close to skin'), 'mj.notes.sillage_high': ('يملأ المكان', 'Fills the room')})
+
+import os
+CONV = 'scripts/blocks-conversion.json'
+if os.path.exists(CONV):
+    with io.open(CONV, encoding='utf8') as fh:
+        for k, v in json.load(fh).get('locales', {}).items():
+            NA[k] = (v[0], v[1])
+
+for lang, idx in (('ar', 0), ('en', 1)):
+    path = f'locales/{lang}.json'
+    with io.open(path, encoding='utf8') as fh:
+        data = json.load(fh)
+    data = {k: v for k, v in data.items() if not k.startswith('mj.')}
+    data.update({k: v[idx] for k, v in NA.items()})
+    with io.open(path, 'w', encoding='utf8') as fh:
+        json.dump(data, fh, ensure_ascii=False, indent=2)
+        fh.write('\n')
+    print(path, len(data))

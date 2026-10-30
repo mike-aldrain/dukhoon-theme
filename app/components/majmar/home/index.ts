@@ -1,0 +1,18 @@
+/** Majmar home blocks; registered by key in app/router.tsx and declared in twilight.json. */
+export { CinematicHero } from './CinematicHero';
+export { ScrollFilm } from './ScrollFilm';
+export { FeaturedCollections } from './FeaturedCollections';
+export { ProductShowcase } from './ProductShowcase';
+export { BrandStory } from './BrandStory';
+export { Lookbook } from './Lookbook';
+export { Testimonials } from './Testimonials';
+export { SocialGrid } from './SocialGrid';
+export { Newsletter } from './Newsletter';
+export { TrustBar } from './TrustBar';
+export { OccasionCountdown } from './OccasionCountdown';
+export { ScentFamilies } from './ScentFamilies';
+export { ScentFinder } from './ScentFinder';
+export { RitualBundle } from './RitualBundle';
+export { GiftBoxBuilder } from './GiftBoxBuilder';
+export { Faq } from './Faq';
+export { ProductReels } from './ProductReels';

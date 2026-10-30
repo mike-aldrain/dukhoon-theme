@@ -1,0 +1,203 @@
+/*
+ * Majmar design tokens.
+ *
+ * Every colour is stored twice: as a ready colour (`--mj-gold`) and as space-separated
+ * RGB channels (`--mj-gold-rgb`) so Tailwind can apply alpha (`bg-mj-gold/10`).
+ * The palette is chosen with `data-mj-palette` on <html> (set by MajmarShell from the
+ * `mj_palette` setting). Merchant custom colours are written over these by MajmarShell
+ * as a small validated <style> block.
+ *
+ * Token names keep the roles used across the theme: `gold` is the amber accent,
+ * `ivory` the primary text, `muted` the secondary text, `copper` the secondary accent.
+ *
+ * Contrast (WCAG 2.2, against the palette background):
+ *   Oud:  sand 16.3:1, muted 7.9:1, amber 8.9:1, amber-hover 11.6:1, error 6.6:1
+ *   Musk: ink 16.7:1, muted 6.4:1, amber-ink 6.1:1 (amber fill #B98A44 is 2.9:1,
+ *         so on Musk amber is used for fills, rules and icons only).
+ */
+
+@use 'sass:math';
+
+/* Fluid size between the 360px and 1280px design widths. */
+@function fluid($min-px, $max-px) {
+  $slope: math.div($max-px - $min-px, 1280 - 360);
+  $base: $min-px - $slope * 360;
+  @return clamp(#{math.div($min-px, 16)}rem, #{math.div($base, 16)}rem + #{$slope * 100}vw, #{math.div($max-px, 16)}rem);
+}
+
+:root,
+html[data-mj-palette='oud'] {
+  --mj-bg-rgb: 20 16 13; /* smoked oud #14100D */
+  --mj-surface-rgb: 30 24 20; /* #1E1814 */
+  --mj-raised-rgb: 42 34 28; /* #2A221C */
+  --mj-gold-rgb: 212 163 90; /* amber #D4A35A */
+  --mj-gold-hover-rgb: 232 190 122; /* #E8BE7A */
+  --mj-gold-ink-rgb: 212 163 90;
+  --mj-copper-rgb: 140 90 60; /* #8C5A3C */
+  --mj-ivory-rgb: 243 234 223; /* sand ivory #F3EADF */
+  --mj-muted-rgb: 179 164 147; /* #B3A493 */
+  --mj-on-gold-rgb: 20 16 13;
+  --mj-line-rgb: 243 234 223;
+  --mj-line-alpha: 0.1;
+  --mj-success-rgb: 134 180 154;
+  --mj-warning-rgb: 224 178 94;
+  --mj-error-rgb: 217 130 114;
+  --mj-glow-strength: 0.2;
+  color-scheme: dark;
+}
+
+html[data-mj-palette='musk'] {
+  --mj-bg-rgb: 247 241 232; /* #F7F1E8 */
+  --mj-surface-rgb: 255 253 249;
+  --mj-raised-rgb: 238 228 214;
+  --mj-gold-rgb: 185 138 68; /* #B98A44 */
+  --mj-gold-hover-rgb: 160 116 52;
+  --mj-gold-ink-rgb: 126 90 36; /* #7E5A24 */
+  --mj-copper-rgb: 140 90 60;
+  --mj-ivory-rgb: 31 24 19; /* ink #1F1813 takes the text role */
+  --mj-muted-rgb: 102 90 78;
+  --mj-on-gold-rgb: 31 24 19;
+  --mj-line-rgb: 31 24 19;
+  --mj-line-alpha: 0.11;
+  --mj-success-rgb: 47 112 82;
+  --mj-warning-rgb: 140 102 30;
+  --mj-error-rgb: 166 63 55;
+  --mj-glow-strength: 0.12;
+  color-scheme: light;
+}
+
+:root {
+  --mj-bg: rgb(var(--mj-bg-rgb));
+  --mj-surface: rgb(var(--mj-surface-rgb));
+  --mj-raised: rgb(var(--mj-raised-rgb));
+  --mj-gold: rgb(var(--mj-gold-rgb));
+  --mj-gold-hover: rgb(var(--mj-gold-hover-rgb));
+  --mj-gold-ink: rgb(var(--mj-gold-ink-rgb));
+  --mj-copper: rgb(var(--mj-copper-rgb));
+  --mj-ivory: rgb(var(--mj-ivory-rgb));
+  --mj-muted: rgb(var(--mj-muted-rgb));
+  --mj-on-gold: rgb(var(--mj-on-gold-rgb));
+  --mj-line: rgb(var(--mj-line-rgb) / var(--mj-line-alpha));
+  --mj-success: rgb(var(--mj-success-rgb));
+  --mj-warning: rgb(var(--mj-warning-rgb));
+  --mj-error: rgb(var(--mj-error-rgb));
+
+  /* Typography: Arabic first; the LTR block below swaps the order. */
+  --mj-font-display: 'El Messiri', 'Bodoni Moda', 'Mj Serif Fallback', serif;
+  --mj-font-body: 'Tajawal', 'Manrope', 'Mj Sans Fallback', system-ui, sans-serif;
+  --mj-fs-display: #{fluid(38, 64)};
+  --mj-fs-h1: #{fluid(32, 48)};
+  --mj-fs-h2: #{fluid(26, 36)};
+  --mj-fs-h3: #{fluid(20, 24)};
+  --mj-fs-body-l: #{fluid(16, 18)};
+  --mj-fs-body: #{fluid(15, 16)};
+  --mj-fs-caption: #{fluid(12, 13)};
+  --mj-fs-overline: 0.75rem;
+  --mj-lh-display: 1.15;
+  --mj-lh-heading: 1.3;
+  --mj-lh-body: 1.7;
+  --mj-measure: 66ch;
+
+  /* Space: 8pt grid */
+  --mj-space-1: 0.5rem;
+  --mj-space-2: 1rem;
+  --mj-space-3: 1.5rem;
+  --mj-space-4: 2rem;
+  --mj-space-6: 3rem;
+  --mj-space-8: 4rem;
+  --mj-section: 3.5rem; /* 56 mobile, 80 tablet, 112 desktop */
+  --mj-gutter: 1.25rem; /* 20 / 40 / 56 */
+  --mj-container: 1280px;
+
+  /* Shape */
+  --mj-radius-control: 4px;
+  --mj-radius-card: 14px;
+  --mj-radius-modal: 24px;
+
+  /* Elevation through warm light */
+  --mj-edge: inset 0 0 0 1px var(--mj-line);
+  --mj-glow: 0 18px 40px -8px rgb(var(--mj-gold-rgb) / 0.08);
+  --mj-glow-hover: inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.45), 0 20px 40px -6px rgb(var(--mj-gold-rgb) / 0.16);
+
+  /* Motion */
+  --mj-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --mj-dur-reveal: 650ms;
+  --mj-dur-page: 300ms;
+  --mj-dur-ui: 220ms;
+  --mj-stagger: 70ms;
+  --mj-rise: 12px;
+  --mj-tilt-max: 7deg;
+  --mj-header-h: 68px;
+  --mj-header-stack: 72px;
+
+  /* Engine bridge: Twilight web components read these. */
+  --s-radius: var(--mj-radius-control);
+}
+
+html[dir='ltr'] {
+  --mj-font-display: 'Bodoni Moda', 'El Messiri', 'Mj Serif Fallback', serif;
+  --mj-font-body: 'Manrope', 'Tajawal', 'Mj Sans Fallback', system-ui, sans-serif;
+  --mj-lh-body: 1.6;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --mj-section: 5rem;
+    --mj-gutter: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --mj-section: 7rem;
+    --mj-gutter: 3.5rem;
+    --mj-header-h: 84px;
+    --mj-header-stack: 129px;
+  }
+}
+
+/* Dark stages: hero, image tiles, lightboxes and the WebGL stage keep the Oud values in
+   both palettes, so sand copy over imagery keeps its contrast. */
+.mj-hero,
+.mj-tile,
+.mj-lightbox,
+.mj-masonry__btn,
+.mj-stage-dark {
+  --mj-bg-rgb: 20 16 13;
+  --mj-surface-rgb: 30 24 20;
+  --mj-raised-rgb: 42 34 28;
+  --mj-gold-rgb: 212 163 90;
+  --mj-gold-hover-rgb: 232 190 122;
+  --mj-gold-ink-rgb: 212 163 90;
+  --mj-ivory-rgb: 243 234 223;
+  --mj-muted-rgb: 179 164 147;
+  --mj-line-rgb: 243 234 223;
+  --mj-glow-strength: 0.2;
+}
+
+/* Amber drives the engine's primary colour unless the merchant keeps the store colour.
+   The engine writes the store colour inline after load; only !important outranks inline
+   style, so this one bridge rule uses it. */
+html[data-mj-accent='amber'],
+html[data-mj-accent='amber'] body {
+  --color-primary: var(--mj-gold) !important;
+  --color-primary-dark: var(--mj-gold-hover) !important;
+  --color-primary-light: rgb(var(--mj-gold-rgb) / 0.16) !important;
+  --color-primary-reverse: var(--mj-on-gold) !important;
+}
+
+/* Metric-matched local fallbacks keep layout still while web fonts swap in. */
+@font-face {
+  font-family: 'Mj Sans Fallback';
+  src: local('Arial'), local('Tahoma');
+  size-adjust: 104%;
+  ascent-override: 92%;
+  descent-override: 24%;
+}
+
+@font-face {
+  font-family: 'Mj Serif Fallback';
+  src: local('Times New Roman'), local('Georgia');
+  size-adjust: 98%;
+  ascent-override: 90%;
+}

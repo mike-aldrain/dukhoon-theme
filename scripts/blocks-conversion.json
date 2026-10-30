@@ -1,0 +1,786 @@
+{
+  "blocks": [
+    {
+      "key": "4e3a4eba-0784-565d-9b95-253c2051a9a7",
+      "path": "home.mj-countdown",
+      "block": "mj-countdown",
+      "component": "OccasionCountdown",
+      "title": {
+        "ar": "مجمر: عدّ تنازلي للمناسبة",
+        "en": "Majmar: Occasion Countdown"
+      },
+      "icon": "sicon-award-ribbon",
+      "fields": [
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "text",
+          "type": "string",
+          "label": "الوصف · Text",
+          "required": false,
+          "format": "textarea",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "end_date",
+          "type": "string",
+          "label": "تاريخ ووقت الانتهاء (مثال 2027-03-20T23:59) · End date and time (e.g. 2027-03-20T23:59)",
+          "required": false,
+          "format": "text",
+          "value": null,
+          "description": "Leave empty to count 14 days from the visit. The block hides itself after this date."
+        },
+        {
+          "id": "link_text",
+          "type": "string",
+          "label": "نص الزر · Button text",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "link_url",
+          "type": "string",
+          "label": "رابط الزر · Button link",
+          "required": false,
+          "format": "url",
+          "value": null
+        }
+      ]
+    },
+    {
+      "key": "d4c36e57-8f6d-52a4-b38b-a1aaf2a7b8f9",
+      "path": "home.mj-families",
+      "block": "mj-families",
+      "component": "ScentFamilies",
+      "title": {
+        "ar": "مجمر: عائلات العطور",
+        "en": "Majmar: Scent Families"
+      },
+      "icon": "sicon-layout-grid",
+      "fields": [
+        {
+          "id": "overline",
+          "type": "string",
+          "label": "سطر تمهيدي · Overline",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "العائلات · Families",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "items.image",
+              "type": "string",
+              "label": "الصورة · Image",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "600×600 px, square."
+            },
+            {
+              "id": "items.title",
+              "type": "string",
+              "label": "الاسم · Name",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.url",
+              "type": "string",
+              "label": "الرابط · Link",
+              "required": false,
+              "format": "url",
+              "value": null
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 8,
+          "item_label": "عائلة · Family",
+          "value": []
+        }
+      ]
+    },
+    {
+      "key": "f2546461-77bd-5877-92a6-8b1964f5237d",
+      "path": "home.mj-finder",
+      "block": "mj-finder",
+      "component": "ScentFinder",
+      "title": {
+        "ar": "مجمر: مستكشف العطر",
+        "en": "Majmar: Scent Finder"
+      },
+      "icon": "sicon-award-ribbon",
+      "fields": [
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "text",
+          "type": "string",
+          "label": "الوصف · Text",
+          "required": false,
+          "format": "textarea",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "mood_warm",
+          "type": "string",
+          "label": "كلمة البحث للمزاج الدافئ · Search word for Warm",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "mood_fresh",
+          "type": "string",
+          "label": "كلمة البحث للمزاج المنعش · Search word for Fresh",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "mood_floral",
+          "type": "string",
+          "label": "كلمة البحث للمزاج الزهري · Search word for Floral",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "mood_smoky",
+          "type": "string",
+          "label": "كلمة البحث للمزاج المدخّن · Search word for Smoky",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        }
+      ]
+    },
+    {
+      "key": "5f02e11c-875e-584d-a180-ea48eef00cd4",
+      "path": "home.mj-ritual",
+      "block": "mj-ritual",
+      "component": "RitualBundle",
+      "title": {
+        "ar": "مجمر: طقس متكامل",
+        "en": "Majmar: Ritual Bundle"
+      },
+      "icon": "sicon-store",
+      "fields": [
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "text",
+          "type": "string",
+          "label": "الوصف · Text",
+          "required": false,
+          "format": "textarea",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "products",
+          "type": "items",
+          "label": "المنتجات (حتى 4) · Products (up to 4)",
+          "required": false,
+          "format": "dropdown-list",
+          "source": "products",
+          "multichoice": true,
+          "searchable": true,
+          "options": [],
+          "selected": [],
+          "value": []
+        },
+        {
+          "id": "bundle_note",
+          "type": "string",
+          "label": "ملاحظة العرض (مثل كود الخصم) · Bundle note (e.g. a coupon code)",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        }
+      ]
+    },
+    {
+      "key": "d028bbfe-394f-5f19-9e2c-93f0a435ba52",
+      "path": "home.mj-giftbox",
+      "block": "mj-giftbox",
+      "component": "GiftBoxBuilder",
+      "title": {
+        "ar": "مجمر: صمّم صندوق هديتك",
+        "en": "Majmar: Gift Box Builder"
+      },
+      "icon": "sicon-store",
+      "fields": [
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "text",
+          "type": "string",
+          "label": "الوصف · Text",
+          "required": false,
+          "format": "textarea",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "category",
+          "type": "items",
+          "label": "التصنيف · Category",
+          "required": false,
+          "format": "dropdown-list",
+          "source": "categories",
+          "multichoice": false,
+          "searchable": true,
+          "options": [],
+          "selected": [],
+          "value": null
+        },
+        {
+          "id": "products",
+          "type": "items",
+          "label": "أو منتجات مختارة · Or picked products",
+          "required": false,
+          "format": "dropdown-list",
+          "source": "products",
+          "multichoice": true,
+          "searchable": true,
+          "options": [],
+          "selected": [],
+          "value": []
+        },
+        {
+          "id": "max_items",
+          "type": "number",
+          "label": "عدد القطع في الصندوق · Pieces per box",
+          "required": false,
+          "format": "integer",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "key": "cc8acfae-4cf9-587c-8138-f9575920865f",
+      "path": "home.mj-faq",
+      "block": "mj-faq",
+      "component": "Faq",
+      "title": {
+        "ar": "مجمر: الأسئلة الشائعة",
+        "en": "Majmar: FAQ"
+      },
+      "icon": "sicon-chat-conversation-alt",
+      "fields": [
+        {
+          "id": "overline",
+          "type": "string",
+          "label": "سطر تمهيدي · Overline",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "الأسئلة · Questions",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "items.question",
+              "type": "string",
+              "label": "السؤال · Question",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.answer",
+              "type": "string",
+              "label": "الإجابة · Answer",
+              "required": false,
+              "format": "textarea",
+              "multilanguage": true,
+              "value": null
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 12,
+          "item_label": "سؤال · Question",
+          "value": []
+        }
+      ]
+    },
+    {
+      "key": "8bd82337-a7ee-5f60-a81a-ff3c2c389e9a",
+      "path": "home.mj-reels",
+      "block": "mj-reels",
+      "component": "ProductReels",
+      "title": {
+        "ar": "مجمر: ريلز المنتجات",
+        "en": "Majmar: Product Reels"
+      },
+      "icon": "sicon-image-carousel",
+      "fields": [
+        {
+          "id": "overline",
+          "type": "string",
+          "label": "سطر تمهيدي · Overline",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "المقاطع · Reels",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "items.video",
+              "type": "string",
+              "label": "رابط فيديو MP4 عمودي · Vertical MP4 video URL",
+              "required": false,
+              "format": "url",
+              "value": null
+            },
+            {
+              "id": "items.poster",
+              "type": "string",
+              "label": "صورة الغلاف · Poster image",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "1080×1920 px."
+            },
+            {
+              "id": "items.url",
+              "type": "string",
+              "label": "رابط المنتج · Product link",
+              "required": false,
+              "format": "url",
+              "value": null
+            },
+            {
+              "id": "items.caption",
+              "type": "string",
+              "label": "التعليق · Caption",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 8,
+          "item_label": "مقطع · Reel",
+          "value": []
+        }
+      ]
+    }
+  ],
+  "locales": {
+    "mj.countdown.title": [
+      "عروض العيد تنتهي قريباً",
+      "The Eid edit ends soon"
+    ],
+    "mj.countdown.overline": [
+      "لفترة محدودة",
+      "Limited time"
+    ],
+    "mj.countdown.text": [
+      "أطقم الهدايا وخلطات العود المحدودة بسعرها الموسمي، ما دام الوقت لم ينتهِ.",
+      "Gift sets and limited oud blends at their seasonal price, while the clock runs."
+    ],
+    "mj.countdown.days": [
+      "يوم",
+      "Days"
+    ],
+    "mj.countdown.hours": [
+      "ساعة",
+      "Hours"
+    ],
+    "mj.countdown.minutes": [
+      "دقيقة",
+      "Minutes"
+    ],
+    "mj.countdown.seconds": [
+      "ثانية",
+      "Seconds"
+    ],
+    "mj.countdown.label": [
+      "متبقٍ {{d}} يوم و{{h}} ساعة و{{m}} دقيقة",
+      "{{d}} days, {{h}} hours and {{m}} minutes left"
+    ],
+    "mj.countdown.cta": [
+      "تسوّق العروض",
+      "Shop the edit"
+    ],
+    "mj.families.overline": [
+      "عائلات العطور",
+      "Scent families"
+    ],
+    "mj.families.title": [
+      "اختر نوتتك",
+      "Find your note"
+    ],
+    "mj.families.oud": [
+      "عود",
+      "Oud"
+    ],
+    "mj.families.musk": [
+      "مسك",
+      "Musk"
+    ],
+    "mj.families.amber": [
+      "عنبر",
+      "Amber"
+    ],
+    "mj.families.rose": [
+      "ورد",
+      "Rose"
+    ],
+    "mj.families.fresh": [
+      "منعش",
+      "Fresh"
+    ],
+    "mj.families.bakhoor": [
+      "بخور",
+      "Bakhoor"
+    ],
+    "mj.finder.title": [
+      "اكتشف عطرك الخاص",
+      "Find your signature scent"
+    ],
+    "mj.finder.overline": [
+      "مستكشف العطر",
+      "Scent finder"
+    ],
+    "mj.finder.text": [
+      "ثلاثة أسئلة في ثلاثين ثانية، ونرشدك إلى العطور التي تناسبك.",
+      "Three questions, thirty seconds. We will point you to the scents that suit you."
+    ],
+    "mj.finder.progress": [
+      "التقدّم",
+      "Progress"
+    ],
+    "mj.finder.q_who": [
+      "لمن العطر؟",
+      "Who is it for?"
+    ],
+    "mj.finder.her": [
+      "لها",
+      "For her"
+    ],
+    "mj.finder.her_hint": [
+      "ناعم ومشرق ولا يُنسى",
+      "Soft, radiant, memorable"
+    ],
+    "mj.finder.him": [
+      "له",
+      "For him"
+    ],
+    "mj.finder.him_hint": [
+      "عميق وخشبي وواثق",
+      "Deep, woody, assured"
+    ],
+    "mj.finder.all": [
+      "للجميع",
+      "For everyone"
+    ],
+    "mj.finder.all_hint": [
+      "مشترك ولا يبطل أثره",
+      "Shared and timeless"
+    ],
+    "mj.finder.q_mood": [
+      "أي مزاج يجذبك؟",
+      "Which mood draws you in?"
+    ],
+    "mj.finder.warm": [
+      "دافئ",
+      "Warm"
+    ],
+    "mj.finder.warm_hint": [
+      "عنبر وفانيلا وراتنج",
+      "Amber, vanilla, resin"
+    ],
+    "mj.finder.fresh": [
+      "منعش",
+      "Fresh"
+    ],
+    "mj.finder.fresh_hint": [
+      "حمضيات ومسك ونسمة نقية",
+      "Citrus, musk, clean air"
+    ],
+    "mj.finder.floral": [
+      "زهري",
+      "Floral"
+    ],
+    "mj.finder.floral_hint": [
+      "ورد طائفي وياسمين",
+      "Taif rose, jasmine"
+    ],
+    "mj.finder.smoky": [
+      "مدخّن",
+      "Smoky"
+    ],
+    "mj.finder.smoky_hint": [
+      "عود وبخور وجلد",
+      "Oud, incense, leather"
+    ],
+    "mj.finder.q_strength": [
+      "كيف تريد أن يفوح؟",
+      "How should it carry?"
+    ],
+    "mj.finder.soft": [
+      "قريب من البشرة",
+      "Close to the skin"
+    ],
+    "mj.finder.soft_hint": [
+      "هادئ للنهار",
+      "Discreet, for daytime"
+    ],
+    "mj.finder.bold": [
+      "يترك أثراً",
+      "Leave a trail"
+    ],
+    "mj.finder.bold_hint": [
+      "غني للمساء",
+      "Rich, for evenings"
+    ],
+    "mj.finder.kw_warm": [
+      "عنبر",
+      "amber"
+    ],
+    "mj.finder.kw_fresh": [
+      "مسك",
+      "musk"
+    ],
+    "mj.finder.kw_floral": [
+      "ورد",
+      "rose"
+    ],
+    "mj.finder.kw_smoky": [
+      "عود",
+      "oud"
+    ],
+    "mj.finder.result_intro": [
+      "ملفك العطري",
+      "Your profile"
+    ],
+    "mj.finder.see": [
+      "اعرض عطوري",
+      "See my scents"
+    ],
+    "mj.finder.back": [
+      "رجوع",
+      "Back"
+    ],
+    "mj.finder.restart": [
+      "ابدأ من جديد",
+      "Start again"
+    ],
+    "mj.ritual.title": [
+      "أكمل الطقس",
+      "Complete the ritual"
+    ],
+    "mj.ritual.overline": [
+      "الطقس",
+      "The ritual"
+    ],
+    "mj.ritual.text": [
+      "عطر للبشرة، ودهن للنبض، وبخور للمكان. حين تجتمع يدوم أثرها طوال المساء.",
+      "Perfume for the skin, oil for the pulse, bakhoor for the room. Layered together, they last all evening."
+    ],
+    "mj.ritual.total": [
+      "الطقس كاملاً",
+      "The ritual together"
+    ],
+    "mj.ritual.adding": [
+      "جارٍ الإضافة…",
+      "Adding…"
+    ],
+    "mj.ritual.add": [
+      "أضف الطقس إلى الحقيبة",
+      "Add the ritual to bag"
+    ],
+    "mj.giftbox.title": [
+      "صمّم صندوق هديتك",
+      "Build your gift box"
+    ],
+    "mj.giftbox.overline": [
+      "الهدايا",
+      "Gifting"
+    ],
+    "mj.giftbox.text": [
+      "اختر {{n}} قطع، ونغلّفها في صندوقنا الخاص مع بطاقة مكتوبة باليد.",
+      "Choose {{n}} pieces. We wrap them in our signature box with a handwritten card."
+    ],
+    "mj.giftbox.count": [
+      "اخترت {{n}} من {{max}}",
+      "{{n}} of {{max}} chosen"
+    ],
+    "mj.giftbox.adding": [
+      "جارٍ الإضافة…",
+      "Adding…"
+    ],
+    "mj.giftbox.add": [
+      "أضف الصندوق إلى الحقيبة",
+      "Add box to bag"
+    ],
+    "mj.giftbox.failed": [
+      "إحدى القطع تحتاج اختيار مقاس أو خيار. افتحها لاختياره ثم أضفها.",
+      "One piece needs a size or option. Open it to choose, then add it."
+    ],
+    "mj.faq.overline": [
+      "أسئلة",
+      "Questions"
+    ],
+    "mj.faq.title": [
+      "قبل أن تختار",
+      "Before you choose"
+    ],
+    "mj.faq.q1": [
+      "هل عطوركم ودهن العود أصلية؟",
+      "Are your perfumes and oud oils authentic?"
+    ],
+    "mj.faq.q1_a": [
+      "كل قارورة تصل من ورشتنا أو مباشرة من الدار المصنّعة، مختومة ومعها رقم التشغيلة.",
+      "Every bottle comes from our own workshop or directly from the house that made it, sealed, with its batch number."
+    ],
+    "mj.faq.q2": [
+      "كم يدوم العطر؟",
+      "How long does the scent last?"
+    ],
+    "mj.faq.q2_a": [
+      "تثبت زيوتنا وعطورنا المركّزة من ثماني إلى اثنتي عشرة ساعة على البشرة، وأطول على القماش، وتجد مدة الثبات في صفحة كل منتج.",
+      "Our oils and extraits hold eight to twelve hours on skin and longer on fabric. Each product page shows its longevity."
+    ],
+    "mj.faq.q3": [
+      "كم يستغرق التوصيل؟",
+      "How fast is delivery?"
+    ],
+    "mj.faq.q3_a": [
+      "نشحن الطلبات خلال يوم عمل واحد، ويصل الطلب خلال يومين إلى أربعة أيام داخل المملكة، ومن ثلاثة إلى ستة أيام لدول الخليج.",
+      "Orders ship within one working day. Delivery takes two to four days inside the Kingdom and three to six across the GCC."
+    ],
+    "mj.faq.q4": [
+      "هل يمكنني إرجاع العطر؟",
+      "Can I return a perfume?"
+    ],
+    "mj.faq.q4_a": [
+      "يمكن إرجاع المنتجات المختومة خلال 14 يوماً، ونستبدل القوارير المفتوحة إذا وصلت تالفة.",
+      "Sealed products can be returned within 14 days. Opened bottles can be exchanged if they arrive damaged."
+    ],
+    "mj.faq.q5": [
+      "هل تقدّمون تغليف الهدايا؟",
+      "Do you gift wrap?"
+    ],
+    "mj.faq.q5_a": [
+      "نعم، اختر تغليف الهدية عند إتمام الطلب وأضف رسالتك، ونكتبها بخط اليد على بطاقتنا.",
+      "Yes. Choose gift wrap at checkout and add a message; we write it by hand on our card."
+    ],
+    "mj.reels.title": [
+      "من مقاطعنا",
+      "Seen on our reels"
+    ],
+    "mj.reels.overline": [
+      "في حركة",
+      "In motion"
+    ],
+    "mj.reels.shop": [
+      "تسوّق المنتج",
+      "Shop this"
+    ],
+    "mj.reels.demo1": [
+      "طبقات العود والورد",
+      "Layering oud and rose"
+    ],
+    "mj.reels.demo2": [
+      "بخّة واحدة، اثنتا عشرة ساعة",
+      "One spray, twelve hours"
+    ],
+    "mj.reels.demo3": [
+      "إشعال المبخرة",
+      "Lighting the mabkhara"
+    ],
+    "mj.reels.demo4": [
+      "صندوق الهدية من الداخل",
+      "Our gift box, unwrapped"
+    ]
+  }
+}

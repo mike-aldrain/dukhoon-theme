@@ -1,0 +1,18 @@
+/*
+ * ATELIER (Majmar layer, after Raed's ITCSS layers)
+ * Base.................Page colours, type scale, buttons, inputs, focus.
+ * Motion...............Reveals, wipes, page transition, reduced motion.
+ * Layout...............Announcement, header, drawers, widgets, footer, bottom bar.
+ * Home.................The nine Majmar home blocks.
+ * Conversion...........Countdown, families, finder, ritual, gift box, FAQ, reels.
+ * Product..............Card, product page, 360° viewer, listings.
+ * Components...........Salla web components on the palette, tap targets.
+ */
+@import './base';
+@import './motion';
+@import './layout';
+@import './home';
+@import './conversion';
+@import './product';
+@import './components';
+@import './film';
