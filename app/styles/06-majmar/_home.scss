@@ -204,6 +204,12 @@ html[dir='rtl'] .mj-arrow__icon {
   &__poster img {
     object-fit: cover;
   }
+  /* The rendered spotlight fades into the field, so the frame square never shows. */
+  &__poster,
+  &__canvas {
+    -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 72%, transparent 100%);
+  }
   &__canvas {
     opacity: 0;
     transition: opacity 400ms var(--mj-ease);
