@@ -1,28 +1,36 @@
 /**
  * Frame sequences that ship with the theme, so the hero turntable and the scroll film
- * work before a merchant uploads any media. Vite emits each WebP as a hashed asset;
- * only the URLs are bundled, and the frames load on demand.
+ * work before a merchant uploads any media. Each palette has its own set, rendered on
+ * that palette's colour so the frames melt into the page; a store only ever loads the
+ * set for its palette. Vite emits each WebP as a hashed asset; only URLs are bundled.
  *
- *   loop-w: 40 frames, 1100 x 1100, spotlit oud-brown field, one full turn of the flacon.
+ *   loop-w: 40 frames, 1100 x 1100, one full turn of the flacon under a warm spotlight.
  *   loop-t: 40 frames, 720 x 900, the same turn framed for phones.
- *   film-w: 80 frames, 1280 x 720, the scroll film (spotlit oud-brown fields, gold smoke).
+ *   film-w: 80 frames, 1280 x 720, the scroll film (cap lifts, gold smoke rises).
  *   film-t: 80 frames, 720 x 1280, the same film framed for phones.
  */
+import type { Palette } from './majmarSettings';
+
 type Glob = Record<string, string>;
 const sorted = (g: Glob) =>
   Object.keys(g)
     .sort()
     .map((k) => g[k]);
 
-export const bundledFrames = {
-  loopWide: sorted(import.meta.glob('../assets/frames/loop-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
-  loopTall: sorted(import.meta.glob('../assets/frames/loop-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
-  filmWide: sorted(import.meta.glob('../assets/frames/film-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
-  filmTall: sorted(import.meta.glob('../assets/frames/film-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+const glob = {
+  emerald: {
+    loopWide: sorted(import.meta.glob('../assets/frames/emerald/loop-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    loopTall: sorted(import.meta.glob('../assets/frames/emerald/loop-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    filmWide: sorted(import.meta.glob('../assets/frames/emerald/film-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    filmTall: sorted(import.meta.glob('../assets/frames/emerald/film-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+  },
+  oxblood: {
+    loopWide: sorted(import.meta.glob('../assets/frames/oxblood/loop-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    loopTall: sorted(import.meta.glob('../assets/frames/oxblood/loop-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    filmWide: sorted(import.meta.glob('../assets/frames/oxblood/film-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    filmTall: sorted(import.meta.glob('../assets/frames/oxblood/film-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+  },
 };
 
-/**
- * Whether copy over the bundled film at progress p should be ink. The bundled film runs
- * on deep oud-brown fields throughout, so its copy is always cream.
- */
-export const bundledFilmInk = (_p: number) => false;
+/** The bundled frame set for a palette. */
+export const framesFor = (palette: Palette) => glob[palette] ?? glob.emerald;

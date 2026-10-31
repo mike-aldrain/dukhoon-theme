@@ -65,28 +65,32 @@
   }
 }
 
-/* ---------- Scent families ---------- */
+/* ---------- Scent families: category cards ----------
+   White cards with the category photo on a soft ivory stage and a gold rule under the
+   name. Placed straight after the hero, the row lifts over the hero's lower edge. */
 .mj-families__rail {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 112px;
-  gap: 1rem;
+  grid-auto-columns: 42%;
+  gap: 0.75rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-inline: var(--mj-gutter);
-  padding-bottom: 0.5rem;
+  padding-block: 0.25rem 1rem;
+  margin: 0;
+  list-style: none;
 
   &::-webkit-scrollbar {
     display: none;
   }
   @media (min-width: 768px) {
     grid-auto-flow: row;
-    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     max-width: calc(var(--mj-container) + var(--mj-gutter) * 2);
     margin-inline: auto;
     overflow: visible;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 }
 .mj-families__item {
@@ -94,39 +98,81 @@
 }
 .mj-families__link {
   display: grid;
-  justify-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
+  height: 100%;
+  padding: 0.6rem 0.6rem 1rem;
+  background: var(--mj-surface);
+  border-radius: var(--mj-radius-card);
+  box-shadow: 0 18px 40px -22px rgb(var(--mj-deep-rgb) / 0.45), inset 0 0 0 1px var(--mj-line);
   text-align: center;
+  transition:
+    transform var(--mj-dur-reveal) var(--mj-ease),
+    box-shadow var(--mj-dur-reveal) var(--mj-ease);
+}
+.mj-families__link:hover,
+.mj-families__link:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 50px -22px rgb(var(--mj-deep-rgb) / 0.55), inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.6);
 }
 .mj-families__disc {
   display: block;
-  width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
+  border-radius: calc(var(--mj-radius-card) - 4px);
   overflow: hidden;
-  box-shadow:
-    inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.35),
-    0 0 0 4px var(--mj-bg),
-    0 0 0 5px rgb(var(--mj-gold-rgb) / 0.2);
-  transition: box-shadow var(--mj-dur-reveal) var(--mj-ease), transform var(--mj-dur-reveal) var(--mj-ease);
+  background: var(--mj-raised);
 
   .mj-media {
     height: 100%;
+    background: transparent;
+  }
+  img {
+    transition: transform 900ms var(--mj-ease);
   }
 }
-.mj-families__link:hover .mj-families__disc,
-.mj-families__link:focus-visible .mj-families__disc {
-  transform: translateY(-4px);
-  box-shadow:
-    inset 0 0 0 1px var(--mj-gold),
-    0 0 0 4px var(--mj-bg),
-    0 0 0 5px rgb(var(--mj-gold-rgb) / 0.6),
-    0 20px 40px -14px rgb(var(--mj-gold-rgb) / 0.4);
+.mj-families__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+.mj-families__link:hover .mj-families__disc img {
+  transform: scale(1.06);
 }
 .mj-families__name {
+  justify-self: center;
+  position: relative;
+  padding-bottom: 0.45rem;
   font-family: var(--mj-font-display);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--mj-ivory);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 25%;
+    bottom: 0;
+    height: 1px;
+    background: var(--mj-gold);
+    transition: inset-inline var(--mj-dur-reveal) var(--mj-ease);
+  }
+}
+.mj-families__link:hover .mj-families__name::after {
+  inset-inline: 0;
+}
+
+/* Straight after the hero: no heading, and the cards overlap the hero's lower edge. */
+.s-block--mj-hero + .s-block .mj-families {
+  padding-top: 0;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  .mj-head {
+    display: none;
+  }
+  .mj-families__rail {
+    position: relative;
+    z-index: 3;
+    margin-top: clamp(-88px, -6vw, -40px);
+  }
 }
 
 /* ---------- Scent finder ---------- */

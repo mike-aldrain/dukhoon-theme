@@ -7,7 +7,7 @@
  *   2. The merchant's MP4 (`video`), scrubbed by setting currentTime.
  *   3. The film that ships with the theme: 80 frames (wide and phone framings) in which
  *      the flacon turns under a warm spotlight, its cap lifts toward the camera and
- *      gold smoke rises, on deep oud-brown fields.
+ *      gold smoke rises, rendered on the palette's own colour (emerald or oxblood).
  * Frames are drawn to a canvas and load progressively once the section is near.
  * Chapters fade in along the timeline, the copy switches between ink and cream to stay
  * readable on each field, and the buy panel for a real store product lands at the end.
@@ -24,7 +24,7 @@ import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { useMajmar } from '../../../hooks/useMajmar';
 import { useMotionAllowed } from '../../../hooks/useMotionAllowed';
 import { useHydrated } from '../../../hooks/useHydrated';
-import { bundledFilmInk, bundledFrames } from '../../../lib/bundledFrames';
+import { framesFor } from '../../../lib/bundledFrames';
 import { drawCover, expandPattern, fitCanvas, loadFrames, nearestLoaded } from '../../../lib/framePlayer';
 import { openMiniCart } from '../MiniCart';
 import { itemsOf, urlOf, useBlockText } from './shared';
@@ -64,7 +64,8 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   const tx = useBlockText();
   const { t } = useTranslation();
   const { format } = useMoney();
-  const { motion } = useMajmar();
+  const { motion, palette } = useMajmar();
+  const bundled = framesFor(palette);
   const motionAllowed = useMotionAllowed();
   const hydrated = useHydrated();
   const sectionRef = useRef<HTMLElement>(null);
@@ -114,7 +115,8 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
       const idx = p < 0.12 ? -1 : Math.min(n - 1, Math.floor(((p - 0.12) / 0.74) * n));
       setActive(p > 0.88 ? -1 : idx);
       setEnded(p > 0.88);
-      setInk(source === 'bundled' ? bundledFilmInk(p) : tone === 'bright');
+      // The bundled film is dark throughout; merchant media follows the tone setting.
+      setInk(source !== 'bundled' && tone === 'bright');
       if (source === 'video') {
         const v = videoRef.current;
         if (v && v.duration && Math.abs(v.currentTime - p * v.duration) > 0.04) v.currentTime = p * v.duration;
@@ -174,7 +176,7 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
     const start = () => {
       fitCanvas(canvas);
       const narrow = window.matchMedia(NARROW).matches;
-      const urls = source === 'frames' ? expandPattern(framesPattern, framesCount) : narrow ? bundledFrames.filmTall : bundledFrames.filmWide;
+      const urls = source === 'frames' ? expandPattern(framesPattern, framesCount) : narrow ? bundled.filmTall : bundled.filmWide;
       const loaded = loadFrames(urls, redraw);
       framesRef.current = loaded.frames;
       cancelLoad = loaded.cancel;
@@ -199,7 +201,7 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
       framesRef.current = [];
       window.removeEventListener('resize', onResize);
     };
-  }, [animate, source, framesPattern, framesCount]);
+  }, [animate, source, framesPattern, framesCount, bundled]);
 
   const addToBag = async () => {
     if (!item) return;
@@ -241,7 +243,7 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   );
 
   if (!animate) {
-    const poster = source === 'bundled' ? bundledFrames.filmWide[Math.round(bundledFrames.filmWide.length * 0.3)] : '';
+    const poster = source === 'bundled' ? bundled.filmWide[Math.round(bundled.filmWide.length * 0.3)] : '';
     return (
       <section className="mj-film mj-film--static" aria-label={title}>
         <div className="mj-container mj-film__static">

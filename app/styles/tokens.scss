@@ -25,83 +25,78 @@
   @return clamp(#{math.div($min-px, 16)}rem, #{math.div($base, 16)}rem + #{$slope * 100}vw, #{math.div($max-px, 16)}rem);
 }
 
-/* Bright colour blocks (option): cream page, ink text, saffron, coral, rose, lilac and emerald
-   colour blocks. Ink 17.5:1 on cream; ink on saffron 9.2:1, coral 6.6:1, rose 9.1:1,
-   lilac 10.6:1, butter 13.3:1, mint 12.7:1; cream on emerald 7.3:1 and on plum 16.2:1. */
-html[data-mj-palette='saffron'] {
-  --mj-bg-rgb: 255 246 232; /* cream #FFF6E8 */
-  --mj-surface-rgb: 255 255 255;
-  --mj-raised-rgb: 252 236 210;
-  --mj-gold-rgb: 242 167 28; /* saffron #F2A71C (fills) */
-  --mj-gold-hover-rgb: 255 106 77; /* coral on hover */
-  --mj-gold-ink-rgb: 138 82 8; /* saffron as text, 6.0:1 on cream */
-  --mj-copper-rgb: 255 106 77;
-  --mj-ivory-rgb: 23 17 13; /* ink #17110D */
-  --mj-muted-rgb: 87 72 60; /* 8.2:1 on cream */
-  --mj-on-gold-rgb: 23 17 13;
-  --mj-cta-rgb: 23 17 13;
-  --mj-on-cta-rgb: 255 246 232;
-  --mj-line-rgb: 23 17 13;
-  --mj-line-alpha: 0.14;
-  --mj-success-rgb: 12 93 72;
-  --mj-warning-rgb: 140 90 10;
-  --mj-error-rgb: 179 38 30;
-  --mj-glow-strength: 0.22;
-  --mj-border: 2px solid rgb(var(--mj-ivory-rgb));
-  --mj-pop: 8px 10px 0 rgb(var(--mj-ivory-rgb));
-  color-scheme: light;
-}
-
-/* Quiet light luxury: warm white, ink, vivid gold. */
-html[data-mj-palette='musk'] {
-  --mj-bg-rgb: 251 248 243;
-  --mj-surface-rgb: 255 255 255;
-  --mj-raised-rgb: 244 238 228;
-  --mj-gold-rgb: 200 149 46;
-  --mj-gold-hover-rgb: 224 169 59;
-  --mj-gold-ink-rgb: 138 90 18;
-  --mj-copper-rgb: 168 82 45;
-  --mj-ivory-rgb: 18 16 14;
-  --mj-muted-rgb: 91 84 76;
-  --mj-on-gold-rgb: 18 16 14;
-  --mj-cta-rgb: 18 16 14;
-  --mj-on-cta-rgb: 255 255 255;
-  --mj-line-rgb: 18 16 14;
-  --mj-line-alpha: 0.1;
-  --mj-success-rgb: 31 122 82;
-  --mj-warning-rgb: 140 102 30;
-  --mj-error-rgb: 179 38 30;
-  --mj-glow-strength: 0.22;
-  --mj-border: 1px solid rgb(var(--mj-line-rgb) / 0.14);
-  --mj-pop: 0 18px 40px -12px rgb(18 16 14 / 0.25);
-  color-scheme: light;
-}
-
-/* Oud luxury (default): oud-wood dark, warm gold, cream. Cream text 17.1:1 on the page,
-   muted 8.5:1, gold 8.8:1; ink on gold buttons 8.8:1. */
+/*
+ * Two palettes, each a light ivory page with deep brand-colour blocks:
+ * product rows sit on ivory so photos look bright, while the hero, marquee, film,
+ * ritual, newsletter, collection tiles and footer sit on the brand colour with gold
+ * (the `--mj-d-*` set, applied by the dark-stage scope below).
+ *
+ * Emerald and gold (default). Page: text 13.6:1, muted 6.5:1, gold text 5.3:1, ivory on
+ * emerald buttons 13.6:1. Blocks: ivory 13.2:1, muted 8.5:1, gold 7.4:1.
+ */
 :root,
-html[data-mj-palette='oud'] {
-  --mj-bg-rgb: 18 13 10; /* #120D0A */
-  --mj-surface-rgb: 28 21 16;
-  --mj-raised-rgb: 40 30 22;
-  --mj-gold-rgb: 214 168 92; /* #D6A85C */
-  --mj-gold-hover-rgb: 234 196 130;
-  --mj-gold-ink-rgb: 214 168 92;
-  --mj-copper-rgb: 168 102 60;
-  --mj-ivory-rgb: 247 240 230;
-  --mj-muted-rgb: 184 170 152;
-  --mj-on-gold-rgb: 18 13 10;
-  --mj-cta-rgb: 214 168 92;
-  --mj-on-cta-rgb: 18 13 10;
-  --mj-line-rgb: 247 240 230;
-  --mj-line-alpha: 0.1;
-  --mj-success-rgb: 134 180 154;
-  --mj-warning-rgb: 224 178 94;
-  --mj-error-rgb: 217 130 114;
-  --mj-glow-strength: 0.2;
-  --mj-border: 1px solid rgb(247 240 230 / 0.16);
-  --mj-pop: 0 18px 40px -12px rgb(0 0 0 / 0.6);
-  color-scheme: dark;
+html[data-mj-palette='emerald'] {
+  --mj-bg-rgb: 246 241 231; /* ivory #F6F1E7 */
+  --mj-surface-rgb: 255 255 255;
+  --mj-raised-rgb: 237 230 216;
+  --mj-gold-rgb: 190 150 80; /* #BE9650 fills, rules, icons */
+  --mj-gold-hover-rgb: 168 128 60;
+  --mj-gold-ink-rgb: 128 94 34; /* gold as text */
+  --mj-copper-rgb: 150 100 50;
+  --mj-ivory-rgb: 14 42 34; /* text: emerald ink */
+  --mj-muted-rgb: 74 90 82;
+  --mj-on-gold-rgb: 14 42 34;
+  --mj-cta-rgb: 14 42 34;
+  --mj-on-cta-rgb: 246 241 231;
+  --mj-line-rgb: 14 42 34;
+  --mj-line-alpha: 0.12;
+  --mj-success-rgb: 30 110 72;
+  --mj-warning-rgb: 140 100 20;
+  --mj-error-rgb: 170 40 30;
+  --mj-glow-strength: 0.18;
+  --mj-deep-rgb: 8 26 21;
+
+  --mj-d-bg-rgb: 14 42 34; /* emerald #0E2A22 */
+  --mj-d-surface-rgb: 20 53 43;
+  --mj-d-raised-rgb: 27 66 54;
+  --mj-d-gold-rgb: 212 175 106; /* #D4AF6A */
+  --mj-d-gold-hover-rgb: 230 199 140;
+  --mj-d-ivory-rgb: 244 238 226;
+  --mj-d-muted-rgb: 185 196 182;
+  color-scheme: light;
+}
+
+/* Oxblood and gold. Page: text 14.8:1, muted 7.2:1, gold text 5.5:1.
+   Blocks: ivory 14.5:1, muted 8.9:1, gold 8.5:1. */
+html[data-mj-palette='oxblood'] {
+  --mj-bg-rgb: 248 240 236; /* blush ivory #F8F0EC */
+  --mj-surface-rgb: 255 255 255;
+  --mj-raised-rgb: 240 226 220;
+  --mj-gold-rgb: 196 152 80;
+  --mj-gold-hover-rgb: 172 130 60;
+  --mj-gold-ink-rgb: 128 90 34;
+  --mj-copper-rgb: 160 90 60;
+  --mj-ivory-rgb: 58 15 20; /* text: oxblood ink */
+  --mj-muted-rgb: 104 72 72;
+  --mj-on-gold-rgb: 58 15 20;
+  --mj-cta-rgb: 58 15 20;
+  --mj-on-cta-rgb: 248 240 236;
+  --mj-line-rgb: 58 15 20;
+  --mj-line-alpha: 0.12;
+  --mj-success-rgb: 30 110 72;
+  --mj-warning-rgb: 140 100 20;
+  --mj-error-rgb: 170 40 30;
+  --mj-glow-strength: 0.18;
+  --mj-deep-rgb: 31 7 10;
+
+  --mj-d-bg-rgb: 58 15 20; /* oxblood #3A0F14 */
+  --mj-d-surface-rgb: 71 22 28;
+  --mj-d-raised-rgb: 86 30 37;
+  --mj-d-gold-rgb: 216 180 106; /* #D8B46A */
+  --mj-d-gold-hover-rgb: 234 204 142;
+  --mj-d-ivory-rgb: 247 237 228;
+  --mj-d-muted-rgb: 211 184 176;
+  color-scheme: light;
 }
 
 :root {
@@ -121,18 +116,8 @@ html[data-mj-palette='oud'] {
   --mj-success: rgb(var(--mj-success-rgb));
   --mj-warning: rgb(var(--mj-warning-rgb));
   --mj-error: rgb(var(--mj-error-rgb));
+  --mj-deep: rgb(var(--mj-deep-rgb));
 
-  /* Colour-block fields (same in every palette; each pairs with ink or cream copy). */
-  --mj-ink: #17110d;
-  --mj-cream: #fff6e8;
-  --mj-saffron: #f2a71c;
-  --mj-coral: #ff6a4d;
-  --mj-rose: #f39bbb;
-  --mj-lilac: #cdb8ff;
-  --mj-butter: #f7d77a;
-  --mj-mint: #9fe3c8;
-  --mj-emerald: #0c5d48;
-  --mj-plum: #290f33;
 
   /* Typography: Arabic first; the LTR block below swaps the order. */
   --mj-font-display: 'El Messiri', 'Fraunces', 'Mj Serif Fallback', serif;
@@ -213,17 +198,48 @@ html[dir='ltr'] {
    copy over photography keeps its contrast. */
 .mj-tile,
 .mj-lightbox,
-.mj-stage-dark {
-  --mj-bg-rgb: 20 16 13;
-  --mj-surface-rgb: 30 24 20;
-  --mj-raised-rgb: 42 34 28;
-  --mj-gold-rgb: 212 163 90;
-  --mj-gold-hover-rgb: 232 190 122;
-  --mj-gold-ink-rgb: 212 163 90;
-  --mj-ivory-rgb: 243 234 223;
-  --mj-muted-rgb: 179 164 147;
-  --mj-line-rgb: 243 234 223;
+.mj-stage-dark,
+.mj-hero,
+.mj-marquee,
+.mj-film,
+.mj-ritual,
+.mj-newsletter,
+.store-footer,
+.app-inner:has(.mj-hero--lead) .mj-header--overlay {
+  --mj-bg-rgb: var(--mj-d-bg-rgb);
+  --mj-surface-rgb: var(--mj-d-surface-rgb);
+  --mj-raised-rgb: var(--mj-d-raised-rgb);
+  --mj-gold-rgb: var(--mj-d-gold-rgb);
+  --mj-gold-hover-rgb: var(--mj-d-gold-hover-rgb);
+  --mj-gold-ink-rgb: var(--mj-d-gold-rgb);
+  --mj-ivory-rgb: var(--mj-d-ivory-rgb);
+  --mj-muted-rgb: var(--mj-d-muted-rgb);
+  --mj-line-rgb: var(--mj-d-ivory-rgb);
+  --mj-on-gold-rgb: var(--mj-d-bg-rgb);
+  --mj-cta-rgb: var(--mj-d-gold-rgb);
+  --mj-on-cta-rgb: var(--mj-d-bg-rgb);
   --mj-glow-strength: 0.2;
+  /* Colour tokens are resolved where they are declared, so re-derive them here. */
+  --mj-bg: rgb(var(--mj-bg-rgb));
+  --mj-surface: rgb(var(--mj-surface-rgb));
+  --mj-raised: rgb(var(--mj-raised-rgb));
+  --mj-gold: rgb(var(--mj-gold-rgb));
+  --mj-gold-hover: rgb(var(--mj-gold-hover-rgb));
+  --mj-gold-ink: rgb(var(--mj-gold-ink-rgb));
+  --mj-ivory: rgb(var(--mj-ivory-rgb));
+  --mj-muted: rgb(var(--mj-muted-rgb));
+  --mj-on-gold: rgb(var(--mj-on-gold-rgb));
+  --mj-cta: rgb(var(--mj-cta-rgb));
+  --mj-on-cta: rgb(var(--mj-on-cta-rgb));
+  --mj-line: rgb(var(--mj-line-rgb) / var(--mj-line-alpha));
+  color: var(--mj-ivory);
+}
+
+/* Blocks that sit on the brand colour paint it themselves. */
+.mj-ritual,
+.mj-newsletter,
+.store-footer {
+  background-color: var(--mj-bg);
 }
 
 /* Amber drives the engine's primary colour unless the merchant keeps the store colour.

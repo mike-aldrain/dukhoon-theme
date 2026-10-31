@@ -20,7 +20,7 @@ import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useMajmar } from '../../../hooks/useMajmar';
 import { useMotionAllowed } from '../../../hooks/useMotionAllowed';
 import { usePickedProducts } from '../../../hooks/useStoreProducts';
-import { bundledFrames } from '../../../lib/bundledFrames';
+import { framesFor } from '../../../lib/bundledFrames';
 import { drawCover, expandPattern, fitCanvas, loadFrames } from '../../../lib/framePlayer';
 import { priceOf } from './conversionUtils';
 
@@ -39,7 +39,7 @@ interface HeroStageProps {
 const NARROW = '(max-width: 820px)';
 
 export function HeroStage({ products: field, framesUrl, framesCount = 0, image, mobileImage, sticker, stickerBadge, label, priority }: HeroStageProps) {
-  const { motion } = useMajmar();
+  const { motion, palette } = useMajmar();
   const motionAllowed = useMotionAllowed();
   const { t } = useTranslation();
   const { format } = useMoney();
@@ -52,8 +52,9 @@ export function HeroStage({ products: field, framesUrl, framesCount = 0, image, 
 
   const merchant = framesUrl && framesUrl.includes('{n}') && framesCount > 1 ? expandPattern(framesUrl, Math.min(framesCount, 120)) : null;
   const useStill = !!image;
-  const wide = merchant ?? bundledFrames.loopWide;
-  const tall = merchant ?? bundledFrames.loopTall;
+  const bundled = framesFor(palette);
+  const wide = merchant ?? bundled.loopWide;
+  const tall = merchant ?? bundled.loopTall;
   const spin = motion !== 'off' && motionAllowed && !useStill;
 
   useEffect(() => {
@@ -143,7 +144,7 @@ export function HeroStage({ products: field, framesUrl, framesCount = 0, image, 
     };
     // The frame lists are fixed per render of the merchant settings.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [spin, motion, framesUrl, framesCount]);
+  }, [spin, motion, palette, framesUrl, framesCount]);
 
   const fetchPriority = priority ? { fetchPriority: 'high' as const } : {};
   const posterWide = useStill ? image : wide[0];

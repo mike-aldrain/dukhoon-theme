@@ -1,7 +1,7 @@
 /**
  * Cinematic Hero (home block `mj-hero`).
  *
- * A deep oud field (or a colour field the merchant picks) with a giant outlined word, the headline (one
+ * The palette field (emerald or oxblood) with a giant outlined word in faint gold, the headline (one
  * word can be highlighted in cream with an ink outline), two pill buttons, and the
  * drag-to-spin turntable (HeroStage) with a spinning sticker and a price sticker that links
  * to a real store product.
@@ -27,7 +27,6 @@ export interface CinematicHeroData {
   frames_count?: unknown;
   /** Picked products: the first one fills the price sticker (latest product when empty). */
   products?: unknown;
-  field?: unknown;
   cta_primary_text?: unknown;
   cta_primary_url?: unknown;
   cta_secondary_text?: unknown;
@@ -35,13 +34,6 @@ export interface CinematicHeroData {
   position?: number;
   [key: string]: unknown;
 }
-
-const FIELDS = ['oud', 'saffron', 'coral', 'rose', 'lilac', 'emerald', 'plum'] as const;
-const choice = <T extends string>(v: unknown, allowed: readonly T[], d: T): T => {
-  const raw = Array.isArray(v) ? v[0] : v;
-  const val = typeof raw === 'object' && raw ? (raw as { value?: unknown }).value : raw;
-  return (allowed as readonly unknown[]).includes(val) ? (val as T) : d;
-};
 
 /** Split the title around the highlighted word, if it appears in it. */
 function withHighlight(title: string, word: string) {
@@ -60,7 +52,6 @@ export function CinematicHero({ data }: { data: CinematicHeroData }) {
   const tx = useBlockText();
   // The engine numbers blocks from 1 (`position: index + 1`).
   const isLead = (data.position ?? 1) === 1;
-  const field = choice(data.field, FIELDS, 'oud');
 
   const overline = tx(data.overline, 'mj.hero.overline', 'House of oud · 2026 edition');
   const title = tx(data.title, 'mj.hero.title', 'Oud that stays after you');
@@ -80,7 +71,7 @@ export function CinematicHero({ data }: { data: CinematicHeroData }) {
   const Title = isLead ? 'h1' : 'h2';
 
   return (
-    <section className={`mj-hero mj-field--${field}${isLead ? ' mj-hero--lead' : ''}`} aria-label={title}>
+    <section className={`mj-hero${isLead ? ' mj-hero--lead' : ''}`} aria-label={title}>
       {giant && (
         <span className="mj-hero__giant" aria-hidden="true">
           {giant}

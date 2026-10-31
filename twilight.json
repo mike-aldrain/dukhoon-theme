@@ -362,25 +362,21 @@
       "required": false,
       "options": [
         {
-          "label": "فخامة العود (داكن وذهبي) · Oud luxury (dark and gold)",
-          "value": "oud"
+          "label": "زمردي وذهبي · Emerald and gold",
+          "value": "emerald"
         },
         {
-          "label": "فخامة فاتحة هادئة · Quiet light luxury",
-          "value": "musk"
-        },
-        {
-          "label": "ألوان زاهية · Bright colour blocks",
-          "value": "saffron"
+          "label": "عنابي وذهبي · Oxblood and gold",
+          "value": "oxblood"
         }
       ],
       "selected": [
         {
-          "label": "فخامة العود (داكن وذهبي) · Oud luxury (dark and gold)",
-          "value": "oud"
+          "label": "زمردي وذهبي · Emerald and gold",
+          "value": "emerald"
         }
       ],
-      "value": "oud"
+      "value": "emerald"
     },
     {
       "id": "mj_accent_source",
@@ -446,7 +442,7 @@
       "format": "color",
       "label": "الخلفية · Background",
       "required": false,
-      "value": "#120D0A",
+      "value": "#F6F1E7",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -461,7 +457,7 @@
       "format": "color",
       "label": "الأسطح والبطاقات · Surfaces and cards",
       "required": false,
-      "value": "#1C1510",
+      "value": "#FFFFFF",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -476,7 +472,7 @@
       "format": "color",
       "label": "اللون الكهرماني · Amber accent",
       "required": false,
-      "value": "#D6A85C",
+      "value": "#BE9650",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -491,7 +487,7 @@
       "format": "color",
       "label": "لون النص · Text colour",
       "required": false,
-      "value": "#F7F0E6",
+      "value": "#0E2A22",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -581,10 +577,6 @@
       "label": "تأثير التمرير · Hover effect",
       "required": false,
       "options": [
-        {
-          "label": "قفزة مع ظل (لوحة الألوان الزاهية) · Lift with a shadow (bright palette)",
-          "value": "pop"
-        },
         {
           "label": "إمالة ثلاثية الأبعاد مع لمعة كهرمانية · 3D tilt with amber edge light",
           "value": "tilt"
@@ -918,51 +910,6 @@
           "description": "One short word, drawn as a large outline behind the hero. Example: عود"
         },
         {
-          "id": "field",
-          "type": "items",
-          "label": "لون الخلفية · Background colour",
-          "required": false,
-          "format": "dropdown-list",
-          "multichoice": false,
-          "options": [
-            {
-              "label": "خشب العود (داكن) · Oud wood (dark)",
-              "value": "oud"
-            },
-            {
-              "label": "زمردي · Emerald",
-              "value": "emerald"
-            },
-            {
-              "label": "برقوقي · Plum",
-              "value": "plum"
-            },
-            {
-              "label": "زعفراني · Saffron",
-              "value": "saffron"
-            },
-            {
-              "label": "مرجاني · Coral",
-              "value": "coral"
-            },
-            {
-              "label": "وردي · Rose",
-              "value": "rose"
-            },
-            {
-              "label": "ليلكي · Lilac",
-              "value": "lilac"
-            }
-          ],
-          "selected": [
-            {
-              "label": "خشب العود (داكن) · Oud wood (dark)",
-              "value": "oud"
-            }
-          ],
-          "value": "oud"
-        },
-        {
           "id": "products",
           "type": "items",
           "label": "منتج ملصق السعر · Product on the price sticker",
@@ -1085,39 +1032,6 @@
           "multilanguage": true,
           "value": null,
           "description": "Example: عود, عنبر, مسك أبيض, ورد الطائف"
-        },
-        {
-          "id": "field",
-          "type": "items",
-          "label": "لون الشريط · Band colour",
-          "required": false,
-          "format": "dropdown-list",
-          "multichoice": false,
-          "options": [
-            {
-              "label": "داكن مع نجوم ذهبية · Dark with gold stars",
-              "value": "ink"
-            },
-            {
-              "label": "زمردي · Emerald",
-              "value": "emerald"
-            },
-            {
-              "label": "زعفراني · Saffron",
-              "value": "saffron"
-            },
-            {
-              "label": "مرجاني · Coral",
-              "value": "coral"
-            }
-          ],
-          "selected": [
-            {
-              "label": "داكن مع نجوم ذهبية · Dark with gold stars",
-              "value": "ink"
-            }
-          ],
-          "value": "ink"
         }
       ]
     },

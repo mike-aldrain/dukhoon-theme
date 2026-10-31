@@ -5,14 +5,14 @@
  */
 
 .mj-film {
-  --mj-film-fg: var(--mj-cream);
+  --mj-film-fg: var(--mj-ivory);
   --mj-film-side: max(var(--mj-gutter), calc((100vw - var(--mj-container)) / 2 + var(--mj-gutter)));
   position: relative;
-  background: #0f0a07;
+  background: var(--mj-deep);
   color: var(--mj-film-fg);
 
   &.is-ink {
-    --mj-film-fg: var(--mj-ink);
+    --mj-film-fg: rgb(var(--mj-deep-rgb));
   }
 
   &__pin {
@@ -47,7 +47,7 @@
     margin: 0 0 0.6rem;
     font-size: 0.8125rem;
     font-weight: 500;
-    color: #d6a85c;
+    color: var(--mj-gold);
     letter-spacing: 0.04em;
   }
   &__title {
@@ -113,7 +113,7 @@
     span {
       display: block;
       height: 100%;
-      background: #d6a85c;
+      background: var(--mj-gold);
       transform: scaleX(0);
       transform-origin: left;
       html[dir='rtl'] & {
@@ -132,9 +132,9 @@
     gap: 0.9rem;
     width: min(420px, calc(100vw - 2 * var(--mj-gutter)));
     padding: 1.75rem;
-    background: rgb(15 9 6 / 0.78);
-    color: var(--mj-cream);
-    border: 1px solid rgb(214 168 92 / 0.5);
+    background: rgb(var(--mj-deep-rgb) / 0.8);
+    color: var(--mj-ivory);
+    border: 1px solid rgb(var(--mj-gold-rgb) / 0.5);
     border-radius: 6px;
     backdrop-filter: blur(12px);
     box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.7);
@@ -153,7 +153,7 @@
   &__buy-over {
     margin: 0;
     font-size: 0.8125rem;
-    color: #d6a85c;
+    color: var(--mj-gold);
   }
   &__buy-name {
     margin: 0;
@@ -168,7 +168,7 @@
     font-style: italic;
     font-size: 1.75rem;
     font-weight: 600;
-    color: #d6a85c;
+    color: var(--mj-gold);
     s {
       margin-inline-start: 0.5rem;
       font-size: 1.1rem;
@@ -208,7 +208,7 @@
   /* Static layout: server render, reduced motion, motion off. */
   &--static {
     padding-block: var(--mj-section);
-    color: var(--mj-cream);
+    color: var(--mj-ivory);
     .mj-film__title {
       font-size: clamp(2.5rem, 5vw, 4.5rem);
       margin-block: 1rem 1.5rem;
@@ -233,7 +233,7 @@
   }
   &__poster {
     overflow: hidden;
-    border: 1px solid rgb(214 168 92 / 0.4);
+    border: 1px solid rgb(var(--mj-gold-rgb) / 0.4);
     border-radius: 6px;
     aspect-ratio: 16 / 10;
     img,
@@ -269,6 +269,6 @@
     font-style: italic;
     font-weight: 600;
     font-size: 1.25rem;
-    color: #d6a85c;
+    color: var(--mj-gold);
   }
 }

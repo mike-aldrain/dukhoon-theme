@@ -1,6 +1,6 @@
 /**
  * Scent Marquee (home block `mj-marquee`): a band of large scent words that scrolls
- * sideways without end, on an ink or colour field. The words are one comma-separated
+ * sideways without end, on the palette's deep tone between gold hairlines. The words are one comma-separated
  * field. The track is decorative (aria-hidden); the words are also given once as a
  * visually hidden list for screen readers. CSS-only motion, stopped for reduced motion.
  */
@@ -9,17 +9,11 @@ import { useBlockText } from './shared';
 
 export interface MarqueeData {
   words?: unknown;
-  field?: unknown;
   [key: string]: unknown;
 }
 
-const FIELDS = ['ink', 'saffron', 'coral', 'emerald'] as const;
-
 export function Marquee({ data }: { data: MarqueeData }) {
   const tx = useBlockText();
-  const raw = Array.isArray(data.field) ? data.field[0] : data.field;
-  const value = typeof raw === 'object' && raw ? (raw as { value?: unknown }).value : raw;
-  const field = (FIELDS as readonly unknown[]).includes(value) ? (value as string) : 'ink';
   const words = tx(data.words, 'mj.marquee.words', 'Cambodian oud, Hindi oud, Oud oil, Muattar, Mukhallat, Majlis bakhoor')
     .split(/[,،]/)
     .map((w) => w.trim())
@@ -42,7 +36,7 @@ export function Marquee({ data }: { data: MarqueeData }) {
   );
 
   return (
-    <section className={`mj-marquee mj-field--${field}`}>
+    <section className="mj-marquee">
       <ul className="mj-sr-only">
         {words.map((w) => (
           <li key={w}>{w}</li>

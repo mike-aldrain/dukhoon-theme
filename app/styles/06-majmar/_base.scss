@@ -163,8 +163,9 @@ html[dir='rtl'] .mj-tagline {
     font-size: 0.75rem;
   }
 
-  /* Primary call to action: ink fill (gold in the Oud palette); turns gold on hover. */
-  &--gold {
+  /* Primary call to action: brand ink on the ivory page, gold on the brand-colour blocks. */
+  &--gold,
+  &--ink {
     background: var(--mj-cta);
     color: var(--mj-on-cta);
 

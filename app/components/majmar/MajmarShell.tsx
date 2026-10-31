@@ -43,7 +43,6 @@ export function MajmarShell({ children }: { children: ReactNode }) {
         colors.bg && `--mj-bg-rgb:${colors.bg};`,
         colors.surface && `--mj-surface-rgb:${colors.surface};--mj-raised-rgb:${colors.surface};`,
         colors.gold && `--mj-gold-rgb:${colors.gold};--mj-gold-hover-rgb:${colors.gold};`,
-        colors.gold && mj.palette === 'oud' && `--mj-gold-ink-rgb:${colors.gold};`,
         colors.text && `--mj-ivory-rgb:${colors.text};--mj-line-rgb:${colors.text};`,
       ]
         .filter(Boolean)

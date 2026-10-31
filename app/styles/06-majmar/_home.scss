@@ -78,16 +78,6 @@ html[dir='rtl'] .mj-arrow__icon {
   transform: scaleX(-1);
 }
 
-/* ---------- Colour fields (hero, marquee, bands) ---------- */
-.mj-field--oud { --mj-field: #0f0906; --mj-on-field: var(--mj-cream); }
-.mj-field--saffron { --mj-field: var(--mj-saffron); --mj-on-field: var(--mj-ink); }
-.mj-field--coral { --mj-field: var(--mj-coral); --mj-on-field: var(--mj-ink); }
-.mj-field--rose { --mj-field: var(--mj-rose); --mj-on-field: var(--mj-ink); }
-.mj-field--lilac { --mj-field: var(--mj-lilac); --mj-on-field: var(--mj-ink); }
-.mj-field--emerald { --mj-field: var(--mj-emerald); --mj-on-field: var(--mj-cream); }
-.mj-field--plum { --mj-field: var(--mj-plum); --mj-on-field: var(--mj-cream); }
-.mj-field--ink { --mj-field: var(--mj-ink); --mj-on-field: var(--mj-cream); }
-
 .mj-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -117,8 +107,8 @@ html[dir='rtl'] .mj-arrow__icon {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: var(--mj-field);
-  color: var(--mj-on-field);
+  background: var(--mj-bg);
+  color: var(--mj-ivory);
   padding-top: var(--mj-header-stack, 0px);
 
   &__giant {
@@ -143,7 +133,7 @@ html[dir='rtl'] .mj-arrow__icon {
     align-items: center;
     gap: 1.5rem;
     min-height: min(860px, calc(92svh - var(--mj-header-stack, 0px)));
-    padding-block: 1rem 3rem;
+    padding-block: 1rem clamp(4rem, 8vw, 7rem);
   }
 
   &__copy {
@@ -166,7 +156,7 @@ html[dir='rtl'] .mj-arrow__icon {
   }
   &__subtitle {
     max-width: 34ch;
-    color: color-mix(in srgb, var(--mj-on-field) 78%, transparent);
+    color: var(--mj-muted);
     font-size: clamp(1.05rem, 1.4vw, 1.25rem);
     line-height: 1.6;
   }
@@ -188,7 +178,7 @@ html[dir='rtl'] .mj-arrow__icon {
       }
     }
     &:focus-visible {
-      outline: 3px solid var(--mj-ink);
+      outline: 2px solid var(--mj-gold);
       outline-offset: 6px;
       border-radius: 28px;
     }
@@ -256,16 +246,16 @@ html[dir='rtl'] .mj-arrow__icon {
     inset-inline-end: 4%;
     animation: mj-spin 14s linear infinite;
     circle {
-      fill: var(--mj-cream);
-      stroke: var(--mj-ink);
-      stroke-width: 2;
+      fill: rgb(var(--mj-deep-rgb) / 0.6);
+      stroke: var(--mj-gold);
+      stroke-width: 1;
     }
     text {
       font-family: var(--mj-font-body);
       font-weight: 700;
       font-size: 13.5px;
       letter-spacing: 1px;
-      fill: var(--mj-ink);
+      fill: var(--mj-gold);
     }
     .mj-sticker__badge {
       font-family: var(--mj-font-latin);
@@ -287,9 +277,9 @@ html[dir='rtl'] .mj-arrow__icon {
     gap: 0.15rem;
     max-width: 14rem;
     padding: 0.85rem 1.1rem;
-    background: rgb(15 9 6 / 0.72);
-    color: var(--mj-cream);
-    border: 1px solid rgb(214 168 92 / 0.55);
+    background: rgb(var(--mj-deep-rgb) / 0.72);
+    color: var(--mj-ivory);
+    border: 1px solid rgb(var(--mj-gold-rgb) / 0.55);
     border-radius: 4px;
     backdrop-filter: blur(8px);
     transition: border-color 350ms var(--mj-ease), transform 350ms var(--mj-ease);
@@ -332,9 +322,9 @@ html[dir='rtl'] .mj-arrow__icon {
 .mj-marquee {
   overflow: hidden;
   padding-block: 1rem;
-  border-block: 1px solid rgb(214 168 92 / 0.3);
-  background: var(--mj-field);
-  color: var(--mj-on-field);
+  border-block: 1px solid rgb(var(--mj-gold-rgb) / 0.3);
+  background: var(--mj-deep);
+  color: var(--mj-ivory);
   &__track {
     display: flex;
     width: max-content;
@@ -354,10 +344,6 @@ html[dir='rtl'] .mj-arrow__icon {
     font-style: normal;
     font-size: 0.6em;
     color: var(--mj-gold);
-  }
-  &.mj-field--saffron i,
-  &.mj-field--coral i {
-    color: var(--mj-ink);
   }
   &:hover &__track {
     animation-play-state: paused;
@@ -922,7 +908,7 @@ html[data-mj-motion='off'] {
     mix-blend-mode: multiply;
   }
 }
-html[data-mj-palette='oud'] .mj-media--product img {
+html[data-mj-palette] .mj-media--product img {
   mix-blend-mode: normal;
 }
 .mj-tile .mj-media--product {
