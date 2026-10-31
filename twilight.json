@@ -442,7 +442,7 @@
       "format": "color",
       "label": "الخلفية · Background",
       "required": false,
-      "value": "#F6F1E7",
+      "value": "#0B231C",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -457,7 +457,7 @@
       "format": "color",
       "label": "الأسطح والبطاقات · Surfaces and cards",
       "required": false,
-      "value": "#FFFFFF",
+      "value": "#102C24",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -472,7 +472,7 @@
       "format": "color",
       "label": "اللون الكهرماني · Amber accent",
       "required": false,
-      "value": "#BE9650",
+      "value": "#D4AF6A",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -487,7 +487,7 @@
       "format": "color",
       "label": "لون النص · Text colour",
       "required": false,
-      "value": "#0E2A22",
+      "value": "#F4EEE2",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -955,6 +955,31 @@
                 }
               ],
               "value": "light"
+            },
+            {
+              "id": "slides.kind",
+              "type": "items",
+              "label": "نوع الشريحة · Slide type",
+              "required": false,
+              "format": "dropdown-list",
+              "multichoice": false,
+              "options": [
+                {
+                  "label": "صورة · Image",
+                  "value": "image"
+                },
+                {
+                  "label": "قارورة ثلاثية الأبعاد تدور · 3D turning bottle",
+                  "value": "3d"
+                }
+              ],
+              "selected": [
+                {
+                  "label": "صورة · Image",
+                  "value": "image"
+                }
+              ],
+              "value": "image"
             }
           ],
           "minLength": 0,

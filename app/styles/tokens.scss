@@ -26,77 +26,93 @@
 }
 
 /*
- * Two palettes, each a light ivory page with deep brand-colour blocks:
- * product rows sit on ivory so photos look bright, while the hero, marquee, film,
- * ritual, newsletter, collection tiles and footer sit on the brand colour with gold
- * (the `--mj-d-*` set, applied by the dark-stage scope below).
+ * Two palettes, each a deep brand-colour page with gold detail and ivory "islands":
+ * product cards, the offer card and feature cards are ivory with dark ink (the `--mj-l-*`
+ * set, applied by the light-island scope below), so product photos stay bright.
+ * Banners and blocks on the brand colour use the `--mj-d-*` set.
  *
- * Emerald and gold (default). Page: text 13.6:1, muted 6.5:1, gold text 5.3:1, ivory on
- * emerald buttons 13.6:1. Blocks: ivory 13.2:1, muted 8.5:1, gold 7.4:1.
+ * Emerald and gold (default). Page: ivory text 14.3:1, muted 9.2:1, gold 8.0:1, emerald on
+ * gold buttons 8.0:1. Islands: ink 13.6:1, muted 6.5:1, gold text 5.3:1.
  */
 :root,
 [data-mj-palette='emerald'] {
-  --mj-bg-rgb: 246 241 231; /* ivory #F6F1E7 */
-  --mj-surface-rgb: 255 255 255;
-  --mj-raised-rgb: 237 230 216;
-  --mj-gold-rgb: 190 150 80; /* #BE9650 fills, rules, icons */
-  --mj-gold-hover-rgb: 168 128 60;
-  --mj-gold-ink-rgb: 128 94 34; /* gold as text */
-  --mj-copper-rgb: 150 100 50;
-  --mj-ivory-rgb: 14 42 34; /* text: emerald ink */
-  --mj-muted-rgb: 74 90 82;
-  --mj-on-gold-rgb: 14 42 34;
-  --mj-cta-rgb: 14 42 34;
-  --mj-on-cta-rgb: 246 241 231;
-  --mj-line-rgb: 14 42 34;
+  --mj-bg-rgb: 11 35 28; /* #0B231C */
+  --mj-surface-rgb: 16 44 36;
+  --mj-raised-rgb: 22 56 46;
+  --mj-gold-rgb: 212 175 106; /* #D4AF6A */
+  --mj-gold-hover-rgb: 230 199 140;
+  --mj-gold-ink-rgb: 212 175 106;
+  --mj-copper-rgb: 184 132 76;
+  --mj-ivory-rgb: 244 238 226; /* text #F4EEE2 */
+  --mj-muted-rgb: 185 196 182;
+  --mj-on-gold-rgb: 11 35 28;
+  --mj-cta-rgb: 212 175 106;
+  --mj-on-cta-rgb: 11 35 28;
+  --mj-line-rgb: 244 238 226;
   --mj-line-alpha: 0.12;
-  --mj-success-rgb: 30 110 72;
-  --mj-warning-rgb: 140 100 20;
-  --mj-error-rgb: 170 40 30;
-  --mj-glow-strength: 0.18;
-  --mj-deep-rgb: 8 26 21;
+  --mj-success-rgb: 150 205 172;
+  --mj-warning-rgb: 232 192 112;
+  --mj-error-rgb: 240 150 130;
+  --mj-glow-strength: 0.2;
+  --mj-deep-rgb: 6 20 16;
 
   --mj-d-bg-rgb: 14 42 34; /* emerald #0E2A22 */
   --mj-d-surface-rgb: 20 53 43;
   --mj-d-raised-rgb: 27 66 54;
-  --mj-d-gold-rgb: 212 175 106; /* #D4AF6A */
+  --mj-d-gold-rgb: 212 175 106;
   --mj-d-gold-hover-rgb: 230 199 140;
   --mj-d-ivory-rgb: 244 238 226;
   --mj-d-muted-rgb: 185 196 182;
-  color-scheme: light;
+
+  --mj-l-bg-rgb: 246 241 231; /* ivory #F6F1E7 */
+  --mj-l-surface-rgb: 251 248 242;
+  --mj-l-raised-rgb: 237 230 216;
+  --mj-l-gold-rgb: 190 150 80;
+  --mj-l-gold-ink-rgb: 128 94 34;
+  --mj-l-ink-rgb: 14 42 34;
+  --mj-l-muted-rgb: 74 90 82;
+  color-scheme: dark;
 }
 
-/* Oxblood and gold. Page: text 14.8:1, muted 7.2:1, gold text 5.5:1.
-   Blocks: ivory 14.5:1, muted 8.9:1, gold 8.5:1. */
+/* Oxblood and gold. Page: ivory text 15.5:1, muted 9.6:1, gold 9.1:1.
+   Islands: ink 14.8:1, muted 7.2:1, gold text 5.5:1. */
 [data-mj-palette='oxblood'] {
-  --mj-bg-rgb: 248 240 236; /* blush ivory #F8F0EC */
-  --mj-surface-rgb: 255 255 255;
-  --mj-raised-rgb: 240 226 220;
-  --mj-gold-rgb: 196 152 80;
-  --mj-gold-hover-rgb: 172 130 60;
-  --mj-gold-ink-rgb: 128 90 34;
-  --mj-copper-rgb: 160 90 60;
-  --mj-ivory-rgb: 58 15 20; /* text: oxblood ink */
-  --mj-muted-rgb: 104 72 72;
-  --mj-on-gold-rgb: 58 15 20;
-  --mj-cta-rgb: 58 15 20;
-  --mj-on-cta-rgb: 248 240 236;
-  --mj-line-rgb: 58 15 20;
+  --mj-bg-rgb: 46 11 16; /* #2E0B10 */
+  --mj-surface-rgb: 58 15 20;
+  --mj-raised-rgb: 72 22 28;
+  --mj-gold-rgb: 216 180 106; /* #D8B46A */
+  --mj-gold-hover-rgb: 234 204 142;
+  --mj-gold-ink-rgb: 216 180 106;
+  --mj-copper-rgb: 196 128 84;
+  --mj-ivory-rgb: 247 237 228;
+  --mj-muted-rgb: 211 184 176;
+  --mj-on-gold-rgb: 46 11 16;
+  --mj-cta-rgb: 216 180 106;
+  --mj-on-cta-rgb: 46 11 16;
+  --mj-line-rgb: 247 237 228;
   --mj-line-alpha: 0.12;
-  --mj-success-rgb: 30 110 72;
-  --mj-warning-rgb: 140 100 20;
-  --mj-error-rgb: 170 40 30;
-  --mj-glow-strength: 0.18;
+  --mj-success-rgb: 160 205 170;
+  --mj-warning-rgb: 236 196 116;
+  --mj-error-rgb: 244 160 140;
+  --mj-glow-strength: 0.2;
   --mj-deep-rgb: 31 7 10;
 
   --mj-d-bg-rgb: 58 15 20; /* oxblood #3A0F14 */
   --mj-d-surface-rgb: 71 22 28;
   --mj-d-raised-rgb: 86 30 37;
-  --mj-d-gold-rgb: 216 180 106; /* #D8B46A */
+  --mj-d-gold-rgb: 216 180 106;
   --mj-d-gold-hover-rgb: 234 204 142;
   --mj-d-ivory-rgb: 247 237 228;
   --mj-d-muted-rgb: 211 184 176;
-  color-scheme: light;
+
+  --mj-l-bg-rgb: 248 240 236;
+  --mj-l-surface-rgb: 252 247 244;
+  --mj-l-raised-rgb: 240 226 220;
+  --mj-l-gold-rgb: 196 152 80;
+  --mj-l-gold-ink-rgb: 128 90 34;
+  --mj-l-ink-rgb: 58 15 20;
+  --mj-l-muted-rgb: 104 72 72;
+  color-scheme: dark;
 }
 
 :root,
@@ -239,6 +255,36 @@ html[dir='ltr'] {
   color: var(--mj-ivory);
 }
 
+
+/* Ivory islands on the dark page: product cards, the offer card, feature cards. */
+.mj-card,
+.mj-offer,
+.mj-trust__item {
+  --mj-bg-rgb: var(--mj-l-bg-rgb);
+  --mj-surface-rgb: var(--mj-l-surface-rgb);
+  --mj-raised-rgb: var(--mj-l-raised-rgb);
+  --mj-gold-rgb: var(--mj-l-gold-rgb);
+  --mj-gold-ink-rgb: var(--mj-l-gold-ink-rgb);
+  --mj-ivory-rgb: var(--mj-l-ink-rgb);
+  --mj-muted-rgb: var(--mj-l-muted-rgb);
+  --mj-line-rgb: var(--mj-l-ink-rgb);
+  --mj-on-gold-rgb: var(--mj-l-ink-rgb);
+  --mj-cta-rgb: var(--mj-l-ink-rgb);
+  --mj-on-cta-rgb: var(--mj-l-bg-rgb);
+  --mj-bg: rgb(var(--mj-bg-rgb));
+  --mj-surface: rgb(var(--mj-surface-rgb));
+  --mj-raised: rgb(var(--mj-raised-rgb));
+  --mj-gold: rgb(var(--mj-gold-rgb));
+  --mj-gold-ink: rgb(var(--mj-gold-ink-rgb));
+  --mj-ivory: rgb(var(--mj-ivory-rgb));
+  --mj-muted: rgb(var(--mj-muted-rgb));
+  --mj-on-gold: rgb(var(--mj-on-gold-rgb));
+  --mj-cta: rgb(var(--mj-cta-rgb));
+  --mj-on-cta: rgb(var(--mj-on-cta-rgb));
+  --mj-line: rgb(var(--mj-line-rgb) / var(--mj-line-alpha));
+  color: var(--mj-ivory);
+}
+
 /* Blocks that sit on the brand colour paint it themselves. */
 .mj-ritual,
 .mj-newsletter,
@@ -273,8 +319,26 @@ html[dir='ltr'] {
   ascent-override: 90%;
 }
 
-/* The palette holder paints the page colour, so both palettes reach the edges. */
+/* The palette holder paints the page: the brand colour, two soft pools of gold light and a
+   faint eight-point-star lattice (khatam), drawn in gold at a whisper. */
 .app-inner[data-mj-palette] {
+  position: relative;
+  isolation: isolate;
   background-color: var(--mj-bg);
+  background-image:
+    radial-gradient(70rem 40rem at 85% -5%, rgb(var(--mj-gold-rgb) / 0.13), transparent 60%),
+    radial-gradient(55rem 35rem at 5% 45%, rgb(var(--mj-gold-rgb) / 0.07), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23D4AF6A' stroke-opacity='.075' stroke-width='1'%3E%3Cpath d='M48 20l8.2 19.8L76 48l-19.8 8.2L48 76l-8.2-19.8L20 48l19.8-8.2z'/%3E%3Cpath d='M28.2 28.2h39.6v39.6H28.2z'/%3E%3Cpath d='M0 48h20M76 48h20M48 0v20M48 76v20'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: auto, auto, 96px 96px;
   color: var(--mj-ivory);
+}
+/* Fine grain over the whole page, like printed luxury packaging. */
+.app-inner[data-mj-palette]::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }

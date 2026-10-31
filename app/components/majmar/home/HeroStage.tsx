@@ -34,11 +34,13 @@ interface HeroStageProps {
   stickerBadge: string;
   label: string;
   priority: boolean;
+  /** Show the price sticker for a real product (default on). */
+  showPrice?: boolean;
 }
 
 const NARROW = '(max-width: 820px)';
 
-export function HeroStage({ products: field, framesUrl, framesCount = 0, image, mobileImage, sticker, stickerBadge, label, priority }: HeroStageProps) {
+export function HeroStage({ products: field, framesUrl, framesCount = 0, image, mobileImage, sticker, stickerBadge, label, priority, showPrice = true }: HeroStageProps) {
   const { motion, palette } = useMajmar();
   const motionAllowed = useMotionAllowed();
   const { t } = useTranslation();
@@ -48,7 +50,7 @@ export function HeroStage({ products: field, framesUrl, framesCount = 0, image, 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [live, setLive] = useState(false);
   const { products } = usePickedProducts(field, 1);
-  const product = products[0];
+  const product = showPrice ? products[0] : undefined;
 
   const merchant = framesUrl && framesUrl.includes('{n}') && framesCount > 1 ? expandPattern(framesUrl, Math.min(framesCount, 120)) : null;
   const useStill = !!image;
@@ -123,23 +125,25 @@ export function HeroStage({ products: field, framesUrl, framesCount = 0, image, 
       kick();
     });
     io.observe(stage);
+    // The stage can be laid out after mount (inside a slider track), so re-measure on any box change.
+    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(onResize) : null;
+    ro?.observe(canvas);
     stage.addEventListener('pointerdown', onDown);
     stage.addEventListener('pointermove', onMove);
     stage.addEventListener('pointerup', onUp);
     stage.addEventListener('pointercancel', onUp);
     stage.addEventListener('keydown', onKey);
-    window.addEventListener('resize', onResize);
     kick();
     return () => {
       cancel();
       cancelAnimationFrame(raf);
       io.disconnect();
+      ro?.disconnect();
       stage.removeEventListener('pointerdown', onDown);
       stage.removeEventListener('pointermove', onMove);
       stage.removeEventListener('pointerup', onUp);
       stage.removeEventListener('pointercancel', onUp);
       stage.removeEventListener('keydown', onKey);
-      window.removeEventListener('resize', onResize);
       setLive(false);
     };
     // The frame lists are fixed per render of the merchant settings.

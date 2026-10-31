@@ -4,8 +4,9 @@
  *
  * Slides are a native scroll-snap track, so they swipe on touch and work without script;
  * dots and a slow auto-advance (paused on hover, focus and reduced motion) drive it.
- * Each slide has an image (and an optional phone image), a short line, a headline, a
- * sentence and a button. Without merchant slides, two bundled oud slides show.
+ * Each slide has an image (and an optional phone image), or the 3D turntable (the flacon
+ * turns slowly and can be dragged), plus a short line, a headline, a sentence and a button.
+ * Without merchant slides, the 3D Oud Royal slide and a bundled oud oils slide show.
  *
  * The offer card shows one real store product (picked, or the latest product) with its
  * price and an add-to-bag button. The countdown only shows when the merchant sets an end
@@ -20,6 +21,7 @@ import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useMotionAllowed } from '../../../hooks/useMotionAllowed';
 import { imageOf, usePickedProducts } from '../../../hooks/useStoreProducts';
 import { banner } from '../../../lib/bundledBanners';
+import { HeroStage } from './HeroStage';
 import { openMiniCart } from '../MiniCart';
 import { priceOf } from './conversionUtils';
 import { itemsOf, urlOf, useBlockText } from './shared';
@@ -33,6 +35,7 @@ interface SlideItem {
   button?: unknown;
   url?: unknown;
   tone?: unknown;
+  kind?: unknown;
 }
 
 export interface HeroSliderData {
@@ -90,18 +93,20 @@ export function HeroSlider({ data }: { data: HeroSliderData }) {
         text: tx(s.text, '', ''),
         button: tx(s.button, '', ''),
         url: urlOf(s.url),
-        dark: valueOf(s.tone) === 'dark',
+        dark: valueOf(s.tone) === 'dark' || valueOf(s.kind) === '3d',
+        is3d: valueOf(s.kind) === '3d',
       }))
     : [
         {
-          image: banner('slide-royal'),
+          image: '',
           mobile: '',
           overline: t('mj.slider.s1_over', 'New 2026 edition'),
           title: t('mj.slider.s1_title', 'Oud Royal: oud that stays after you'),
           text: t('mj.slider.s1_text', 'Aged Cambodian oud with a touch of saffron. Twelve hours on skin.'),
           button: t('mj.slider.shop', 'Shop now'),
           url: '/products',
-          dark: false,
+          dark: true,
+          is3d: true,
         },
         {
           image: banner('slide-oils'),
@@ -112,6 +117,7 @@ export function HeroSlider({ data }: { data: HeroSliderData }) {
           button: t('mj.slider.s2_button', 'Discover the oils'),
           url: '/products',
           dark: true,
+          is3d: false,
         },
       ];
 
@@ -184,18 +190,30 @@ export function HeroSlider({ data }: { data: HeroSliderData }) {
                   aria-roledescription="slide"
                   aria-label={`${i + 1} / ${slides.length}`}
                 >
-                  <picture className="mj-slide__media">
-                    {s.mobile && <source media="(max-width: 760px)" srcSet={s.mobile} />}
-                    <img
-                      src={s.image}
-                      alt=""
-                      width={1600}
-                      height={720}
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                      decoding={i === 0 ? 'sync' : 'async'}
-                      {...(i === 0 && isLead ? { fetchPriority: 'high' as const } : {})}
-                    />
-                  </picture>
+                  {s.is3d ? (
+                    <div className="mj-slide__stage">
+                      <HeroStage
+                        sticker=""
+                        stickerBadge=""
+                        label={s.title}
+                        priority={i === 0 && isLead}
+                        showPrice={false}
+                      />
+                    </div>
+                  ) : (
+                    <picture className="mj-slide__media">
+                      {s.mobile && <source media="(max-width: 760px)" srcSet={s.mobile} />}
+                      <img
+                        src={s.image}
+                        alt=""
+                        width={1600}
+                        height={720}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        decoding={i === 0 ? 'sync' : 'async'}
+                        {...(i === 0 && isLead ? { fetchPriority: 'high' as const } : {})}
+                      />
+                    </picture>
+                  )}
                   <div className="mj-slide__copy">
                     {s.overline && <p className="mj-slide__over">{s.overline}</p>}
                     {s.title && <Heading className="mj-slide__title">{s.title}</Heading>}
