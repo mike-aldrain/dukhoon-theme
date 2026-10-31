@@ -11,30 +11,35 @@ glass and brass, slow smoke. Arabic and right-to-left first, English verified.
 
 ## What makes it cinematic
 
-1. **3D product showcase (WebGL hero).** The store's real products float on lit cards in a
-   slow 3D carousel: a gold halo behind the front product, floor reflections, depth fog,
-   gold dust and a light sweep. It holds on each product, then turns to the next, and a
-   caption shows the front product's name, price and link. Merchants pick the products
-   (or it uses the latest ones). The first paint is a plain CSS card with the first
-   product's photo, so it never slows the first screen.
-2. **Scroll Product Film.** A pinned, scroll-driven film of the featured product: it flies
-   in, the carousel turns through its gallery and other real products while the camera
-   pushes in through four chapters (scent notes), then it settles beside the buy panel.
-   A frame sequence or MP4 can replace the 3D showcase.
-3. **Light luxury palette** (default): warm white, ink-black buttons, vivid gold accents;
-   all text pairs 5.6:1 or higher. The dark "Oud" palette remains a setting.
-4. Every block falls back to the store's real product photos when the merchant has not
+1. **Drag-to-spin hero turntable.** A 40-frame turn of the flacon under a warm spotlight
+   on oud-wood dark. It turns slowly by itself; shoppers can drag it (or use the arrow
+   keys) and it spins with inertia. The first frame is a plain priority image, so the
+   first screen never waits for script. A gold-framed price label links to a real store
+   product. Merchants can upload their own 360° frames (`frames_url` with `{n}`) or a
+   still image.
+2. **Scroll Product Film.** A pinned, scroll-driven film: the flacon turns, its cap lifts
+   toward the camera, gold smoke rises, and four chapters about the oud fade in. At the
+   end, a buy panel for a real store product lands beside the bottle. The film ships with
+   the theme (80 frames, wide and phone framings); a merchant frame sequence or MP4 can
+   replace it.
+3. **Oud luxury palette** (default): oud-wood dark `#120D0A`, warm gold `#D6A85C`, cream
+   text. All text pairs 8.5:1 or higher. "Quiet light luxury" and "Bright colour blocks"
+   remain settings.
+4. **Scent Marquee**: a slow band of oud names between gold hairlines.
+5. Every block falls back to the store's real product photos when the merchant has not
    uploaded images.
 
-The 3D code ships as its own chunk (118 KB gzipped, Three.js 0.170) and is never part of
-the first page load. Product photos come from Salla's CDN, which allows WebGL use (CORS).
+No 3D library ships with the theme. The turntable and the film play pre-rendered WebP
+frames (about 3.1 MB in total, loaded only when needed and only for the screen size in
+use), so the JavaScript stays small.
 
 ## Demo pack
 
-`C:/Users/Mike/Downloads/majmar-demo-pack`: nine perfume-house products (sheet with
-Arabic/English names, prices, scent tags), two photos each (original 3D studio renders, free
-to use), two CC0 lifestyle photos, and step-by-step instructions. Load it into the preview
-store so the marketplace preview shows perfume.
+`C:/Users/Mike/Downloads/majmar-demo-pack`: twelve oud products (oud perfumes, oud oils,
+oud wood, bakhoor and a burner), with a sheet of Arabic/English names, prices and scent
+tags, two photos each (original 3D studio renders, free to use), two CC0 lifestyle photos,
+and step-by-step instructions. Load it into the preview store so the marketplace preview
+shows oud.
 
 ## Run it
 
@@ -64,10 +69,11 @@ the `mj.*` strings into `locales/ar.json` and `locales/en.json`. Both can be re-
 
 | Block | Key | Purpose |
 | --- | --- | --- |
-| Cinematic Hero | `mj-hero` | Headline, CTAs, WebGL bottle (switch), image/video background, optional product render |
+| Cinematic Hero | `mj-hero` | Headline with a gold word, CTAs, drag-to-spin turntable (bundled or merchant frames, or a still), price label for a real product |
+| Scent Marquee | `mj-marquee` | Oud names scrolling between gold hairlines |
 | Scroll Product Film | `mj-film` | Pinned scroll film: 3D bottle, frame sequence or MP4; chapters; buy panel |
 | Occasion Countdown | `mj-countdown` | Ramadan / Eid / National Day urgency |
-| Scent Families | `mj-families` | Oud, Musk, Amber, Rose, Fresh, Bakhoor discovery |
+| Scent Families | `mj-families` | Cambodi, Hindi, Oud oil, Muattar, Mukhallat, Bakhoor discovery |
 | Scent Finder | `mj-finder` | 3-question quiz leading to search results |
 | Ritual Bundle | `mj-ritual` | Perfume + oud oil + bakhoor, one-tap add to bag |
 | Gift Box Builder | `mj-giftbox` | Pick N pieces, live tray and total, add box to bag |
@@ -92,7 +98,7 @@ and hides those tags from the plain tag list. Products without such tags look no
 
 ## Settings
 
-Grouped under "Majmar": palette (Oud dark / Musk light), accent (amber or store
+Grouped under "Majmar": palette (Oud luxury dark, default / Quiet light luxury / Bright colour blocks), accent (amber or store
 colour), fonts (El Messiri, Tajawal, Bodoni Moda, Manrope, or the store font),
 custom colours, announcement bar, transparent header, card hover / badges / quick add,
 sticky buy box, 360° view, footer, WhatsApp and social links, motion level

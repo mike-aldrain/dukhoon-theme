@@ -2,16 +2,18 @@
  * Scroll Film (home block `mj-film`): a scroll-driven product film.
  *
  * The section is several screens tall; its stage stays pinned while the visitor scrolls,
- * and scroll position (0..1) plays the film. Three sources, in order of preference:
- *   1. Frame sequence: `frames_url` with `{n}` (e.g. .../frame-{n}.webp) and `frames_count`,
- *      drawn to a canvas. Frames load progressively once the section is near.
- *   2. MP4 video (`video`), scrubbed by setting currentTime.
- *   3. Default: the WebGL bottle in `scroll` mode (turn, cap lifts toward camera,
- *      push in, settle), so the block works with no merchant assets.
- * Chapters fade in along the timeline and the buy panel lands at the end.
+ * and scroll position (0..1) plays the film. Sources, in order of preference:
+ *   1. The merchant's frame sequence: `frames_url` with `{n}` and `frames_count`.
+ *   2. The merchant's MP4 (`video`), scrubbed by setting currentTime.
+ *   3. The film that ships with the theme: 80 frames (wide and phone framings) in which
+ *      the flacon turns under a warm spotlight, its cap lifts toward the camera and
+ *      gold smoke rises, on deep oud-brown fields.
+ * Frames are drawn to a canvas and load progressively once the section is near.
+ * Chapters fade in along the timeline, the copy switches between ink and cream to stay
+ * readable on each field, and the buy panel for a real store product lands at the end.
  *
- * Server render, reduced motion, motion "off" and no-WebGL visitors get a static
- * layout with the same copy and buy panel. The film only starts after hydration.
+ * Server render, reduced motion and motion "off" get a static layout with the same copy
+ * and buy panel. The film only starts after hydration.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -22,11 +24,10 @@ import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { useMajmar } from '../../../hooks/useMajmar';
 import { useMotionAllowed } from '../../../hooks/useMotionAllowed';
 import { useHydrated } from '../../../hooks/useHydrated';
-import type { ProductSceneHandle } from '../../../lib/productScene';
-import { imageOf, useLatestProducts, useProductGallery } from '../../../hooks/useStoreProducts';
-import { canUseWebGL, sceneTokens } from './HeroStage';
+import { bundledFilmInk, bundledFrames } from '../../../lib/bundledFrames';
+import { drawCover, expandPattern, fitCanvas, loadFrames, nearestLoaded } from '../../../lib/framePlayer';
 import { openMiniCart } from '../MiniCart';
-import { itemsOf, MjArt, urlOf, useBlockText } from './shared';
+import { itemsOf, urlOf, useBlockText } from './shared';
 
 interface Chapter {
   title?: unknown;
@@ -42,11 +43,12 @@ export interface ScrollFilmData {
   frames_count?: unknown;
   video?: unknown;
   length?: unknown;
-  webgl?: boolean;
+  tone?: unknown;
   [key: string]: unknown;
 }
 
 const LENGTHS = { short: 3, medium: 4, long: 5.5 } as const;
+const NARROW = '(max-width: 820px)';
 
 const firstId = (raw: unknown): number | null => {
   const v = Array.isArray(raw) ? raw[0] : raw;
@@ -58,18 +60,9 @@ const choice = (raw: unknown): string => {
   return String(typeof v === 'object' && v ? (v as { value?: unknown }).value ?? '' : v ?? '');
 };
 
-/** Draw an image into the canvas with object-fit: cover. */
-function drawCover(ctx: CanvasRenderingContext2D, img: HTMLImageElement, w: number, h: number) {
-  const s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
-  const dw = img.naturalWidth * s;
-  const dh = img.naturalHeight * s;
-  ctx.clearRect(0, 0, w, h);
-  ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
-}
-
 export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   const tx = useBlockText();
-  const { t, isRTL } = useTranslation();
+  const { t } = useTranslation();
   const { format } = useMoney();
   const { motion } = useMajmar();
   const motionAllowed = useMotionAllowed();
@@ -78,29 +71,32 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const barRef = useRef<HTMLSpanElement>(null);
+  const framesRef = useRef<(HTMLImageElement | undefined)[]>([]);
   const [active, setActive] = useState(-1);
   const [ended, setEnded] = useState(false);
+  const [ink, setInk] = useState(false);
   const [adding, setAdding] = useState(false);
 
   const framesPattern = urlOf(data.frames_url);
   const framesCount = Math.min(400, Math.max(0, Math.round(Number(data.frames_count) || 0)));
   const videoUrl = urlOf(data.video);
-  const source: 'frames' | 'video' | 'webgl' =
-    framesPattern.includes('{n}') && framesCount > 1 ? 'frames' : videoUrl ? 'video' : 'webgl';
-  const animate =
-    hydrated && motionAllowed && motion !== 'off' && (source !== 'webgl' || (data.webgl !== false && canUseWebGL()));
-  const screens = LENGTHS[(choice(data.length) as keyof typeof LENGTHS) || 'medium'] ?? LENGTHS.medium;
+  const source: 'frames' | 'video' | 'bundled' =
+    framesPattern.includes('{n}') && framesCount > 1 ? 'frames' : videoUrl ? 'video' : 'bundled';
+  // Merchant media: the merchant says whether it is bright (ink copy) or dark (cream copy).
+  const tone = choice(data.tone) === 'bright' ? 'bright' : 'dark';
+  const animate = hydrated && motionAllowed && motion !== 'off';
+  const screens = LENGTHS[(choice(data.length) as keyof typeof LENGTHS) || 'long'] ?? LENGTHS.long;
 
   const chapters = useMemo(() => {
     const items = itemsOf<Chapter>(data.chapters, 'chapters');
     if (items.length) return items.slice(0, 5);
     return [1, 2, 3, 4].map((i) => ({
-      title: t(`mj.film.ch${i}_title`, ['Blown glass', 'Top: saffron and bergamot', 'Heart: Taif rose', 'Base: aged oud'][i - 1]),
+      title: t(`mj.film.ch${i}_title`, ['Blown by hand', 'Cambodian oud', 'Aged ten years', 'It stays with you'][i - 1]),
       text: t(`mj.film.ch${i}_text`, [
-        'Each flacon is mouth-blown and polished by hand.',
-        'A bright, warm opening that greets you first.',
-        'Rose from the Taif highlands, picked at dawn.',
-        'Twelve hours on skin, and the scent is still yours.',
+        'A heavy flacon of clear glass, its edges polished one by one.',
+        'Oud wood from the forests of Cambodia, distilled slowly over a low fire.',
+        'The oil rests in the dark until it rounds and clears.',
+        'Twelve hours on skin, and the oud is still yours.',
       ][i - 1]),
     }));
   }, [data.chapters, t]);
@@ -110,117 +106,78 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
     ...productApi.queries.list({ source: productId ? 'selected' : 'latest', sourceValue: productId ? [productId] : undefined, perPage: 1 }),
   });
   const item = picked?.items?.[0];
-  // The film turns through the featured product's gallery, topped up with other real
-  // products so the carousel always has depth.
-  const gallery = useProductGallery(item ? Number(item.id) : null);
-  const latest = useLatestProducts();
-  const filmImages = useMemo(() => {
-    const extra = latest.filter((p) => p.id !== item?.id).map(imageOf);
-    const all = Array.from(new Set([...(gallery.length ? gallery : [imageOf(item)]), ...extra].filter(Boolean)));
-    return all.slice(0, 5);
-  }, [gallery, latest, item]);
-  const imagesKey = filmImages.join('|');
 
-  // ---- Progress from scroll (rAF-throttled), feeding the active source.
-  const sceneRef = useRef<ProductSceneHandle | null>(null);
-  const framesRef = useRef<HTMLImageElement[]>([]);
   const onProgress = useCallback(
     (p: number) => {
       barRef.current?.style.setProperty('transform', `scaleX(${p.toFixed(4)})`);
       const n = chapters.length;
-      const idx = p < 0.06 ? -1 : Math.min(n - 1, Math.floor(((p - 0.06) / 0.72) * n));
-      setActive(p > 0.8 ? -1 : idx);
-      setEnded(p > 0.8);
-      if (source === 'webgl') sceneRef.current?.setProgress(p);
-      else if (source === 'video') {
+      const idx = p < 0.12 ? -1 : Math.min(n - 1, Math.floor(((p - 0.12) / 0.74) * n));
+      setActive(p > 0.88 ? -1 : idx);
+      setEnded(p > 0.88);
+      setInk(source === 'bundled' ? bundledFilmInk(p) : tone === 'bright');
+      if (source === 'video') {
         const v = videoRef.current;
         if (v && v.duration && Math.abs(v.currentTime - p * v.duration) > 0.04) v.currentTime = p * v.duration;
-      } else {
-        const c = canvasRef.current;
-        const frames = framesRef.current;
-        if (!c || !frames.length) return;
-        // Nearest loaded frame at or before the target.
-        let i = Math.round(p * (framesCount - 1));
-        while (i > 0 && !frames[i]?.complete) i--;
-        const img = frames[i];
-        const ctx = c.getContext('2d');
-        if (img?.complete && img.naturalWidth && ctx) drawCover(ctx, img, c.width, c.height);
+        return;
       }
+      const c = canvasRef.current;
+      const frames = framesRef.current;
+      if (c && frames.length) drawCover(c, nearestLoaded(frames, Math.round(p * (frames.length - 1))));
     },
-    [chapters.length, source, framesCount]
+    [chapters.length, source, tone]
   );
 
+  // Progress from scroll, eased toward the target so the film glides between frames.
   useEffect(() => {
     if (!animate) return;
     const section = sectionRef.current;
     if (!section) return;
     let raf = 0;
-    const tick = () => {
-      raf = 0;
+    let shown = -1;
+    let target = 0;
+    const measure = () => {
       const r = section.getBoundingClientRect();
       const total = r.height - window.innerHeight;
-      onProgress(total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0);
+      target = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+    };
+    const tick = () => {
+      raf = 0;
+      shown = shown < 0 ? target : shown + (target - shown) * 0.16;
+      if (Math.abs(target - shown) < 0.0005) shown = target;
+      onProgress(shown);
+      if (shown !== target) raf = requestAnimationFrame(tick);
     };
     const onScroll = () => {
+      measure();
       if (!raf) raf = requestAnimationFrame(tick);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    tick();
+    window.addEventListener('mj:film-frame', onScroll);
+    onScroll();
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
+      window.removeEventListener('mj:film-frame', onScroll);
     };
   }, [animate, onProgress]);
 
-  // ---- Source setup once the section is near the viewport.
+  // Frames load once the section is a screen away.
   useEffect(() => {
-    if (!animate) return;
+    if (!animate || source === 'video') return;
     const section = sectionRef.current;
     const canvas = canvasRef.current;
     if (!section || !canvas) return;
-    let cancelled = false;
-    const fit = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      if (source === 'frames') {
-        canvas.width = canvas.clientWidth * dpr;
-        canvas.height = canvas.clientHeight * dpr;
-      }
-    };
+    let cancelLoad: (() => void) | undefined;
+    const redraw = () => window.dispatchEvent(new Event('mj:film-frame'));
     const start = () => {
-      if (source === 'webgl') {
-        if (!filmImages.length) return;
-        import('../../../lib/productScene')
-          .then(({ mountProductScene }) => {
-            if (cancelled) return;
-            sceneRef.current = mountProductScene(canvas, {
-              images: filmImages,
-              ...sceneTokens(canvas),
-              rtl: isRTL,
-              intensity: motion === 'subtle' ? 'subtle' : 'cinematic',
-              mode: 'scroll',
-            });
-            window.dispatchEvent(new Event('scroll'));
-          })
-          .catch(() => undefined);
-      } else if (source === 'frames') {
-        fit();
-        const urls = Array.from({ length: framesCount }, (_, i) => framesPattern.replace('{n}', String(i + 1).padStart(4, '0')));
-        // Load every 4th frame first for a quick coarse film, then fill the gaps.
-        const order = [...urls.keys()].sort((a, b) => (a % 4) - (b % 4) || a - b);
-        framesRef.current = new Array(framesCount);
-        order.forEach((i, k) => {
-          window.setTimeout(() => {
-            if (cancelled) return;
-            const img = new Image();
-            img.decoding = 'async';
-            img.onload = () => i === 0 && window.dispatchEvent(new Event('scroll'));
-            img.src = urls[i];
-            framesRef.current[i] = img;
-          }, k * 12);
-        });
-      }
+      fitCanvas(canvas);
+      const narrow = window.matchMedia(NARROW).matches;
+      const urls = source === 'frames' ? expandPattern(framesPattern, framesCount) : narrow ? bundledFrames.filmTall : bundledFrames.filmWide;
+      const loaded = loadFrames(urls, redraw);
+      framesRef.current = loaded.frames;
+      cancelLoad = loaded.cancel;
     };
     const io = new IntersectionObserver(
       ([e]) => {
@@ -231,17 +188,18 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
       { rootMargin: '100% 0px' }
     );
     io.observe(section);
-    window.addEventListener('resize', fit);
-    return () => {
-      cancelled = true;
-      io.disconnect();
-      window.removeEventListener('resize', fit);
-      sceneRef.current?.dispose();
-      sceneRef.current = null;
+    const onResize = () => {
+      fitCanvas(canvas);
+      redraw();
     };
-    // `imagesKey` stands for filmImages.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animate, source, framesPattern, framesCount, isRTL, motion, imagesKey]);
+    window.addEventListener('resize', onResize);
+    return () => {
+      io.disconnect();
+      cancelLoad?.();
+      framesRef.current = [];
+      window.removeEventListener('resize', onResize);
+    };
+  }, [animate, source, framesPattern, framesCount]);
 
   const addToBag = async () => {
     if (!item) return;
@@ -263,14 +221,14 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
 
   const buyPanel = item && (
     <div className={`mj-film__buy${ended || !animate ? ' is-in' : ''}`}>
-      <p className="mj-overline">{tx(data.buy_overline, 'mj.film.buy_overline', 'Now available')}</p>
-      <h3 className="mj-h2">{item.name}</h3>
+      <p className="mj-film__buy-over">{tx(data.buy_overline, 'mj.film.buy_overline', 'Available now')}</p>
+      <h3 className="mj-film__buy-name">{item.name}</h3>
       <p className="mj-film__price">
         {format(Number(price))}
         {item.is_on_sale && item.sale_price ? <s>{format(Number(item.regular_price ?? item.price))}</s> : null}
       </p>
       <div className="mj-film__actions">
-        <button type="button" className="mj-btn mj-btn--gold" onClick={addToBag} disabled={adding} aria-busy={adding}>
+        <button type="button" className="mj-btn mj-btn--ink" onClick={addToBag} disabled={adding} aria-busy={adding}>
           {t('mj.film.add', 'Add to bag')}
         </button>
         {item.url && (
@@ -283,25 +241,28 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   );
 
   if (!animate) {
+    const poster = source === 'bundled' ? bundledFrames.filmWide[Math.round(bundledFrames.filmWide.length * 0.3)] : '';
     return (
       <section className="mj-film mj-film--static" aria-label={title}>
         <div className="mj-container mj-film__static">
           <div className="mj-film__poster">
             {videoUrl ? (
               <video src={videoUrl} muted playsInline preload="metadata" />
-            ) : (
-              filmImages[0] ? <img src={filmImages[0]} alt="" loading="lazy" /> : <MjArt kind="flacon" />
-            )}
+            ) : poster ? (
+              <img src={poster} alt="" loading="lazy" width={1280} height={720} />
+            ) : item?.image?.url ? (
+              <img src={item.image.url} alt="" loading="lazy" />
+            ) : null}
           </div>
           <div className="mj-film__static-copy">
-            <p className="mj-overline">{overline}</p>
-            <h2 className="mj-h1">{title}</h2>
+            <p className="mj-eyebrow">{overline}</p>
+            <h2 className="mj-film__title">{title}</h2>
             <ol className="mj-film__list">
               {chapters.map((c, i) => (
                 <li key={i}>
                   <span className="mj-film__num">{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <h3 className="mj-h3">{tx(c.title, '', '')}</h3>
+                    <h3>{tx(c.title, '', '')}</h3>
                     <p>{tx(c.text, '', '')}</p>
                   </div>
                 </li>
@@ -317,7 +278,7 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
   return (
     <section
       ref={sectionRef}
-      className={`mj-film${ended ? ' is-ended' : ''}`}
+      className={`mj-film${ended ? ' is-ended' : ''}${ink ? ' is-ink' : ''}`}
       style={{ height: `${screens * 100}svh` }}
       aria-label={title}
     >
@@ -327,22 +288,25 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
         ) : (
           <canvas ref={canvasRef} className="mj-film__media" aria-hidden="true" />
         )}
-        <span className="mj-film__vignette" aria-hidden="true" />
+
+        <p className="mj-film__count" aria-hidden="true">
+          {String(Math.max(1, active + 1)).padStart(2, '0')} / {String(chapters.length).padStart(2, '0')}
+        </p>
 
         <header className={`mj-film__intro${active === -1 && !ended ? ' is-in' : ''}`}>
-          <p className="mj-overline">{overline}</p>
-          <h2 className="mj-display">{title}</h2>
+          <p className="mj-film__over">{overline}</p>
+          <h2 className="mj-film__title">{title}</h2>
           <p className="mj-film__hint">{t('mj.film.hint', 'Scroll to play')}</p>
         </header>
 
         <div className="mj-film__chapters" aria-live="polite">
           {chapters.map((c, i) => (
             <div key={i} className={`mj-film__chapter${active === i ? ' is-in' : ''}`} aria-hidden={active !== i}>
-              <span className="mj-film__num">
-                {String(i + 1).padStart(2, '0')} / {String(chapters.length).padStart(2, '0')}
-              </span>
-              <h3 className="mj-h1">{tx(c.title, '', '')}</h3>
-              <p className="mj-body-l">{tx(c.text, '', '')}</p>
+              <p className="mj-film__over">
+                {String(i + 1).padStart(2, '0')} · {overline}
+              </p>
+              <h3 className="mj-film__chapter-title">{tx(c.title, '', '')}</h3>
+              <p className="mj-film__chapter-text">{tx(c.text, '', '')}</p>
             </div>
           ))}
         </div>

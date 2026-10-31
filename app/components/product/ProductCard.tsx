@@ -9,6 +9,9 @@ import { useMajmar } from '../../hooks/useMajmar';
 
 type ProductCardProps = ComponentProps<typeof EngineProductCard>;
 
+/** Colour-block fields for the bright palette, picked from the product id so a card keeps its colour. */
+const TONES = ['saffron', 'rose', 'coral', 'lilac', 'butter', 'mint'] as const;
+
 /**
  * Thin wrapper over the engine `ProductCard`.
  *
@@ -32,7 +35,8 @@ type ProductCardProps = ComponentProps<typeof EngineProductCard>;
  * Styling: `04-components/product.scss`.
  *
  * Majmar additions (styles in `06-majmar/_product.scss`):
- *  - The card sits in a `.mj-card` shell. On fine pointers and with the "tilt" hover
+ *  - The card sits in a `.mj-card` shell with a `data-tone` colour field (bright palette).
+ *  - The shell: On fine pointers and with the "tilt" hover
  *    setting, pointer position drives `--rx` / `--ry` (up to `--mj-tilt-max`, 6deg),
  *    written straight to the shell's style in a rAF, so React does not re-render.
  *  - A gold edge light sweeps across on hover (CSS only).
@@ -100,6 +104,7 @@ export function ProductCard(props: ProductCardProps) {
     <div
       ref={ref}
       className={`mj-card${altImage ? ' has-alt' : ''}`}
+      data-tone={TONES[Math.abs(Number(props.product.id) || 0) % TONES.length]}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >

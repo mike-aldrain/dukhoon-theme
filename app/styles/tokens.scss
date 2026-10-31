@@ -25,20 +25,46 @@
   @return clamp(#{math.div($min-px, 16)}rem, #{math.div($base, 16)}rem + #{$slope * 100}vw, #{math.div($max-px, 16)}rem);
 }
 
-/* Light luxury (default): warm white, ink black, vivid gold. */
-:root,
-html[data-mj-palette='musk'] {
-  --mj-bg-rgb: 251 248 243; /* #FBF8F3 */
+/* Bright colour blocks (option): cream page, ink text, saffron, coral, rose, lilac and emerald
+   colour blocks. Ink 17.5:1 on cream; ink on saffron 9.2:1, coral 6.6:1, rose 9.1:1,
+   lilac 10.6:1, butter 13.3:1, mint 12.7:1; cream on emerald 7.3:1 and on plum 16.2:1. */
+html[data-mj-palette='saffron'] {
+  --mj-bg-rgb: 255 246 232; /* cream #FFF6E8 */
   --mj-surface-rgb: 255 255 255;
-  --mj-raised-rgb: 244 238 228; /* #F4EEE4 */
-  --mj-gold-rgb: 200 149 46; /* vivid gold #C8952E (fills, rules, icons) */
-  --mj-gold-hover-rgb: 224 169 59; /* #E0A93B */
-  --mj-gold-ink-rgb: 138 90 18; /* #8A5A12 gold as text, 5.6:1 */
+  --mj-raised-rgb: 252 236 210;
+  --mj-gold-rgb: 242 167 28; /* saffron #F2A71C (fills) */
+  --mj-gold-hover-rgb: 255 106 77; /* coral on hover */
+  --mj-gold-ink-rgb: 138 82 8; /* saffron as text, 6.0:1 on cream */
+  --mj-copper-rgb: 255 106 77;
+  --mj-ivory-rgb: 23 17 13; /* ink #17110D */
+  --mj-muted-rgb: 87 72 60; /* 8.2:1 on cream */
+  --mj-on-gold-rgb: 23 17 13;
+  --mj-cta-rgb: 23 17 13;
+  --mj-on-cta-rgb: 255 246 232;
+  --mj-line-rgb: 23 17 13;
+  --mj-line-alpha: 0.14;
+  --mj-success-rgb: 12 93 72;
+  --mj-warning-rgb: 140 90 10;
+  --mj-error-rgb: 179 38 30;
+  --mj-glow-strength: 0.22;
+  --mj-border: 2px solid rgb(var(--mj-ivory-rgb));
+  --mj-pop: 8px 10px 0 rgb(var(--mj-ivory-rgb));
+  color-scheme: light;
+}
+
+/* Quiet light luxury: warm white, ink, vivid gold. */
+html[data-mj-palette='musk'] {
+  --mj-bg-rgb: 251 248 243;
+  --mj-surface-rgb: 255 255 255;
+  --mj-raised-rgb: 244 238 228;
+  --mj-gold-rgb: 200 149 46;
+  --mj-gold-hover-rgb: 224 169 59;
+  --mj-gold-ink-rgb: 138 90 18;
   --mj-copper-rgb: 168 82 45;
-  --mj-ivory-rgb: 18 16 14; /* ink #12100E takes the text role, 17.9:1 */
-  --mj-muted-rgb: 91 84 76; /* #5B544C, 7.0:1 */
+  --mj-ivory-rgb: 18 16 14;
+  --mj-muted-rgb: 91 84 76;
   --mj-on-gold-rgb: 18 16 14;
-  --mj-cta-rgb: 18 16 14; /* primary buttons: ink fill */
+  --mj-cta-rgb: 18 16 14;
   --mj-on-cta-rgb: 255 255 255;
   --mj-line-rgb: 18 16 14;
   --mj-line-alpha: 0.1;
@@ -46,29 +72,35 @@ html[data-mj-palette='musk'] {
   --mj-warning-rgb: 140 102 30;
   --mj-error-rgb: 179 38 30;
   --mj-glow-strength: 0.22;
+  --mj-border: 1px solid rgb(var(--mj-line-rgb) / 0.14);
+  --mj-pop: 0 18px 40px -12px rgb(18 16 14 / 0.25);
   color-scheme: light;
 }
 
-/* Oud (dark warm) alternative. */
+/* Oud luxury (default): oud-wood dark, warm gold, cream. Cream text 17.1:1 on the page,
+   muted 8.5:1, gold 8.8:1; ink on gold buttons 8.8:1. */
+:root,
 html[data-mj-palette='oud'] {
-  --mj-bg-rgb: 20 16 13;
-  --mj-surface-rgb: 30 24 20;
-  --mj-raised-rgb: 42 34 28;
-  --mj-gold-rgb: 224 169 59;
-  --mj-gold-hover-rgb: 240 196 110;
-  --mj-gold-ink-rgb: 224 169 59;
+  --mj-bg-rgb: 18 13 10; /* #120D0A */
+  --mj-surface-rgb: 28 21 16;
+  --mj-raised-rgb: 40 30 22;
+  --mj-gold-rgb: 214 168 92; /* #D6A85C */
+  --mj-gold-hover-rgb: 234 196 130;
+  --mj-gold-ink-rgb: 214 168 92;
   --mj-copper-rgb: 168 102 60;
   --mj-ivory-rgb: 247 240 230;
   --mj-muted-rgb: 184 170 152;
-  --mj-on-gold-rgb: 20 16 13;
-  --mj-cta-rgb: 224 169 59;
-  --mj-on-cta-rgb: 20 16 13;
+  --mj-on-gold-rgb: 18 13 10;
+  --mj-cta-rgb: 214 168 92;
+  --mj-on-cta-rgb: 18 13 10;
   --mj-line-rgb: 247 240 230;
   --mj-line-alpha: 0.1;
   --mj-success-rgb: 134 180 154;
   --mj-warning-rgb: 224 178 94;
   --mj-error-rgb: 217 130 114;
   --mj-glow-strength: 0.2;
+  --mj-border: 1px solid rgb(247 240 230 / 0.16);
+  --mj-pop: 0 18px 40px -12px rgb(0 0 0 / 0.6);
   color-scheme: dark;
 }
 
@@ -90,19 +122,32 @@ html[data-mj-palette='oud'] {
   --mj-warning: rgb(var(--mj-warning-rgb));
   --mj-error: rgb(var(--mj-error-rgb));
 
+  /* Colour-block fields (same in every palette; each pairs with ink or cream copy). */
+  --mj-ink: #17110d;
+  --mj-cream: #fff6e8;
+  --mj-saffron: #f2a71c;
+  --mj-coral: #ff6a4d;
+  --mj-rose: #f39bbb;
+  --mj-lilac: #cdb8ff;
+  --mj-butter: #f7d77a;
+  --mj-mint: #9fe3c8;
+  --mj-emerald: #0c5d48;
+  --mj-plum: #290f33;
+
   /* Typography: Arabic first; the LTR block below swaps the order. */
-  --mj-font-display: 'El Messiri', 'Bodoni Moda', 'Mj Serif Fallback', serif;
-  --mj-font-body: 'Tajawal', 'Manrope', 'Mj Sans Fallback', system-ui, sans-serif;
-  --mj-fs-display: #{fluid(38, 64)};
-  --mj-fs-h1: #{fluid(32, 48)};
-  --mj-fs-h2: #{fluid(26, 36)};
+  --mj-font-display: 'El Messiri', 'Fraunces', 'Mj Serif Fallback', serif;
+  --mj-font-body: 'Readex Pro', 'Mj Sans Fallback', system-ui, sans-serif;
+  --mj-font-latin: 'Fraunces', 'Mj Serif Fallback', Georgia, serif;
+  --mj-fs-display: #{fluid(48, 104)};
+  --mj-fs-h1: #{fluid(38, 76)};
+  --mj-fs-h2: #{fluid(28, 44)};
   --mj-fs-h3: #{fluid(20, 24)};
   --mj-fs-body-l: #{fluid(16, 18)};
   --mj-fs-body: #{fluid(15, 16)};
   --mj-fs-caption: #{fluid(12, 13)};
   --mj-fs-overline: 0.75rem;
-  --mj-lh-display: 1.15;
-  --mj-lh-heading: 1.3;
+  --mj-lh-display: 1.05;
+  --mj-lh-heading: 1.15;
   --mj-lh-body: 1.7;
   --mj-measure: 66ch;
 
@@ -139,12 +184,12 @@ html[data-mj-palette='oud'] {
   --mj-header-stack: 72px;
 
   /* Engine bridge: Twilight web components read these. */
-  --s-radius: var(--mj-radius-control);
+  --s-radius: 14px;
 }
 
 html[dir='ltr'] {
-  --mj-font-display: 'Bodoni Moda', 'El Messiri', 'Mj Serif Fallback', serif;
-  --mj-font-body: 'Manrope', 'Tajawal', 'Mj Sans Fallback', system-ui, sans-serif;
+  --mj-font-display: 'Fraunces', 'El Messiri', 'Mj Serif Fallback', serif;
+  --mj-font-body: 'Readex Pro', 'Mj Sans Fallback', system-ui, sans-serif;
   --mj-lh-body: 1.6;
 }
 

@@ -1,22 +1,26 @@
 /*
- * Majmar cinematic layer: the WebGL hero stage and the Scroll Film block.
+ * Majmar Scroll Film block: a pinned frame-sequence film on moving colour fields.
+ * Copy is cream by default and switches to ink (`.is-ink`) on the bright fields.
+ * Chapters and the buy panel sit on the physical left: the bottle drifts right in the film.
  */
 
-/* ---------- Scroll Film ---------- */
 .mj-film {
+  --mj-film-fg: var(--mj-cream);
+  --mj-film-side: max(var(--mj-gutter), calc((100vw - var(--mj-container)) / 2 + var(--mj-gutter)));
   position: relative;
-  background:
-    radial-gradient(55% 60% at 50% 42%, rgb(var(--mj-gold-rgb) / var(--mj-glow-strength)), transparent 72%),
-    var(--mj-bg);
-  color: var(--mj-ivory);
+  background: #0f0a07;
+  color: var(--mj-film-fg);
+
+  &.is-ink {
+    --mj-film-fg: var(--mj-ink);
+  }
 
   &__pin {
     position: sticky;
     top: 0;
+    height: 100vh;
     height: 100svh;
     overflow: hidden;
-    display: grid;
-    place-items: center;
   }
   &__media {
     position: absolute;
@@ -25,256 +29,246 @@
     height: 100%;
     object-fit: cover;
   }
-  &__vignette {
+
+  &__count {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(75% 65% at 50% 45%, transparent 45%, rgb(var(--mj-bg-rgb) / 0.9) 100%),
-      linear-gradient(to top, rgb(var(--mj-bg-rgb) / 0.85), transparent 30%);
+    top: calc(var(--mj-header-h) + 1rem);
+    right: var(--mj-film-side);
+    margin: 0;
+    font-family: var(--mj-font-latin);
+    font-style: italic;
+    font-size: 1.25rem;
+    font-weight: 600;
+    direction: ltr;
+    transition: color 500ms;
   }
 
-  /* Opening title */
-  &__intro {
+  &__over {
+    margin: 0 0 0.6rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #d6a85c;
+    letter-spacing: 0.04em;
+  }
+  &__title {
+    margin: 0;
+    font-family: var(--mj-font-display);
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 500;
+    line-height: 1;
+    text-wrap: balance;
+  }
+  &__hint {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+  }
+
+  &__intro,
+  &__chapter {
     position: absolute;
-    inset-inline: var(--mj-gutter);
-    top: 14svh;
-    display: grid;
-    justify-items: center;
-    gap: 0.75rem;
-    text-align: center;
     opacity: 0;
-    transform: translate3d(0, 20px, 0);
+    transform: translateY(40px);
+    transition:
+      opacity 600ms var(--mj-ease),
+      transform 600ms var(--mj-ease),
+      color 500ms;
+    pointer-events: none;
+    &.is-in {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  &__intro {
+    inset-inline: var(--mj-gutter);
+    top: 18svh;
+    text-align: center;
+  }
+  &__chapter {
+    left: var(--mj-film-side);
+    bottom: 12svh;
+    width: min(520px, calc(100vw - 2 * var(--mj-gutter)));
+    text-align: start;
+  }
+  &__chapter-title {
+    margin: 0;
+    font-family: var(--mj-font-display);
+    font-size: clamp(2.75rem, 6vw, 5.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+  &__chapter-text {
+    max-width: 32ch;
+    margin: 0.75rem 0 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  &__bar {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 6px;
+    height: 2px;
+    background: color-mix(in srgb, var(--mj-film-fg) 14%, transparent);
+    span {
+      display: block;
+      height: 100%;
+      background: #d6a85c;
+      transform: scaleX(0);
+      transform-origin: left;
+      html[dir='rtl'] & {
+        transform-origin: right;
+      }
+    }
+  }
+
+  /* Buy panel: dark glass with a gold hairline, landing at the end. */
+  &__buy {
+    position: absolute;
+    left: var(--mj-film-side);
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    gap: 0.9rem;
+    width: min(420px, calc(100vw - 2 * var(--mj-gutter)));
+    padding: 1.75rem;
+    background: rgb(15 9 6 / 0.78);
+    color: var(--mj-cream);
+    border: 1px solid rgb(214 168 92 / 0.5);
+    border-radius: 6px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.7);
+    opacity: 0;
+    transform: translateY(calc(-50% + 40px));
     transition:
       opacity 700ms var(--mj-ease),
       transform 700ms var(--mj-ease);
     pointer-events: none;
-
     &.is-in {
       opacity: 1;
-      transform: none;
-    }
-    .mj-overline {
-      color: var(--mj-gold-ink);
-    }
-    .mj-display {
-      color: var(--mj-ivory);
-      text-wrap: balance;
-    }
-  }
-  &__hint {
-    margin-top: 1rem;
-    font-size: var(--mj-fs-caption);
-    color: var(--mj-muted);
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-
-    &::after {
-      content: '';
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--mj-gold-ink), transparent);
-      animation: mj-scroll-cue 2.4s var(--mj-ease) infinite;
-    }
-  }
-
-  /* Chapters: one at a time, on the inline-start side, over the film. */
-  &__chapters {
-    position: absolute;
-    inset-inline-start: max(var(--mj-gutter), calc((100% - var(--mj-container)) / 2));
-    bottom: 14svh;
-    width: min(30rem, calc(100% - var(--mj-gutter) * 2));
-  }
-  &__chapter {
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    display: grid;
-    gap: 0.6rem;
-    opacity: 0;
-    transform: translate3d(0, 28px, 0);
-    filter: blur(6px);
-    transition:
-      opacity 700ms var(--mj-ease),
-      transform 700ms var(--mj-ease),
-      filter 700ms var(--mj-ease);
-
-    &.is-in {
-      opacity: 1;
-      transform: none;
-      filter: none;
-    }
-    .mj-h1 {
-      color: var(--mj-ivory);
-    }
-    p {
-      color: var(--mj-muted);
-    }
-  }
-  &__num {
-    font-family: 'Manrope', var(--mj-font-body);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    color: var(--mj-gold-ink);
-    direction: ltr;
-    unicode-bidi: isolate;
-  }
-
-  /* Buy panel lands at the end, on the inline-start side (the bottle settles to the end side). */
-  &__buy {
-    position: absolute;
-    inset-inline-start: max(var(--mj-gutter), calc((100% - var(--mj-container)) / 2));
-    top: 50%;
-    width: min(26rem, calc(100% - var(--mj-gutter) * 2));
-    display: grid;
-    gap: 0.9rem;
-    padding: clamp(1.25rem, 3vw, 2rem);
-    border-radius: var(--mj-radius-card);
-    background: rgb(var(--mj-surface-rgb) / 0.8);
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
-    box-shadow:
-      inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.45),
-      0 40px 80px -30px rgb(40 24 8 / 0.35);
-    opacity: 0;
-    transform: translate3d(0, calc(-50% + 40px), 0);
-    transition:
-      opacity 800ms var(--mj-ease),
-      transform 800ms var(--mj-ease);
-    pointer-events: none;
-
-    &.is-in {
-      opacity: 1;
-      transform: translate3d(0, -50%, 0);
+      transform: translateY(-50%);
       pointer-events: auto;
     }
-    .mj-overline {
-      color: var(--mj-gold-ink);
-    }
-    .mj-h2 {
-      color: var(--mj-ivory);
-    }
-    @media (max-width: 767.98px) {
-      top: auto;
-      bottom: calc(1rem + 72px + var(--safe-bottom, 0px));
-      transform: translate3d(0, 40px, 0);
-      &.is-in {
-        transform: none;
-      }
-    }
+  }
+  &__buy-over {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: #d6a85c;
+  }
+  &__buy-name {
+    margin: 0;
+    font-family: var(--mj-font-display);
+    font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.1;
   }
   &__price {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    font-size: var(--mj-fs-h3);
-    color: var(--mj-gold-ink);
+    margin: 0;
+    font-family: var(--mj-font-latin);
+    font-style: italic;
+    font-size: 1.75rem;
     font-weight: 600;
+    color: #d6a85c;
     s {
-      font-size: 0.65em;
-      color: var(--mj-muted);
-      font-weight: 400;
+      margin-inline-start: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      opacity: 0.55;
     }
   }
   &__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-    .mj-btn {
-      flex: 1 1 auto;
+  }
+
+  @media (max-width: 820px) {
+    &__chapter {
+      bottom: 9svh;
+    }
+    &__chapter-title {
+      font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+    &__chapter-text {
+      font-size: 1rem;
+    }
+    &__buy {
+      left: var(--mj-gutter);
+      right: var(--mj-gutter);
+      top: auto;
+      bottom: 1.25rem;
+      width: auto;
+      transform: translateY(60px);
+      &.is-in {
+        transform: none;
+      }
     }
   }
 
-  /* Progress line along the bottom of the pinned stage. */
-  &__bar {
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 2px;
-    background: var(--mj-line);
-    span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, var(--mj-copper), var(--mj-gold), var(--mj-gold-hover));
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-  }
-  html[dir='rtl'] &__bar span {
-    transform-origin: right;
-  }
-
-  /* Static layout: reduced motion, motion off, no WebGL, and the server render. */
+  /* Static layout: server render, reduced motion, motion off. */
   &--static {
     padding-block: var(--mj-section);
+    color: var(--mj-cream);
+    .mj-film__title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      margin-block: 1rem 1.5rem;
+    }
+    .mj-film__buy {
+      position: static;
+      width: 100%;
+      margin-top: 2rem;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
   }
   &__static {
     display: grid;
-    gap: clamp(2rem, 5vw, 5rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
     align-items: center;
-    @media (min-width: 1024px) {
-      grid-template-columns: 1fr 1fr;
+    @media (max-width: 820px) {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
   &__poster {
-    aspect-ratio: 4 / 5;
-    border-radius: var(--mj-radius-card);
     overflow: hidden;
-    background: var(--mj-surface);
-    video,
-    .mj-art {
+    border: 1px solid rgb(214 168 92 / 0.4);
+    border-radius: 6px;
+    aspect-ratio: 16 / 10;
+    img,
+    video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-  &__static-copy {
-    display: grid;
-    gap: 1.25rem;
-    .mj-overline {
-      color: var(--mj-gold-ink);
-    }
-    .mj-h1 {
-      color: var(--mj-ivory);
-    }
-    .mj-film__buy {
-      position: static;
-      width: auto;
-      transform: none;
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
   &__list {
     display: grid;
-    gap: 1.25rem;
+    gap: 1.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     li {
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 1rem;
-      padding-block: 1rem;
-      border-top: 1px solid var(--mj-line);
     }
-    .mj-h3 {
-      color: var(--mj-ivory);
-      margin-bottom: 0.25rem;
+    h3 {
+      margin: 0;
+      font-family: var(--mj-font-display);
+      font-size: 1.5rem;
     }
     p {
-      color: var(--mj-muted);
+      margin: 0.25rem 0 0;
+      opacity: 0.85;
     }
   }
-}
-
-.s-block--mj-film {
-  margin: 0;
-  max-width: none;
-}
-
-/* Phones and tablets: the 3D showcase sits above the hero copy. */
-@media (max-width: 1023.98px) {
-  .mj-hero .mj-hero__stage {
-    order: -1;
+  &__num {
+    font-family: var(--mj-font-latin);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #d6a85c;
   }
 }

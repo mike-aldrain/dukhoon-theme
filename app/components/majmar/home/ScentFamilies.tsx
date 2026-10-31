@@ -24,11 +24,11 @@ export interface ScentFamiliesData {
 
 /** [translation key, English fallback, art] for the default families. */
 const DEFAULTS: [string, string, ArtKind][] = [
-  ['mj.families.oud', 'Oud', 'oud'],
-  ['mj.families.musk', 'Musk', 'flacon'],
-  ['mj.families.amber', 'Amber', 'bottle'],
-  ['mj.families.rose', 'Rose', 'rose'],
-  ['mj.families.fresh', 'Fresh', 'flacon'],
+  ['mj.families.cambodi', 'Cambodi', 'oud'],
+  ['mj.families.hindi', 'Hindi', 'oud'],
+  ['mj.families.oil', 'Oud oil', 'flacon'],
+  ['mj.families.muattar', 'Muattar', 'oud'],
+  ['mj.families.mukhallat', 'Mukhallat', 'bottle'],
   ['mj.families.bakhoor', 'Bakhoor', 'mabkhara'],
 ];
 const ARTS: ArtKind[] = ['oud', 'flacon', 'bottle', 'rose', 'mabkhara', 'giftbox'];
@@ -48,8 +48,8 @@ export function ScentFamilies({ data }: { data: ScentFamiliesData }) {
     <section className="mj-section mj-families">
       <div className="mj-container">
         <SectionHead
-          overline={tx(data.overline, 'mj.families.overline', 'Scent families')}
-          title={tx(data.title, 'mj.families.title', 'Find your note')}
+          overline={tx(data.overline, 'mj.families.overline', 'The world of oud')}
+          title={tx(data.title, 'mj.families.title', 'Choose your oud')}
           align="center"
         />
       </div>

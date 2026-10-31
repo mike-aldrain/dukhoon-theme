@@ -31,6 +31,7 @@ import { registerThemeHooks } from './hooks';
 import {
   BrandStory,
   CinematicHero,
+  Marquee,
   ScrollFilm,
   OccasionCountdown,
   ScentFamilies,
@@ -95,6 +96,7 @@ registerHomeComponents({
   blog: Blog,
   // Majmar blocks (twilight.json `home.mj-*`).
   'mj-hero': CinematicHero,
+  'mj-marquee': Marquee,
   'mj-film': ScrollFilm,
   'mj-countdown': OccasionCountdown,
   'mj-families': ScentFamilies,
@@ -120,6 +122,7 @@ registerHomeComponentConfig({
   // Majmar blocks own their spacing; the reserved heights match their first
   // paint so lazily placed blocks do not shift the page (CLS).
   'mj-hero': { className: 's-block s-block--mj s-block--mj-hero', height: '100svh' },
+  'mj-marquee': { className: 's-block s-block--mj', height: 'clamp(70px, 6vw, 92px)' },
   // The film grows to several screens after hydration; reserve one screen.
   'mj-film': { className: 's-block s-block--mj s-block--mj-film', height: '100svh' },
   'mj-collections': { className: 's-block s-block--mj', height: 'clamp(720px, 70vw, 1100px)' },

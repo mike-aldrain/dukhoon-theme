@@ -1,6 +1,7 @@
 /** Majmar home blocks; registered by key in app/router.tsx and declared in twilight.json. */
 export { CinematicHero } from './CinematicHero';
 export { ScrollFilm } from './ScrollFilm';
+export { Marquee } from './Marquee';
 export { FeaturedCollections } from './FeaturedCollections';
 export { ProductShowcase } from './ProductShowcase';
 export { BrandStory } from './BrandStory';

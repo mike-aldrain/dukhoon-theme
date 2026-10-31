@@ -111,6 +111,41 @@ if os.path.exists(CONV):
         for k, v in json.load(fh).get('locales', {}).items():
             NA[k] = (v[0], v[1])
 
+# Oud-only house: every default line speaks about oud (Oct 2026 revision).
+NA.update({
+    'mj.hero.overline': ('دار العود · إصدار ٢٠٢٦', 'House of oud · 2026 edition'),
+    'mj.hero.title': ('عودٌ يبقى بعدك', 'Oud that stays after you'),
+    'mj.hero.highlight': ('يبقى', 'stays'),
+    'mj.hero.subtitle': ('عود رويال: عود كمبودي معتّق مع لمسة زعفران. اثنتا عشرة ساعة على البشرة.', 'Oud Royal: aged Cambodian oud with a touch of saffron. Twelve hours on skin.'),
+    'mj.hero.giant': ('عود', 'Oud'),
+    'mj.hero.sticker': ('', ''),
+    'mj.hero.sticker_badge': ('', ''),
+    'mj.hero.cta_primary': ('تسوّق العود', 'Shop the oud'),
+    'mj.hero.cta_secondary': ('شاهد الفيلم', 'Watch the film'),
+    'mj.hero.drag': ('اسحب لتدوير القارورة', 'Drag to turn the bottle'),
+    'mj.marquee.words': ('عود كمبودي, عود هندي, دهن العود, عود معطّر, مخلّط, بخور المجلس', 'Cambodian oud, Hindi oud, Oud oil, Muattar, Mukhallat, Majlis bakhoor'),
+    'mj.showcase.overline': ('مجموعة العود', 'The oud collection'),
+    'mj.showcase.title': ('عود يعود إليه عملاؤنا', 'Oud our clients come back to'),
+    'mj.families.overline': ('عالم العود', 'The world of oud'),
+    'mj.families.title': ('اختر عودك', 'Choose your oud'),
+    'mj.families.cambodi': ('كمبودي', 'Cambodi'),
+    'mj.families.hindi': ('هندي', 'Hindi'),
+    'mj.families.oil': ('دهن العود', 'Oud oil'),
+    'mj.families.muattar': ('عود معطّر', 'Muattar'),
+    'mj.families.mukhallat': ('مخلّط', 'Mukhallat'),
+    'mj.families.bakhoor': ('بخور', 'Bakhoor'),
+    'mj.film.title': ('داخل القارورة', 'Inside the flacon'),
+    'mj.film.ch1_title': ('زجاج منفوخ باليد', 'Blown by hand'),
+    'mj.film.ch1_text': ('قارورة ثقيلة من الزجاج الصافي، تُصقل حوافها واحدة واحدة.', 'A heavy flacon of clear glass, its edges polished one by one.'),
+    'mj.film.ch2_title': ('عود كمبودي', 'Cambodian oud'),
+    'mj.film.ch2_text': ('خشب عود من غابات كمبوديا، يُقطّر ببطء على نار هادئة.', 'Oud wood from the forests of Cambodia, distilled slowly over a low fire.'),
+    'mj.film.ch3_title': ('معتّق عشر سنوات', 'Aged ten years'),
+    'mj.film.ch3_text': ('يرتاح الدهن في الظلام حتى ينضج ويصفو.', 'The oil rests in the dark until it rounds and clears.'),
+    'mj.film.ch4_title': ('يبقى معك', 'It stays with you'),
+    'mj.film.ch4_text': ('اثنتا عشرة ساعة على البشرة، ويبقى العود عودك.', 'Twelve hours on skin, and the oud is still yours.'),
+    'mj.film.buy_overline': ('متوفر الآن', 'Available now'),
+})
+
 for lang, idx in (('ar', 0), ('en', 1)):
     path = f'locales/{lang}.json'
     with io.open(path, encoding='utf8') as fh:

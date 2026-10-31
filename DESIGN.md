@@ -172,7 +172,7 @@ Intensity: `data-mj-motion` = `cinematic` | `subtle` (shorter travel, no Ken Bur
 | Budget | `heroScene` chunk 121 KB gz | Pixel ratio capped at 1.75; rendering stops off-screen and in hidden tabs |
 
 Do: keep the bottle on the inline-end side of copy, the buy panel on the inline-start side.
-Don't: animate the LCP element, add shadow maps, or load Three.js in the main bundle.
+Don't: animate the LCP element, or add a 3D runtime: motion comes from pre-rendered frames.
 
 ## 9. Revision: light luxury and real products (31 Oct 2026)
 
@@ -182,3 +182,17 @@ Don't: animate the LCP element, add shadow maps, or load Three.js in the main bu
 - The 3D layer (`app/lib/productScene.ts`) shows the store's product photos on cards and
   takes its background, surface and gold from the same tokens, so it matches the page.
 - Product photos on white sit on the card surface with padding (`.mj-media--product`).
+
+## 10. Revision: oud luxury and frame-sequence motion (31 Oct 2026)
+
+- The default palette is **Oud luxury** again, refined: background `#120D0A`, surface
+  `#1C1510`, gold `#D6A85C`, cream text `#F7F0E6` (17.1:1), muted `#B8AA98` (8.5:1), ink on
+  gold buttons 8.8:1. "Quiet light luxury" (`musk`) and "Bright colour blocks" (`saffron`)
+  are options; the playful outlines, hard shadows and stickers live only in the bright one.
+- Type: El Messiri (Arabic display), Readex Pro (body, Arabic and Latin), Fraunces
+  (Latin display and numbers). Headlines are weight 500 in the luxury palettes.
+- The Three.js layer is gone. The hero turntable and the scroll film play WebP frame
+  sequences rendered for the theme (`app/assets/frames`, see `app/lib/bundledFrames.ts`):
+  the Oud Royal flacon under a warm spotlight on oud-brown fields, with gold smoke.
+- All default copy is about oud: hero, marquee (Cambodian oud, Hindi oud, oud oil,
+  muattar, mukhallat, majlis bakhoor), scent families and the four film chapters.

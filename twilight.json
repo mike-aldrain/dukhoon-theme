@@ -362,21 +362,25 @@
       "required": false,
       "options": [
         {
-          "label": "فخامة فاتحة · Light luxury",
+          "label": "فخامة العود (داكن وذهبي) · Oud luxury (dark and gold)",
+          "value": "oud"
+        },
+        {
+          "label": "فخامة فاتحة هادئة · Quiet light luxury",
           "value": "musk"
         },
         {
-          "label": "عود (داكن دافئ) · Oud (warm dark)",
-          "value": "oud"
+          "label": "ألوان زاهية · Bright colour blocks",
+          "value": "saffron"
         }
       ],
       "selected": [
         {
-          "label": "فخامة فاتحة · Light luxury",
-          "value": "musk"
+          "label": "فخامة العود (داكن وذهبي) · Oud luxury (dark and gold)",
+          "value": "oud"
         }
       ],
-      "value": "musk"
+      "value": "oud"
     },
     {
       "id": "mj_accent_source",
@@ -410,7 +414,7 @@
       "required": false,
       "options": [
         {
-          "label": "خطوط مِجمر (المسيري، تجوال، بودوني، مانروب) · Majmar fonts (El Messiri, Tajawal, Bodoni Moda, Manrope)",
+          "label": "خطوط مِجمر (المسيري، ريدكس برو، فراونسس) · Majmar fonts (El Messiri, Readex Pro, Fraunces)",
           "value": "majmar"
         },
         {
@@ -420,7 +424,7 @@
       ],
       "selected": [
         {
-          "label": "خطوط مِجمر (المسيري، تجوال، بودوني، مانروب) · Majmar fonts (El Messiri, Tajawal, Bodoni Moda, Manrope)",
+          "label": "خطوط مِجمر (المسيري، ريدكس برو، فراونسس) · Majmar fonts (El Messiri, Readex Pro, Fraunces)",
           "value": "majmar"
         }
       ],
@@ -442,7 +446,7 @@
       "format": "color",
       "label": "الخلفية · Background",
       "required": false,
-      "value": "#FBF8F3",
+      "value": "#120D0A",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -457,7 +461,7 @@
       "format": "color",
       "label": "الأسطح والبطاقات · Surfaces and cards",
       "required": false,
-      "value": "#FFFFFF",
+      "value": "#1C1510",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -472,7 +476,7 @@
       "format": "color",
       "label": "اللون الكهرماني · Amber accent",
       "required": false,
-      "value": "#C8952E",
+      "value": "#D6A85C",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -487,7 +491,7 @@
       "format": "color",
       "label": "لون النص · Text colour",
       "required": false,
-      "value": "#12100E",
+      "value": "#F7F0E6",
       "conditions": [
         {
           "id": "mj_custom_colors",
@@ -578,6 +582,10 @@
       "required": false,
       "options": [
         {
+          "label": "قفزة مع ظل (لوحة الألوان الزاهية) · Lift with a shadow (bright palette)",
+          "value": "pop"
+        },
+        {
           "label": "إمالة ثلاثية الأبعاد مع لمعة كهرمانية · 3D tilt with amber edge light",
           "value": "tilt"
         },
@@ -610,7 +618,7 @@
           "value": "outline"
         },
         {
-          "label": "كهرماني ممتلئ · Solid amber",
+          "label": "ممتلئ · Solid",
           "value": "solid"
         }
       ],
@@ -865,7 +873,7 @@
         {
           "id": "overline",
           "type": "string",
-          "label": "سطر تمهيدي · Overline",
+          "label": "شارة تمهيدية · Eyebrow badge",
           "required": false,
           "format": "text",
           "multilanguage": true,
@@ -881,6 +889,16 @@
           "value": null
         },
         {
+          "id": "highlight",
+          "type": "string",
+          "label": "كلمة مميزة من العنوان · Highlighted word from the headline",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null,
+          "description": "Must appear in the headline exactly as typed. It is drawn in cream with an ink outline."
+        },
+        {
           "id": "subtitle",
           "type": "string",
           "label": "وصف قصير · Short description",
@@ -890,13 +908,119 @@
           "value": null
         },
         {
+          "id": "giant",
+          "type": "string",
+          "label": "الكلمة الكبيرة في الخلفية · Giant background word",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null,
+          "description": "One short word, drawn as a large outline behind the hero. Example: عود"
+        },
+        {
+          "id": "field",
+          "type": "items",
+          "label": "لون الخلفية · Background colour",
+          "required": false,
+          "format": "dropdown-list",
+          "multichoice": false,
+          "options": [
+            {
+              "label": "خشب العود (داكن) · Oud wood (dark)",
+              "value": "oud"
+            },
+            {
+              "label": "زمردي · Emerald",
+              "value": "emerald"
+            },
+            {
+              "label": "برقوقي · Plum",
+              "value": "plum"
+            },
+            {
+              "label": "زعفراني · Saffron",
+              "value": "saffron"
+            },
+            {
+              "label": "مرجاني · Coral",
+              "value": "coral"
+            },
+            {
+              "label": "وردي · Rose",
+              "value": "rose"
+            },
+            {
+              "label": "ليلكي · Lilac",
+              "value": "lilac"
+            }
+          ],
+          "selected": [
+            {
+              "label": "خشب العود (داكن) · Oud wood (dark)",
+              "value": "oud"
+            }
+          ],
+          "value": "oud"
+        },
+        {
+          "id": "products",
+          "type": "items",
+          "label": "منتج ملصق السعر · Product on the price sticker",
+          "required": false,
+          "format": "dropdown-list",
+          "source": "products",
+          "multichoice": false,
+          "searchable": true,
+          "options": [],
+          "selected": [],
+          "value": null,
+          "description": "Its name and price show on the sticker, linked to the product. Empty: your latest product."
+        },
+        {
+          "id": "sticker",
+          "type": "string",
+          "label": "نص الملصق الدائري (اختياري) · Round sticker text (optional)",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null,
+          "description": "Leave empty for no round sticker."
+        },
+        {
+          "id": "sticker_badge",
+          "type": "string",
+          "label": "كلمة وسط الملصق · Word in the sticker centre",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "frames_url",
+          "type": "string",
+          "label": "رابط إطارات التدوير مع {n} · Turntable frame URL with {n}",
+          "required": false,
+          "format": "url",
+          "value": null,
+          "description": "Your own 360° turn of the product: https://cdn.example.com/spin/frame-{n}.webp, numbered 0001, 0002 ... Square frames on the same background colour. Empty: the bottle that ships with the theme."
+        },
+        {
+          "id": "frames_count",
+          "type": "number",
+          "label": "عدد إطارات التدوير · Number of turntable frames",
+          "required": false,
+          "format": "integer",
+          "value": 0,
+          "description": "24 to 72 frames for one full turn."
+        },
+        {
           "id": "image",
           "type": "string",
-          "label": "صورة الخلفية · Background image",
+          "label": "أو صورة ثابتة للمنتج · Or a still product image",
           "required": false,
           "format": "image",
           "value": null,
-          "description": "2400×1350 px recommended. Also the video poster."
+          "description": "1100×1100 px, product on a plain background. Replaces the turntable."
         },
         {
           "id": "mobile_image",
@@ -905,29 +1029,7 @@
           "required": false,
           "format": "image",
           "value": null,
-          "description": "1080×1600 px recommended."
-        },
-        {
-          "id": "video",
-          "type": "string",
-          "label": "رابط فيديو MP4 (اختياري) · MP4 video URL (optional)",
-          "required": false,
-          "format": "url",
-          "value": null
-        },
-        {
-          "id": "products",
-          "type": "items",
-          "label": "المنتجات المعروضة في العرض ثلاثي الأبعاد · Products in the 3D showcase",
-          "required": false,
-          "format": "dropdown-list",
-          "source": "products",
-          "multichoice": true,
-          "searchable": true,
-          "options": [],
-          "selected": [],
-          "value": [],
-          "description": "Up to 5. Leave empty to show your latest products."
+          "description": "720×900 px recommended."
         },
         {
           "id": "cta_primary_text",
@@ -962,70 +1064,60 @@
           "required": false,
           "format": "url",
           "value": null
+        }
+      ]
+    },
+    {
+      "key": "17f6e36a-35ea-5be8-8a8c-8748959101bc",
+      "title": {
+        "ar": "مِجمر: شريط النوتات المتحرك",
+        "en": "Majmar: Scent Marquee"
+      },
+      "icon": "sicon-text",
+      "path": "home.mj-marquee",
+      "fields": [
+        {
+          "id": "words",
+          "type": "string",
+          "label": "الكلمات (افصل بينها بفاصلة) · Words (separate with commas)",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null,
+          "description": "Example: عود, عنبر, مسك أبيض, ورد الطائف"
         },
         {
-          "id": "height",
+          "id": "field",
           "type": "items",
-          "label": "الارتفاع · Height",
+          "label": "لون الشريط · Band colour",
           "required": false,
           "format": "dropdown-list",
           "multichoice": false,
           "options": [
             {
-              "label": "ملء الشاشة · Full screen",
-              "value": "full"
+              "label": "داكن مع نجوم ذهبية · Dark with gold stars",
+              "value": "ink"
             },
             {
-              "label": "طويل · Tall",
-              "value": "tall"
+              "label": "زمردي · Emerald",
+              "value": "emerald"
             },
             {
-              "label": "متوسط · Medium",
-              "value": "medium"
+              "label": "زعفراني · Saffron",
+              "value": "saffron"
+            },
+            {
+              "label": "مرجاني · Coral",
+              "value": "coral"
             }
           ],
           "selected": [
             {
-              "label": "ملء الشاشة · Full screen",
-              "value": "full"
+              "label": "داكن مع نجوم ذهبية · Dark with gold stars",
+              "value": "ink"
             }
           ],
-          "value": "full"
-        },
-        {
-          "id": "align",
-          "type": "items",
-          "label": "محاذاة النص · Text alignment",
-          "required": false,
-          "format": "dropdown-list",
-          "multichoice": false,
-          "options": [
-            {
-              "label": "البداية · Start",
-              "value": "start"
-            },
-            {
-              "label": "الوسط · Centre",
-              "value": "center"
-            }
-          ],
-          "selected": [
-            {
-              "label": "البداية · Start",
-              "value": "start"
-            }
-          ],
-          "value": "start"
-        },
-        {
-          "id": "webgl",
-          "type": "boolean",
-          "label": "عرض المنتجات ثلاثي الأبعاد (WebGL) · 3D product showcase (WebGL)",
-          "required": false,
-          "format": "switch",
-          "value": true,
-          "selected": true,
-          "description": "Loads after the page appears. Off: a light still image is shown instead."
+          "value": "ink"
         }
       ]
     },
@@ -1116,7 +1208,7 @@
           "required": false,
           "format": "url",
           "value": null,
-          "description": "Example: https://cdn.example.com/film/frame-{n}.webp (numbered 0001, 0002 ...). Leave empty to use the 3D product showcase."
+          "description": "Example: https://cdn.example.com/film/frame-{n}.webp (numbered 0001, 0002 ...). Leave empty to play the film that ships with the theme."
         },
         {
           "id": "frames_count",
@@ -1157,20 +1249,36 @@
           ],
           "selected": [
             {
-              "label": "متوسط · Medium",
-              "value": "medium"
+              "label": "طويل · Long",
+              "value": "long"
             }
           ],
-          "value": "medium"
+          "value": "long"
         },
         {
-          "id": "webgl",
-          "type": "boolean",
-          "label": "عرض المنتج ثلاثي الأبعاد عند عدم وجود فيديو · 3D product showcase when there is no video",
+          "id": "tone",
+          "type": "items",
+          "label": "إضاءة إطاراتك أو الفيديو · Your frames or video are",
           "required": false,
-          "format": "switch",
-          "value": true,
-          "selected": true
+          "format": "dropdown-list",
+          "multichoice": false,
+          "options": [
+            {
+              "label": "داكنة: نص فاتح · Dark: light text",
+              "value": "dark"
+            },
+            {
+              "label": "فاتحة: نص داكن · Bright: dark text",
+              "value": "bright"
+            }
+          ],
+          "selected": [
+            {
+              "label": "داكنة: نص فاتح · Dark: light text",
+              "value": "dark"
+            }
+          ],
+          "value": "dark"
         }
       ]
     },

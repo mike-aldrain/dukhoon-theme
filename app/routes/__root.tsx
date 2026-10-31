@@ -26,8 +26,8 @@ const DevSettingsWidget = import.meta.env.DEV
   : null;
 
 const FONTS_URL =
-  'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400' +
-  '&family=El+Messiri:wght@400..600&family=Manrope:wght@400..600&family=Tajawal:wght@400;500;700' +
+  'https://fonts.googleapis.com/css2?family=El+Messiri:wght@500..700' +
+  '&family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600..800&family=Readex+Pro:wght@400..700' +
   '&display=swap';
 
 export const Route = createTwilightRootRoute()({

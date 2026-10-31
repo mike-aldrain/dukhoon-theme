@@ -24,8 +24,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "fslightbox": "^3.8.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "three": "0.170.0"
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@salla.sa/twilight-tailwind-theme": "^3.0.2",
@@ -35,7 +34,6 @@
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
-    "@types/three": "0.170.0",
     "@vitejs/plugin-react": "~6.1.0",
     "@vitest/coverage-v8": "^4.1.11",
     "autoprefixer": "^10.5.4",

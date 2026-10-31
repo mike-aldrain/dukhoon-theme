@@ -7,9 +7,9 @@
  * twilight.json also declares, so the theme looks finished on install.
  */
 
-export type Palette = 'oud' | 'musk';
+export type Palette = 'saffron' | 'oud' | 'musk';
 export type MotionLevel = 'off' | 'subtle' | 'cinematic';
-export type CardHover = 'tilt' | 'zoom' | 'none';
+export type CardHover = 'pop' | 'tilt' | 'zoom' | 'none';
 export type BadgeStyle = 'outline' | 'solid';
 
 type Settings = Record<string, unknown> | undefined | null;
@@ -77,7 +77,7 @@ export function readMajmarSettings(settings: Settings, locale: string): MajmarSe
   const s = settings ?? {};
   const frames = Number(s.mj_pdp_360_min_frames);
   return {
-    palette: pick(s.mj_palette, ['oud', 'musk'] as const, 'musk'),
+    palette: pick(s.mj_palette, ['oud', 'musk', 'saffron'] as const, 'oud'),
     accentFromStore: pick(s.mj_accent_source, ['amber', 'store'] as const, 'amber') === 'store',
     storeFonts: pick(s.mj_fonts, ['majmar', 'store'] as const, 'majmar') === 'store',
     customColors: flag(s.mj_custom_colors, false),
@@ -95,7 +95,7 @@ export function readMajmarSettings(settings: Settings, locale: string): MajmarSe
     },
     headerTransparent: flag(s.mj_header_transparent, true),
     card: {
-      hover: pick(s.mj_card_hover, ['tilt', 'zoom', 'none'] as const, 'tilt'),
+      hover: pick(s.mj_card_hover, ['pop', 'tilt', 'zoom', 'none'] as const, 'tilt'),
       badge: pick(s.mj_card_badge, ['outline', 'solid'] as const, 'outline'),
       quickAdd: flag(s.mj_card_quick_add, true),
       secondImage: flag(s.mj_card_second_image, true),
