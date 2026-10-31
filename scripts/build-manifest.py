@@ -160,9 +160,56 @@ def block(key, path, ar, en, icon, fields):
 
 
 # Stable keys so re-running keeps merchant block instances valid.
-K = {p: str(uuid.uuid5(uuid.NAMESPACE_URL, f'majmar/{p}')) for p in ['mj-hero', 'mj-marquee', 'mj-film', 'mj-collections', 'mj-showcase', 'mj-story', 'mj-lookbook', 'mj-testimonials', 'mj-social', 'mj-newsletter', 'mj-trust']}
+K = {p: str(uuid.uuid5(uuid.NAMESPACE_URL, f'majmar/{p}')) for p in ['mj-slider', 'mj-categories', 'mj-promos', 'mj-wide', 'mj-hero', 'mj-marquee', 'mj-film', 'mj-collections', 'mj-showcase', 'mj-story', 'mj-lookbook', 'mj-testimonials', 'mj-social', 'mj-newsletter', 'mj-trust']}
 
 COMPONENTS = [
+    block(K['mj-slider'], 'mj-slider', 'مِجمر: السلايدر الرئيسي مع العرض السريع', 'Majmar: Main Slider with Flash Offer', 'sicon-image-carousel', [
+        coll('slides', 'الشرائح', 'Slides', [
+            bimg('image', 'الصورة', 'Image', '1600×720 px. Keep the product on the side opposite the text.'),
+            bimg('mobile_image', 'صورة الجوال (اختياري)', 'Phone image (optional)', '800×1000 px.'),
+            btext('overline', 'سطر صغير', 'Small line'),
+            btext('title', 'العنوان', 'Headline'),
+            btext('text', 'النص', 'Text', fmt='textarea'),
+            btext('button', 'نص الزر', 'Button text'),
+            burl('url', 'رابط الزر', 'Button link'),
+            bdrop('tone', 'لون النص', 'Text colour', [('light', 'داكن على صورة فاتحة', 'Dark text on a light image'), ('dark', 'فاتح على صورة داكنة', 'Light text on a dark image')], 'light'),
+        ], 0, 6, L('شريحة', 'Slide')),
+        bf('show_offer', 'boolean', 'إظهار بطاقة العرض السريع', 'Show the flash offer card', format='switch', value=True, selected=True),
+        btext('offer_title', 'عنوان بطاقة العرض', 'Offer card title'),
+        bf('offer_product', 'items', 'منتج العرض', 'Offer product', format='dropdown-list', source='products', multichoice=False, searchable=True, options=[], selected=[], value=None,
+           description='Empty: your latest product.'),
+        btext('offer_ends', 'نهاية العرض (اختياري)', 'Offer ends (optional)', ml=False,
+              description='Example: 2026-12-31 23:59. The countdown only shows when an end time is set.'),
+    ]),
+    block(K['mj-categories'], 'mj-categories', 'مِجمر: شبكة التصنيفات', 'Majmar: Category Grid', 'sicon-layout-grid', [
+        btext('title', 'العنوان', 'Title'),
+        coll('items', 'التصنيفات', 'Categories', [
+            bimg('image', 'الصورة', 'Image', 'The first tile is tall: 800×1000 px; others 800×800 px.'),
+            btext('title', 'الاسم', 'Name'),
+            btext('caption', 'ملاحظة قصيرة', 'Short note'),
+            burl('url', 'الرابط', 'Link'),
+        ], 0, 5, L('تصنيف', 'Category')),
+        btext('link_text', 'نص رابط الكل', 'View all text'),
+        burl('link_url', 'رابط الكل', 'View all link'),
+    ]),
+    block(K['mj-promos'], 'mj-promos', 'مِجمر: بانرين ترويجيين', 'Majmar: Promo Banners', 'sicon-image', [
+        coll('items', 'البانرات', 'Banners', [
+            bimg('image', 'الصورة', 'Image', '900×640 px. Keep the product on the side opposite the text.'),
+            btext('overline', 'سطر صغير', 'Small line'),
+            btext('title', 'العنوان', 'Headline'),
+            btext('text', 'النص', 'Text'),
+            btext('button', 'نص الزر', 'Button text'),
+            burl('url', 'الرابط', 'Link'),
+        ], 0, 2, L('بانر', 'Banner')),
+    ]),
+    block(K['mj-wide'], 'mj-wide', 'مِجمر: بانر عريض', 'Majmar: Wide Banner', 'sicon-image', [
+        bimg('image', 'الصورة', 'Image', '1600×520 px.'),
+        bimg('mobile_image', 'صورة الجوال (اختياري)', 'Phone image (optional)', '800×620 px.'),
+        btext('title', 'العنوان', 'Headline'),
+        btext('text', 'النص', 'Text'),
+        btext('button', 'نص الزر', 'Button text'),
+        burl('url', 'الرابط', 'Link'),
+    ]),
     block(K['mj-hero'], 'mj-hero', 'مِجمر: الواجهة السينمائية', 'Majmar: Cinematic Hero', 'sicon-image', [
         btext('overline', 'شارة تمهيدية', 'Eyebrow badge'),
         btext('title', 'العنوان', 'Headline'),

@@ -32,6 +32,10 @@ import {
   BrandStory,
   CinematicHero,
   Marquee,
+  HeroSlider,
+  CategoryGrid,
+  PromoPair,
+  WideBanner,
   ScrollFilm,
   OccasionCountdown,
   ScentFamilies,
@@ -95,6 +99,10 @@ registerHomeComponents({
   'enhanced-square-banners': EnhancedSquareBanners,
   blog: Blog,
   // Majmar blocks (twilight.json `home.mj-*`).
+  'mj-slider': HeroSlider,
+  'mj-categories': CategoryGrid,
+  'mj-promos': PromoPair,
+  'mj-wide': WideBanner,
   'mj-hero': CinematicHero,
   'mj-marquee': Marquee,
   'mj-film': ScrollFilm,
@@ -121,6 +129,10 @@ registerHomeComponents({
 registerHomeComponentConfig({
   // Majmar blocks own their spacing; the reserved heights match their first
   // paint so lazily placed blocks do not shift the page (CLS).
+  'mj-slider': { className: 's-block s-block--mj s-block--mj-slider', height: 'clamp(560px, 42vw, 640px)' },
+  'mj-categories': { className: 's-block s-block--mj', height: 'clamp(520px, 44vw, 700px)' },
+  'mj-promos': { className: 's-block s-block--mj', height: 'clamp(420px, 34vw, 520px)' },
+  'mj-wide': { className: 's-block s-block--mj', height: 'clamp(320px, 33vw, 480px)' },
   'mj-hero': { className: 's-block s-block--mj s-block--mj-hero', height: '100svh' },
   'mj-marquee': { className: 's-block s-block--mj', height: 'clamp(70px, 6vw, 92px)' },
   'mj-families': { className: 's-block s-block--mj s-block--mj-families', height: 'clamp(260px, 22vw, 340px)' },

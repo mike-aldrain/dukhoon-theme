@@ -146,6 +146,48 @@ NA.update({
     'mj.film.buy_overline': ('متوفر الآن', 'Available now'),
 })
 
+# Store layout blocks (Nov 2026).
+NA.update({
+    'mj.slider.label': ('العروض الرئيسية', 'Featured'),
+    'mj.slider.s1_over': ('الإصدار الجديد ٢٠٢٦', 'New 2026 edition'),
+    'mj.slider.s1_title': ('عود رويال: عودٌ يبقى بعدك', 'Oud Royal: oud that stays after you'),
+    'mj.slider.s1_text': ('عود كمبودي معتّق مع لمسة زعفران، اثنتا عشرة ساعة على البشرة.', 'Aged Cambodian oud with a touch of saffron. Twelve hours on skin.'),
+    'mj.slider.shop': ('تسوّق الآن', 'Shop now'),
+    'mj.slider.s2_over': ('دهن العود', 'Oud oils'),
+    'mj.slider.s2_title': ('دهون العود الأصلية', 'Genuine oud oils'),
+    'mj.slider.s2_text': ('كمبودي وهندي ومخلّط، تولة واحدة تكفي لأشهر.', 'Cambodi, Hindi and mukhallat. One tola lasts for months.'),
+    'mj.slider.s2_button': ('اكتشف الدهون', 'Discover the oils'),
+    'mj.slider.go': ('الشريحة {{n}}', 'Slide {{n}}'),
+    'mj.slider.offer': ('عروض سريعة', 'Flash offer'),
+    'mj.slider.ends': ('ينتهي العرض بعد', 'Ends in'),
+    'mj.cats.title': ('تسوّق حسب الفئة', 'Shop by category'),
+    'mj.cats.all': ('كل الفئات', 'All categories'),
+    'mj.cats.shop': ('تسوّق', 'Shop'),
+    'mj.cats.perfume': ('عطور العود', 'Oud perfumes'),
+    'mj.cats.oil': ('دهن العود', 'Oud oils'),
+    'mj.cats.wood': ('خشب العود', 'Oud wood'),
+    'mj.cats.bakhoor': ('البخور والمباخر', 'Bakhoor and burners'),
+    'mj.cats.gifts': ('أطقم الهدايا', 'Gift sets'),
+    'mj.promos.label': ('عروض مميزة', 'Offers'),
+    'mj.promos.p1_over': ('الأقوى في الدار', 'The strongest in the house'),
+    'mj.promos.p1_title': ('عود إنتنس', 'Oud Intense'),
+    'mj.promos.p1_text': ('عود وعنبر ولبان بتركيز بارفان.', 'Oud, amber and frankincense at parfum strength.'),
+    'mj.promos.p2_over': ('للمجلس', 'For the majlis'),
+    'mj.promos.p2_title': ('البخور والمباخر', 'Bakhoor and burners'),
+    'mj.promos.p2_text': ('بخور معطّر بالعود ومبخرة نحاسية مصقولة.', 'Oud-scented bakhoor and a polished brass burner.'),
+    'mj.promos.p2_button': ('اكتشف المجموعة', 'Discover the collection'),
+    'mj.wide.title': ('مجموعة العود الكمبودي', 'The Cambodian oud collection'),
+    'mj.wide.text': ('أربعة عطور من عود واحد، لكل مناسبة عطرها.', 'Four perfumes from one oud, a scent for every occasion.'),
+    'mj.wide.button': ('تسوّق المجموعة', 'Shop the collection'),
+    'mj.showcase.title': ('الأكثر مبيعاً', 'Best sellers'),
+    'mj.trust.delivery': ('شحن سريع', 'Fast shipping'),
+    'mj.trust.delivery_text': ('٢ إلى ٤ أيام داخل المملكة', '2 to 4 days across the Kingdom'),
+    'mj.trust.returns': ('عود أصلي مضمون', 'Genuine oud, guaranteed'),
+    'mj.trust.returns_text': ('شهادة مصدر مع كل دهن', 'A certificate of origin with every oil'),
+    'mj.trust.gift': ('تغليف هدايا فاخر', 'Luxury gift wrap'),
+    'mj.trust.gift_text': ('مع بطاقة مكتوبة باليد', 'With a handwritten card'),
+})
+
 for lang, idx in (('ar', 0), ('en', 1)):
     path = f'locales/{lang}.json'
     with io.open(path, encoding='utf8') as fh:

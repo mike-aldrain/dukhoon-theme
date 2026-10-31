@@ -8,6 +8,7 @@
  * Product..............Card, product page, 360° viewer, listings.
  * Components...........Salla web components on the palette, tap targets.
  * Film.................Scroll Film block.
+ * Store................Commerce home: slider, offer, category bento, promos, wide banner.
  */
 @import './base';
 @import './motion';
@@ -17,3 +18,4 @@
 @import './product';
 @import './components';
 @import './film';
+@import './store';

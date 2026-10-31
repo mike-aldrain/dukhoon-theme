@@ -17,3 +17,7 @@ export { RitualBundle } from './RitualBundle';
 export { GiftBoxBuilder } from './GiftBoxBuilder';
 export { Faq } from './Faq';
 export { ProductReels } from './ProductReels';
+export { HeroSlider } from './HeroSlider';
+export { CategoryGrid } from './CategoryGrid';
+export { PromoPair } from './PromoPair';
+export { WideBanner } from './WideBanner';

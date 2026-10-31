@@ -854,6 +854,385 @@
   ],
   "components": [
     {
+      "key": "cfc72f8b-bc6a-5c1f-87d3-3e7fb30f3def",
+      "title": {
+        "ar": "مِجمر: السلايدر الرئيسي مع العرض السريع",
+        "en": "Majmar: Main Slider with Flash Offer"
+      },
+      "icon": "sicon-image-carousel",
+      "path": "home.mj-slider",
+      "fields": [
+        {
+          "id": "slides",
+          "type": "collection",
+          "label": "الشرائح · Slides",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "slides.image",
+              "type": "string",
+              "label": "الصورة · Image",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "1600×720 px. Keep the product on the side opposite the text."
+            },
+            {
+              "id": "slides.mobile_image",
+              "type": "string",
+              "label": "صورة الجوال (اختياري) · Phone image (optional)",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "800×1000 px."
+            },
+            {
+              "id": "slides.overline",
+              "type": "string",
+              "label": "سطر صغير · Small line",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "slides.title",
+              "type": "string",
+              "label": "العنوان · Headline",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "slides.text",
+              "type": "string",
+              "label": "النص · Text",
+              "required": false,
+              "format": "textarea",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "slides.button",
+              "type": "string",
+              "label": "نص الزر · Button text",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "slides.url",
+              "type": "string",
+              "label": "رابط الزر · Button link",
+              "required": false,
+              "format": "url",
+              "value": null
+            },
+            {
+              "id": "slides.tone",
+              "type": "items",
+              "label": "لون النص · Text colour",
+              "required": false,
+              "format": "dropdown-list",
+              "multichoice": false,
+              "options": [
+                {
+                  "label": "داكن على صورة فاتحة · Dark text on a light image",
+                  "value": "light"
+                },
+                {
+                  "label": "فاتح على صورة داكنة · Light text on a dark image",
+                  "value": "dark"
+                }
+              ],
+              "selected": [
+                {
+                  "label": "داكن على صورة فاتحة · Dark text on a light image",
+                  "value": "light"
+                }
+              ],
+              "value": "light"
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 6,
+          "item_label": "شريحة · Slide",
+          "value": []
+        },
+        {
+          "id": "show_offer",
+          "type": "boolean",
+          "label": "إظهار بطاقة العرض السريع · Show the flash offer card",
+          "required": false,
+          "format": "switch",
+          "value": true,
+          "selected": true
+        },
+        {
+          "id": "offer_title",
+          "type": "string",
+          "label": "عنوان بطاقة العرض · Offer card title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "offer_product",
+          "type": "items",
+          "label": "منتج العرض · Offer product",
+          "required": false,
+          "format": "dropdown-list",
+          "source": "products",
+          "multichoice": false,
+          "searchable": true,
+          "options": [],
+          "selected": [],
+          "value": null,
+          "description": "Empty: your latest product."
+        },
+        {
+          "id": "offer_ends",
+          "type": "string",
+          "label": "نهاية العرض (اختياري) · Offer ends (optional)",
+          "required": false,
+          "format": "text",
+          "multilanguage": false,
+          "value": null,
+          "description": "Example: 2026-12-31 23:59. The countdown only shows when an end time is set."
+        }
+      ]
+    },
+    {
+      "key": "a21145b2-ec9d-5e82-a9be-bb8d0ea4a474",
+      "title": {
+        "ar": "مِجمر: شبكة التصنيفات",
+        "en": "Majmar: Category Grid"
+      },
+      "icon": "sicon-layout-grid",
+      "path": "home.mj-categories",
+      "fields": [
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "التصنيفات · Categories",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "items.image",
+              "type": "string",
+              "label": "الصورة · Image",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "The first tile is tall: 800×1000 px; others 800×800 px."
+            },
+            {
+              "id": "items.title",
+              "type": "string",
+              "label": "الاسم · Name",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.caption",
+              "type": "string",
+              "label": "ملاحظة قصيرة · Short note",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.url",
+              "type": "string",
+              "label": "الرابط · Link",
+              "required": false,
+              "format": "url",
+              "value": null
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 5,
+          "item_label": "تصنيف · Category",
+          "value": []
+        },
+        {
+          "id": "link_text",
+          "type": "string",
+          "label": "نص رابط الكل · View all text",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "link_url",
+          "type": "string",
+          "label": "رابط الكل · View all link",
+          "required": false,
+          "format": "url",
+          "value": null
+        }
+      ]
+    },
+    {
+      "key": "f7b83ce6-a3c0-5e25-a1b7-745c98652433",
+      "title": {
+        "ar": "مِجمر: بانرين ترويجيين",
+        "en": "Majmar: Promo Banners"
+      },
+      "icon": "sicon-image",
+      "path": "home.mj-promos",
+      "fields": [
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "البانرات · Banners",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "items.image",
+              "type": "string",
+              "label": "الصورة · Image",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "900×640 px. Keep the product on the side opposite the text."
+            },
+            {
+              "id": "items.overline",
+              "type": "string",
+              "label": "سطر صغير · Small line",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.title",
+              "type": "string",
+              "label": "العنوان · Headline",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.text",
+              "type": "string",
+              "label": "النص · Text",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.button",
+              "type": "string",
+              "label": "نص الزر · Button text",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.url",
+              "type": "string",
+              "label": "الرابط · Link",
+              "required": false,
+              "format": "url",
+              "value": null
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 2,
+          "item_label": "بانر · Banner",
+          "value": []
+        }
+      ]
+    },
+    {
+      "key": "38cf9457-1507-598a-b7e6-fdd0576a9513",
+      "title": {
+        "ar": "مِجمر: بانر عريض",
+        "en": "Majmar: Wide Banner"
+      },
+      "icon": "sicon-image",
+      "path": "home.mj-wide",
+      "fields": [
+        {
+          "id": "image",
+          "type": "string",
+          "label": "الصورة · Image",
+          "required": false,
+          "format": "image",
+          "value": null,
+          "description": "1600×520 px."
+        },
+        {
+          "id": "mobile_image",
+          "type": "string",
+          "label": "صورة الجوال (اختياري) · Phone image (optional)",
+          "required": false,
+          "format": "image",
+          "value": null,
+          "description": "800×620 px."
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Headline",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "text",
+          "type": "string",
+          "label": "النص · Text",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "button",
+          "type": "string",
+          "label": "نص الزر · Button text",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "url",
+          "type": "string",
+          "label": "الرابط · Link",
+          "required": false,
+          "format": "url",
+          "value": null
+        }
+      ]
+    },
+    {
       "key": "0a290bf1-9d17-5d0c-a051-b0bb28c427f6",
       "title": {
         "ar": "مِجمر: الواجهة السينمائية",
