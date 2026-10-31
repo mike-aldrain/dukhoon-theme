@@ -370,7 +370,7 @@ html[dir='rtl'] .mj-marquee__track {
     animation: none;
   }
 }
-html[data-mj-motion='off'] {
+[data-mj-motion='off'] {
   .mj-marquee__track,
   .mj-sticker--spin,
   .mj-hero__copy {
@@ -908,7 +908,7 @@ html[data-mj-motion='off'] {
     mix-blend-mode: multiply;
   }
 }
-html[data-mj-palette] .mj-media--product img {
+[data-mj-palette] .mj-media--product img {
   mix-blend-mode: normal;
 }
 .mj-tile .mj-media--product {

@@ -123,6 +123,7 @@ registerHomeComponentConfig({
   // paint so lazily placed blocks do not shift the page (CLS).
   'mj-hero': { className: 's-block s-block--mj s-block--mj-hero', height: '100svh' },
   'mj-marquee': { className: 's-block s-block--mj', height: 'clamp(70px, 6vw, 92px)' },
+  'mj-families': { className: 's-block s-block--mj s-block--mj-families', height: 'clamp(260px, 22vw, 340px)' },
   // The film grows to several screens after hydration; reserve one screen.
   'mj-film': { className: 's-block s-block--mj s-block--mj-film', height: '100svh' },
   'mj-collections': { className: 's-block s-block--mj', height: 'clamp(720px, 70vw, 1100px)' },

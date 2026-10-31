@@ -35,7 +35,7 @@
  * emerald buttons 13.6:1. Blocks: ivory 13.2:1, muted 8.5:1, gold 7.4:1.
  */
 :root,
-html[data-mj-palette='emerald'] {
+[data-mj-palette='emerald'] {
   --mj-bg-rgb: 246 241 231; /* ivory #F6F1E7 */
   --mj-surface-rgb: 255 255 255;
   --mj-raised-rgb: 237 230 216;
@@ -68,7 +68,7 @@ html[data-mj-palette='emerald'] {
 
 /* Oxblood and gold. Page: text 14.8:1, muted 7.2:1, gold text 5.5:1.
    Blocks: ivory 14.5:1, muted 8.9:1, gold 8.5:1. */
-html[data-mj-palette='oxblood'] {
+[data-mj-palette='oxblood'] {
   --mj-bg-rgb: 248 240 236; /* blush ivory #F8F0EC */
   --mj-surface-rgb: 255 255 255;
   --mj-raised-rgb: 240 226 220;
@@ -99,7 +99,8 @@ html[data-mj-palette='oxblood'] {
   color-scheme: light;
 }
 
-:root {
+:root,
+[data-mj-palette] {
   --mj-bg: rgb(var(--mj-bg-rgb));
   --mj-surface: rgb(var(--mj-surface-rgb));
   --mj-raised: rgb(var(--mj-raised-rgb));
@@ -245,8 +246,8 @@ html[dir='ltr'] {
 /* Amber drives the engine's primary colour unless the merchant keeps the store colour.
    The engine writes the store colour inline after load; only !important outranks inline
    style, so this one bridge rule uses it. */
-html[data-mj-accent='amber'],
-html[data-mj-accent='amber'] body {
+[data-mj-accent='amber'],
+[data-mj-accent='amber'] body {
   --color-primary: var(--mj-gold) !important;
   --color-primary-dark: var(--mj-gold-hover) !important;
   --color-primary-light: rgb(var(--mj-gold-rgb) / 0.16) !important;
@@ -267,4 +268,10 @@ html[data-mj-accent='amber'] body {
   src: local('Times New Roman'), local('Georgia');
   size-adjust: 98%;
   ascent-override: 90%;
+}
+
+/* The palette holder paints the page colour, so both palettes reach the edges. */
+.app-inner[data-mj-palette] {
+  background-color: var(--mj-bg);
+  color: var(--mj-ivory);
 }

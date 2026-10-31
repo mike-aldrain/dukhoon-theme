@@ -79,7 +79,7 @@ html.mj-js [data-mj-wipe].is-in {
 }
 
 /* Subtle: shorter travel, no Ken Burns or tilt. */
-html[data-mj-motion='subtle'] {
+[data-mj-motion='subtle'] {
   --mj-tilt-max: 0deg;
 
   &.mj-js [data-mj-reveal] {
@@ -121,7 +121,7 @@ html[data-mj-motion='subtle'] {
   }
 }
 
-html[data-mj-motion='off'] {
+[data-mj-motion='off'] {
   @include mj-motion-reduced;
 }
 

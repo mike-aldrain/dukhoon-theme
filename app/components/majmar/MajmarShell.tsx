@@ -16,6 +16,23 @@ import { useMajmar } from '../../hooks/useMajmar';
 import { useHydrated } from '../../hooks/useHydrated';
 import { useReveal } from '../../hooks/useReveal';
 
+/**
+ * The Majmar data attributes (palette, motion, card style...). ThemeLayout renders them
+ * on `.app-inner`, so they are in the server HTML and the palette is right at first
+ * paint; the styles select `[data-mj-*]` on any ancestor.
+ */
+export function majmarDataAttrs(mj: ReturnType<typeof useMajmar>) {
+  return {
+    'data-mj-palette': mj.palette,
+    'data-mj-accent': mj.accentFromStore ? 'store' : 'amber',
+    'data-mj-fonts': mj.storeFonts ? 'store' : 'majmar',
+    'data-mj-motion': mj.motion,
+    'data-mj-card': mj.card.hover,
+    'data-mj-badge': mj.card.badge,
+    'data-mj-quickadd': mj.card.quickAdd ? 'on' : 'off',
+  };
+}
+
 export function MajmarShell({ children }: { children: ReactNode }) {
   const mj = useMajmar();
   const hydrated = useHydrated();
@@ -25,13 +42,9 @@ export function MajmarShell({ children }: { children: ReactNode }) {
   useDocumentClass({
     html: {
       class: hydrated ? ['mj-js'] : [],
-      'data-mj-palette': mj.palette,
-      'data-mj-accent': mj.accentFromStore ? 'store' : 'amber',
-      'data-mj-fonts': mj.storeFonts ? 'store' : 'majmar',
-      'data-mj-motion': mj.motion,
-      'data-mj-card': mj.card.hover,
-      'data-mj-badge': mj.card.badge,
-      'data-mj-quickadd': mj.card.quickAdd ? 'on' : 'off',
+      // Also on <html> for the engine's own web components; the server-rendered copy
+      // that the styles rely on sits on `.app-inner` (ThemeLayout, majmarDataAttrs).
+      ...majmarDataAttrs(mj),
     },
   });
 
@@ -54,7 +67,7 @@ export function MajmarShell({ children }: { children: ReactNode }) {
       {custom && (
         <style
           // Validated digit channels only (see hexToChannels).
-          dangerouslySetInnerHTML={{ __html: `html[data-mj-palette]{${custom}}` }}
+          dangerouslySetInnerHTML={{ __html: `[data-mj-palette]{${custom}}` }}
         />
       )}
       {/* No fade on the first, server-rendered page: it would delay LCP. */}

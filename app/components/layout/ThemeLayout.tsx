@@ -6,7 +6,8 @@ import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useUser } from '@salla.sa/twilight-theme-engine/hooks/useUser';
 import { Footer } from '@salla.sa/twilight-theme-engine/layout';
-import { MajmarShell } from '../majmar/MajmarShell';
+import { MajmarShell, majmarDataAttrs } from '../majmar/MajmarShell';
+import { useMajmar } from '../../hooks/useMajmar';
 import { AnnouncementBar } from '../majmar/AnnouncementBar';
 import { MiniCartHost } from '../majmar/MiniCart';
 import { OrganizationLd } from '../majmar/StructuredData';
@@ -160,6 +161,7 @@ export function ThemeLayout({ children }: ThemeLayoutProps) {
   }, []);
 
   const imgRatio = productImageRatio(theme?.settings?.product_card_img_ratio);
+  const mj = useMajmar();
 
   return (
     <>
@@ -168,6 +170,7 @@ export function ThemeLayout({ children }: ThemeLayoutProps) {
       </a>
       <div
         className={`app-inner flex flex-col min-h-full product-card-img--${imgRatio}`}
+        {...majmarDataAttrs(mj)}
         suppressHydrationWarning
       >
         <AnnouncementBar />

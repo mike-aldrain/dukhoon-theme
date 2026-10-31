@@ -161,6 +161,9 @@
 .app-inner:has(.mj-header--overlay):has(.mj-hero--lead) .site-header__intro {
   display: none;
 }
+.app-inner:has(.mj-header--overlay):has(.mj-hero--lead) .mj-header--overlay > .site-header__topnav {
+  background: var(--mj-bg);
+}
 .app-inner:has(.mj-header--overlay):has(.mj-hero--lead) #main-content {
   margin-top: calc(var(--mj-header-stack, 0px) * -1);
 }
@@ -542,7 +545,7 @@
 }
 /* The active pill reads --color-primary, which the engine can set below <html> with the
    store's own colour; in amber mode paint the pill directly so its label stays legible. */
-html[data-mj-accent='amber'] .mobile-bottom-bar .mobile-bottom-bar__item.is-active {
+[data-mj-accent='amber'] .mobile-bottom-bar .mobile-bottom-bar__item.is-active {
   background: var(--mj-gold);
   color: var(--mj-on-gold);
 }
