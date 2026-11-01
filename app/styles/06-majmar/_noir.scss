@@ -1125,3 +1125,103 @@
 @media (prefers-reduced-motion: reduce) {
   .mj-tl__line::after { animation: none; display: none; }
 }
+
+/* ==========================================================================
+   Saudi luxury visual language (noir palette)
+   - Page: deep oud-black with warm amber vignettes and a gold girih lattice
+     (interlaced eight-point stars and crosses, as on mashrabiya screens and
+     Hejazi/Najdi carved doors), fading toward the edges like gold foil.
+   - Hero: a carved mashrabiya arch window behind the bottle, gold arabesque
+     corner ornaments, Diwani-style calligraphy.
+   ========================================================================== */
+$girih: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='.13' stroke-width='1'%3E%3Cpath d='M60 22l11 27 27 11-27 11-11 27-11-27-27-11 27-11z'/%3E%3Cpath d='M33 33h54v54H33z'/%3E%3Cpath d='M60 38l22 22-22 22-22-22z'/%3E%3Ccircle cx='60' cy='60' r='6'/%3E%3Cpath d='M0 0l22 22M120 0L98 22M0 120l22-22M120 120L98 98M60 0v22M60 98v22M0 60h22M98 60h22'/%3E%3Cpath d='M0 49l11 11-11 11M120 49l-11 11 11 11M49 0l11 11 11-11M49 120l11-11 11 11'/%3E%3C/g%3E%3C/svg%3E");
+$arabesque: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23E6C97A' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M4 4h70M4 4v70'/%3E%3Cpath d='M4 4c40 6 60 26 66 66'/%3E%3Cpath d='M18 4c4 22 22 36 44 38M4 18c22 4 36 22 38 44'/%3E%3Cpath d='M40 40c-10-2-16 6-12 12s14 2 12-12z'/%3E%3Cpath d='M70 70c-6 10 2 22 14 20M70 70c10-6 22 2 20 14'/%3E%3Ccircle cx='4' cy='4' r='3' fill='%23E6C97A'/%3E%3Cpath d='M74 4l6 0M4 74v6'/%3E%3C/g%3E%3C/svg%3E");
+$mashrabiya: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-width='1.2'%3E%3Ccircle cx='22' cy='22' r='9'/%3E%3Cpath d='M22 0v13M22 31v13M0 22h13M31 22h13'/%3E%3Ccircle cx='0' cy='0' r='9'/%3E%3Ccircle cx='44' cy='0' r='9'/%3E%3Ccircle cx='0' cy='44' r='9'/%3E%3Ccircle cx='44' cy='44' r='9'/%3E%3C/g%3E%3C/svg%3E");
+
+.app-inner[data-mj-palette='noir'] {
+  background-color: #0a0806;
+  background-image:
+    radial-gradient(70rem 40rem at 50% -10%, rgb(120 72 24 / 0.35), transparent 65%),
+    radial-gradient(50rem 50rem at 100% 60%, rgb(90 20 24 / 0.22), transparent 60%),
+    radial-gradient(50rem 50rem at 0% 90%, rgb(12 60 46 / 0.2), transparent 60%),
+    $girih;
+  background-size: auto, auto, auto, 120px 120px;
+  background-attachment: fixed, fixed, fixed, scroll;
+}
+/* The lattice glows like gold foil near the centre and fades at the edges. */
+.app-inner[data-mj-palette='noir']::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 35%, rgb(5 4 3 / 0.85) 100%);
+}
+
+/* ---------- Hero: mashrabiya arch window, arabesque corners ---------- */
+.mj-noir__arch {
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--mj-header-stack, 0px) + 5%);
+  bottom: 4%;
+  left: 18%;
+  aspect-ratio: 3 / 4.2;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgb(230 201 122 / 0.5), 0 0 0 10px rgb(201 168 76 / 0.05), 0 0 0 11px rgb(201 168 76 / 0.25);
+  background:
+    radial-gradient(closest-side, rgb(255 200 120 / 0.22), transparent 85%),
+    $mashrabiya;
+  background-size: auto, 44px 44px;
+  -webkit-mask: linear-gradient(#000 60%, transparent);
+  mask: linear-gradient(#000 60%, transparent);
+  opacity: 0.35;
+  html[dir='ltr'] & {
+    left: auto;
+    right: 18%;
+  }
+  @media (max-width: 820px) {
+    display: none;
+  }
+}
+.mj-noir__frame {
+  border-color: rgb(201 168 76 / 0.22) !important;
+  &::before,
+  &::after {
+    width: 110px !important;
+    height: 110px !important;
+    border: 0 !important;
+    background: $arabesque no-repeat;
+    background-size: contain;
+  }
+  &::before {
+    top: -4px !important;
+    inset-inline-start: -4px !important;
+    html[dir='rtl'] & {
+      transform: scaleX(-1);
+    }
+  }
+  &::after {
+    bottom: -4px !important;
+    inset-inline-end: -4px !important;
+    transform: rotate(180deg);
+    html[dir='rtl'] & {
+      transform: rotate(180deg) scaleX(-1);
+    }
+  }
+}
+.mj-noir__eyebrow {
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  background: rgb(201 168 76 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(201 168 76 / 0.4);
+}
+
+/* Section heads in noir get a carved arch-tip ornament above the title. */
+[data-mj-palette='noir'] .mj-head--center .mj-head__text::before {
+  content: '';
+  width: 42px;
+  height: 22px;
+  margin-bottom: 0.35rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='22' viewBox='0 0 42 22'%3E%3Cg fill='none' stroke='%23E6C97A' stroke-width='1.2'%3E%3Cpath d='M2 21C2 10 12 2 21 1c9 1 19 9 19 20'/%3E%3Cpath d='M9 21c0-7 6-12 12-13 6 1 12 6 12 13'/%3E%3C/g%3E%3Ccircle cx='21' cy='16' r='2' fill='%23E6C97A'/%3E%3C/svg%3E") no-repeat center;
+}

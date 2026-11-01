@@ -164,6 +164,7 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
         />
       </picture>
       <canvas ref={canvasRef} className="mj-noir__fx" aria-hidden="true" />
+      <span className="mj-noir__arch" aria-hidden="true" />
       <span className="mj-noir__scrim" aria-hidden="true" />
       <span className="mj-noir__ghost" aria-hidden="true">{tx(data.ghost, 'mj.noir.ghost', 'Oud')}</span>
       <span className="mj-noir__frame" aria-hidden="true" />
