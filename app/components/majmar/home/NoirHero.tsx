@@ -30,6 +30,7 @@ export interface NoirHeroData {
   cta2_url?: unknown;
   product?: unknown;
   show_card?: boolean;
+  ghost?: unknown;
   position?: number;
   [key: string]: unknown;
 }
@@ -164,6 +165,11 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
       </picture>
       <canvas ref={canvasRef} className="mj-noir__fx" aria-hidden="true" />
       <span className="mj-noir__scrim" aria-hidden="true" />
+      <span className="mj-noir__ghost" aria-hidden="true">{tx(data.ghost, 'mj.noir.ghost', 'Oud')}</span>
+      <span className="mj-noir__frame" aria-hidden="true" />
+      <span className="mj-noir__vert" aria-hidden="true">
+        MAJMAR · MAISON D&apos;OUD · {tx(data.overline, 'mj.noir.overline', 'Diriyah edition 2026')}
+      </span>
       <div className="mj-container mj-noir__in">
         <div className="mj-noir__copy">
           <p className="mj-noir__eyebrow">
@@ -184,6 +190,7 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
           <p className="mj-noir__text">
             {tx(data.text, 'mj.noir.text', 'Not every scent wants to please you; some want to stay in your memory. Cambodian oud aged ten years.')}
           </p>
+          <span className="mj-noir__orn" aria-hidden="true" />
           <div className="mj-noir__ctas">
             <Link to={urlOf(data.cta_url) || '/products'} className="mj-btn mj-btn--gold-solid">
               {tx(data.cta_text, 'mj.noir.cta', 'Shop the collection')}
@@ -194,6 +201,20 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
               </Link>
             )}
           </div>
+          <dl className="mj-noir__stats">
+            <div>
+              <dt>{t('mj.noir.s1', '12 hrs')}</dt>
+              <dd>{t('mj.noir.s1l', 'on skin')}</dd>
+            </div>
+            <div>
+              <dt>{t('mj.noir.s2', '10 yrs')}</dt>
+              <dd>{t('mj.noir.s2l', 'aged oil')}</dd>
+            </div>
+            <div>
+              <dt>{t('mj.noir.s3', '4.9')}</dt>
+              <dd>{t('mj.noir.s3l', 'client rating')}</dd>
+            </div>
+          </dl>
         </div>
         {product && (
           <aside className="mj-sig" aria-label={product.name}>
