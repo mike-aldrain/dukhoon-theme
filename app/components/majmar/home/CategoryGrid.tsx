@@ -61,12 +61,18 @@ export function CategoryGrid({ data }: { data: CategoryGridData }) {
             title={tx(data.title, 'mj.cats.stories_title', 'The world of oud')}
             align="center"
           />
-          <ul className="mj-stories">
+          <ul className="mj-arches">
             {tiles.map((tile, i) => (
-              <li key={i}>
-                <Link to={tile.url} className="mj-stories__item">
-                  <span className="mj-stories__ring">{tile.image && <img src={tile.image} alt="" loading="lazy" decoding="async" />}</span>
-                  <b>{tile.name}</b>
+              <li key={i} style={{ ['--i' as string]: i }}>
+                <Link to={tile.url} className="mj-arch">
+                  <span className="mj-arch__frame">
+                    {tile.image && <img src={tile.image} alt="" loading="lazy" decoding="async" />}
+                    <span className="mj-arch__shine" aria-hidden="true" />
+                  </span>
+                  <span className="mj-arch__cap">
+                    <b>{tile.name}</b>
+                    <span>{t('mj.cats.discover', 'Discover')} ←</span>
+                  </span>
                 </Link>
               </li>
             ))}

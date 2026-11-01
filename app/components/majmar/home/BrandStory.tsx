@@ -3,6 +3,7 @@
  * Image on one side (start or end, merchant choice), long copy on the other with a
  * gold pull quote. The image sits in a frame offset by a thin gold line.
  */
+import { banner } from '../../../lib/bundledBanners';
 import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { MjMedia, SectionHead, urlOf, useBlockText } from './shared';
 
@@ -35,9 +36,16 @@ export function BrandStory({ data }: { data: BrandStoryData }) {
   return (
     <section className={`mj-section mj-story mj-story--${side}`}>
       <div className="mj-container mj-story__grid">
-        <figure className="mj-story__figure" data-mj-reveal="">
-          <MjMedia src={data.image} alt="" art="mabkhara" fallback={1} sizes="(min-width: 1024px) 50vw, 100vw" className="mj-story__media" />
-        </figure>
+        {data.image ? (
+          <figure className="mj-story__figure" data-mj-reveal="">
+            <MjMedia src={data.image} alt="" art="mabkhara" sizes="(min-width: 1024px) 50vw, 100vw" className="mj-story__media" />
+          </figure>
+        ) : (
+          <div className="mj-story__duo" data-mj-reveal="">
+            <img src={banner('story-1')} alt="" loading="lazy" decoding="async" />
+            <img src={banner('story-2')} alt="" loading="lazy" decoding="async" />
+          </div>
+        )}
         <div className="mj-story__copy">
           <SectionHead
             overline={tx(data.overline, 'mj.story.overline', 'Our atelier')}

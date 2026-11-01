@@ -249,6 +249,7 @@ NA.update({
     'mj.tl.d3': ('وصلنا إلى كل مدن المملكة ودول الخليج.', 'We reached every city in the Kingdom and the Gulf.'),
     'mj.tl.d4': ('مجموعة مستوحاة من عمارة نجد وضيافة المجلس.', 'A collection inspired by Najdi architecture and majlis hospitality.'),
     'mj.cats.stories_title': ('عالم مِجمر', 'The world of Majmar'),
+    'mj.cats.discover': ('اكتشف', 'Discover'),
     'mj.showcase.title': ('عطور تستحق أن تبدأ بها', 'Scents worth starting with'),
     'mj.showcase.overline': ('الأكثر طلباً', 'Most wanted'),
 })

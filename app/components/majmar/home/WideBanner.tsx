@@ -21,7 +21,7 @@ export interface WideBannerData {
 export function WideBanner({ data }: { data: WideBannerData }) {
   const tx = useBlockText();
   const { t } = useTranslation();
-  const image = data.image || banner('wide-collection');
+  const image = data.image || banner('gift-photo');
   const title = tx(data.title, 'mj.wide.title', 'The Cambodian oud collection');
   const text = tx(data.text, 'mj.wide.text', 'Four perfumes from one oud, a scent for every occasion.');
   const button = tx(data.button, 'mj.wide.button', 'Shop the collection');

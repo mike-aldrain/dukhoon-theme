@@ -12,6 +12,7 @@
  * only the mood keyword is searched, since a longer query rarely matches.
  */
 import { useState } from 'react';
+import { banner } from '../../../lib/bundledBanners';
 import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { text } from '../../../lib/majmarSettings';
@@ -92,6 +93,11 @@ export function ScentFinder({ data }: { data: ScentFinderData }) {
     <section className="mj-section mj-finder" aria-label={title}>
       <div className="mj-container">
         <div className="mj-finder__panel" data-mj-reveal="">
+          <figure className="mj-finder__visual" aria-hidden="true">
+            <img src={banner('finder')} alt="" loading="lazy" decoding="async" />
+            <span className="mj-finder__wheel" />
+          </figure>
+          <div className="mj-finder__body">
           <header className="mj-finder__head">
             <p className="mj-overline">{t('mj.finder.overline', 'Scent finder')}</p>
             <h2 className="mj-h2">{title}</h2>
@@ -156,6 +162,7 @@ export function ScentFinder({ data }: { data: ScentFinderData }) {
                 {t('mj.finder.restart', 'Start again')}
               </button>
             )}
+          </div>
           </div>
         </div>
       </div>
