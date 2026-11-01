@@ -7,7 +7,7 @@
  * twilight.json also declares, so the theme looks finished on install.
  */
 
-export type Palette = 'emerald' | 'oxblood';
+export type Palette = 'noir' | 'emerald' | 'oxblood';
 export type MotionLevel = 'off' | 'subtle' | 'cinematic';
 export type CardHover = 'tilt' | 'zoom' | 'none';
 export type BadgeStyle = 'outline' | 'solid';
@@ -77,7 +77,7 @@ export function readMajmarSettings(settings: Settings, locale: string): MajmarSe
   const s = settings ?? {};
   const frames = Number(s.mj_pdp_360_min_frames);
   return {
-    palette: pick(s.mj_palette, ['emerald', 'oxblood'] as const, 'emerald'),
+    palette: pick(s.mj_palette, ['noir', 'emerald', 'oxblood'] as const, 'noir'),
     accentFromStore: pick(s.mj_accent_source, ['amber', 'store'] as const, 'amber') === 'store',
     storeFonts: pick(s.mj_fonts, ['majmar', 'store'] as const, 'majmar') === 'store',
     customColors: flag(s.mj_custom_colors, false),

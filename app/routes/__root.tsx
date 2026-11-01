@@ -26,7 +26,7 @@ const DevSettingsWidget = import.meta.env.DEV
   : null;
 
 const FONTS_URL =
-  'https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500..700' +
+  'https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500..700&family=Aref+Ruqaa:wght@700' +
   '&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600' +
   '&display=swap';
 

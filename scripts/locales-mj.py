@@ -223,6 +223,36 @@ NA.update({
     'mj.announcement.default': ('شحن مجاني لجميع مناطق المملكة فوق ٣٠٠ ر.س · عود أصلي ١٠٠٪ · قسّطها مع تابي وتمارا', 'Free delivery across the Kingdom over 300 SAR · 100% genuine oud · Pay in 4 with Tabby or Tamara'),
 })
 
+# Noir (Nov 2026).
+NA.update({
+    'mj.noir.overline': ('إصدار الدرعية ٢٠٢٦', 'Diriyah edition 2026'),
+    'mj.noir.title': ('عودٌ يبقى بعدك', 'Oud that stays after you'),
+    'mj.noir.highlight': ('يبقى', 'stays'),
+    'mj.noir.text': ('ليس كل عطرٍ يريد أن يُعجبك؛ بعضها يريد أن يبقى في ذاكرتك. عود كمبودي معتّق عشر سنوات.', 'Not every scent wants to please you; some want to stay in your memory. Cambodian oud aged ten years.'),
+    'mj.noir.cta': ('تسوّق المجموعة', 'Shop the collection'),
+    'mj.noir.cta2': ('اكتشف الإطلالات', 'Discover the looks'),
+    'mj.noir.signature': ('توقيع الليلة', 'Signature of the night'),
+    'mj.noir.add': ('أضفه إلى مجموعتك', 'Add to your collection'),
+    'mj.looks.overline': ('وصل حديثاً', 'Just arrived'),
+    'mj.looks.title': ('إطلالات الموسم', 'Looks of the season'),
+    'mj.looks.l1': ('إطلالة العيد', 'Eid look'),
+    'mj.looks.l2': ('ليالي المجلس', 'Majlis nights'),
+    'mj.looks.l3': ('توقيع المساء', 'Evening signature'),
+    'mj.looks.hint': ('اضغط (+) لرؤية المنتج', 'Tap (+) to see the product'),
+    'mj.looks.view': ('عرض المنتج', 'View product'),
+    'mj.tl.overline': ('رحلتنا', 'Our journey'),
+    'mj.tl.title': ('من سوق الزل إلى كل مجلس', 'From the souq to every majlis'),
+    'mj.tl.y1': ('٢٠١٨', '2018'), 'mj.tl.y2': ('٢٠٢٠', '2020'), 'mj.tl.y3': ('٢٠٢٣', '2023'), 'mj.tl.y4': ('٢٠٢٦', '2026'),
+    'mj.tl.t1': ('البداية', 'The beginning'), 'mj.tl.t2': ('دهن العود الخاص', 'Our own oud oil'), 'mj.tl.t3': ('عشرون ألف عميل', 'Twenty thousand clients'), 'mj.tl.t4': ('إصدار الدرعية', 'The Diriyah edition'),
+    'mj.tl.d1': ('من دكان صغير في سوق الزل بالرياض، بدأنا نختار العود بأيدينا.', 'From a small shop in Riyadh, we began choosing oud by hand.'),
+    'mj.tl.d2': ('أطلقنا أول دهن عود معتّق عشر سنوات تحت اسم مِجمر.', 'We launched our first oud oil aged ten years.'),
+    'mj.tl.d3': ('وصلنا إلى كل مدن المملكة ودول الخليج.', 'We reached every city in the Kingdom and the Gulf.'),
+    'mj.tl.d4': ('مجموعة مستوحاة من عمارة نجد وضيافة المجلس.', 'A collection inspired by Najdi architecture and majlis hospitality.'),
+    'mj.cats.stories_title': ('عالم مِجمر', 'The world of Majmar'),
+    'mj.showcase.title': ('عطور تستحق أن تبدأ بها', 'Scents worth starting with'),
+    'mj.showcase.overline': ('الأكثر طلباً', 'Most wanted'),
+})
+
 for lang, idx in (('ar', 0), ('en', 1)):
     path = f'locales/{lang}.json'
     with io.open(path, encoding='utf8') as fh:

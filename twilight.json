@@ -362,6 +362,10 @@
       "required": false,
       "options": [
         {
+          "label": "ليلي أسود وذهبي · Night black and gold",
+          "value": "noir"
+        },
+        {
           "label": "زمردي وذهبي · Emerald and gold",
           "value": "emerald"
         },
@@ -372,11 +376,11 @@
       ],
       "selected": [
         {
-          "label": "زمردي وذهبي · Emerald and gold",
-          "value": "emerald"
+          "label": "ليلي أسود وذهبي · Night black and gold",
+          "value": "noir"
         }
       ],
-      "value": "emerald"
+      "value": "noir"
     },
     {
       "id": "mj_accent_source",
@@ -853,6 +857,286 @@
     }
   ],
   "components": [
+    {
+      "key": "b6fedcc5-831d-5789-a27b-1534a1edc624",
+      "title": {
+        "ar": "مِجمر: الواجهة السينمائية الليلية",
+        "en": "Majmar: Cinematic Night Hero"
+      },
+      "icon": "sicon-image",
+      "path": "home.mj-noir",
+      "fields": [
+        {
+          "id": "image",
+          "type": "string",
+          "label": "الصورة · Image",
+          "required": false,
+          "format": "image",
+          "value": null,
+          "description": "1600×900 px, dark and atmospheric, product on the side opposite the text."
+        },
+        {
+          "id": "mobile_image",
+          "type": "string",
+          "label": "صورة الجوال (اختياري) · Phone image (optional)",
+          "required": false,
+          "format": "image",
+          "value": null,
+          "description": "900×1200 px."
+        },
+        {
+          "id": "overline",
+          "type": "string",
+          "label": "سطر صغير · Small line",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Headline",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "highlight",
+          "type": "string",
+          "label": "كلمة لامعة من العنوان · Shining word from the headline",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "text",
+          "type": "string",
+          "label": "النص · Text",
+          "required": false,
+          "format": "textarea",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "cta_text",
+          "type": "string",
+          "label": "نص الزر · Button text",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "cta_url",
+          "type": "string",
+          "label": "رابط الزر · Button link",
+          "required": false,
+          "format": "url",
+          "value": null
+        },
+        {
+          "id": "cta2_text",
+          "type": "string",
+          "label": "نص الزر الثاني · Second button text",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "cta2_url",
+          "type": "string",
+          "label": "رابط الزر الثاني · Second button link",
+          "required": false,
+          "format": "url",
+          "value": null
+        },
+        {
+          "id": "show_card",
+          "type": "boolean",
+          "label": "إظهار بطاقة التوقيع · Show the signature card",
+          "required": false,
+          "format": "switch",
+          "value": true,
+          "selected": true
+        },
+        {
+          "id": "product",
+          "type": "items",
+          "label": "منتج بطاقة التوقيع · Signature card product",
+          "required": false,
+          "format": "dropdown-list",
+          "source": "products",
+          "multichoice": false,
+          "searchable": true,
+          "options": [],
+          "selected": [],
+          "value": null,
+          "description": "Its scent tags fill the pyramid. Empty: your latest product."
+        }
+      ]
+    },
+    {
+      "key": "ee1db5e3-9093-5801-b028-077fe225052b",
+      "title": {
+        "ar": "مِجمر: الإطلالات القابلة للتسوق",
+        "en": "Majmar: Shoppable Looks"
+      },
+      "icon": "sicon-image-carousel",
+      "path": "home.mj-looks",
+      "fields": [
+        {
+          "id": "overline",
+          "type": "string",
+          "label": "سطر صغير · Small line",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "الإطلالات · Looks",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "items.image",
+              "type": "string",
+              "label": "الصورة · Image",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "900×1150 px."
+            },
+            {
+              "id": "items.title",
+              "type": "string",
+              "label": "العنوان · Title",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.product",
+              "type": "items",
+              "label": "المنتج · Product",
+              "required": false,
+              "format": "dropdown-list",
+              "source": "products",
+              "multichoice": false,
+              "searchable": true,
+              "options": [],
+              "selected": [],
+              "value": null
+            },
+            {
+              "id": "items.x",
+              "type": "number",
+              "label": "موضع النقطة أفقياً (٪) · Hotspot left (%)",
+              "required": false,
+              "format": "integer",
+              "value": 50
+            },
+            {
+              "id": "items.y",
+              "type": "number",
+              "label": "موضع النقطة عمودياً (٪) · Hotspot top (%)",
+              "required": false,
+              "format": "integer",
+              "value": 55
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 4,
+          "item_label": "إطلالة · Look",
+          "value": []
+        }
+      ]
+    },
+    {
+      "key": "1eaf9bf0-ea4a-537f-9e0b-c8ddcd45db0b",
+      "title": {
+        "ar": "مِجمر: رحلتنا",
+        "en": "Majmar: Timeline"
+      },
+      "icon": "sicon-history",
+      "path": "home.mj-timeline",
+      "fields": [
+        {
+          "id": "overline",
+          "type": "string",
+          "label": "سطر صغير · Small line",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان · Title",
+          "required": false,
+          "format": "text",
+          "multilanguage": true,
+          "value": null
+        },
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "المحطات · Steps",
+          "required": false,
+          "format": "collection",
+          "fields": [
+            {
+              "id": "items.year",
+              "type": "string",
+              "label": "السنة · Year",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.title",
+              "type": "string",
+              "label": "العنوان · Title",
+              "required": false,
+              "format": "text",
+              "multilanguage": true,
+              "value": null
+            },
+            {
+              "id": "items.text",
+              "type": "string",
+              "label": "النص · Text",
+              "required": false,
+              "format": "textarea",
+              "multilanguage": true,
+              "value": null
+            }
+          ],
+          "minLength": 0,
+          "maxLength": 8,
+          "item_label": "محطة · Step",
+          "value": []
+        }
+      ]
+    },
     {
       "key": "cfc72f8b-bc6a-5c1f-87d3-3e7fb30f3def",
       "title": {

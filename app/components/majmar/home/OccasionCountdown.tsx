@@ -8,12 +8,14 @@
  * to screen readers as one polite, minute-level label rather than ticking every second.
  */
 import { useEffect, useMemo, useState } from 'react';
+import { banner } from '../../../lib/bundledBanners';
 import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useHydrated } from '../../../hooks/useHydrated';
 import { urlOf, useBlockText } from './shared';
 
 export interface OccasionCountdownData {
+  image?: string;
   title?: unknown;
   text?: unknown;
   end_date?: unknown;
@@ -95,6 +97,11 @@ export function OccasionCountdown({ data }: { data: OccasionCountdownData }) {
           <Link to={linkUrl} className="mj-btn mj-btn--gold mj-countdown__cta">
             {tx(data.link_text, 'mj.countdown.cta', 'Shop the edit')}
           </Link>
+          {(data.image || banner('offer')) && (
+            <figure className="mj-countdown__img">
+              <img src={data.image || banner('offer')} alt="" loading="lazy" decoding="async" />
+            </figure>
+          )}
         </div>
       </div>
     </section>

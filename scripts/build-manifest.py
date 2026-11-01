@@ -77,7 +77,7 @@ SPIN = [{'id': 'mj_pdp_360', 'operation': '=', 'value': True}]
 
 SETTINGS = [
     title('mj-g-branding', 'مِجمر: الهوية', 'Majmar: Branding'),
-    drop('mj_palette', 'لوحة الألوان', 'Palette', [('emerald', 'زمردي وذهبي', 'Emerald and gold'), ('oxblood', 'عنابي وذهبي', 'Oxblood and gold')], 'emerald'),
+    drop('mj_palette', 'لوحة الألوان', 'Palette', [('noir', 'ليلي أسود وذهبي', 'Night black and gold'), ('emerald', 'زمردي وذهبي', 'Emerald and gold'), ('oxblood', 'عنابي وذهبي', 'Oxblood and gold')], 'noir'),
     drop('mj_accent_source', 'لون التمييز', 'Accent colour', [('amber', 'كهرماني', 'Amber gold'), ('store', 'لون المتجر الأساسي', 'Store primary colour')], 'amber'),
     drop('mj_fonts', 'الخطوط', 'Fonts', [('majmar', 'خطوط مِجمر (المسيري، ريدكس برو، فراونسس)', 'Majmar fonts (El Messiri, Readex Pro, Fraunces)'), ('store', 'خط المتجر من لوحة التحكم', 'Store font from the dashboard')], 'majmar'),
     switch('mj_custom_colors', 'ألوان مخصصة', 'Custom colours', False, 'Override the palette colours below. Keep text-to-background contrast at 4.5:1 or more.'),
@@ -160,9 +160,43 @@ def block(key, path, ar, en, icon, fields):
 
 
 # Stable keys so re-running keeps merchant block instances valid.
-K = {p: str(uuid.uuid5(uuid.NAMESPACE_URL, f'majmar/{p}')) for p in ['mj-slider', 'mj-spin', 'mj-occasions', 'mj-categories', 'mj-promos', 'mj-wide', 'mj-hero', 'mj-marquee', 'mj-film', 'mj-collections', 'mj-showcase', 'mj-story', 'mj-lookbook', 'mj-testimonials', 'mj-social', 'mj-newsletter', 'mj-trust']}
+K = {p: str(uuid.uuid5(uuid.NAMESPACE_URL, f'majmar/{p}')) for p in ['mj-noir', 'mj-looks', 'mj-timeline', 'mj-slider', 'mj-spin', 'mj-occasions', 'mj-categories', 'mj-promos', 'mj-wide', 'mj-hero', 'mj-marquee', 'mj-film', 'mj-collections', 'mj-showcase', 'mj-story', 'mj-lookbook', 'mj-testimonials', 'mj-social', 'mj-newsletter', 'mj-trust']}
 
 COMPONENTS = [
+    block(K['mj-noir'], 'mj-noir', 'مِجمر: الواجهة السينمائية الليلية', 'Majmar: Cinematic Night Hero', 'sicon-image', [
+        bimg('image', 'الصورة', 'Image', '1600×900 px, dark and atmospheric, product on the side opposite the text.'),
+        bimg('mobile_image', 'صورة الجوال (اختياري)', 'Phone image (optional)', '900×1200 px.'),
+        btext('overline', 'سطر صغير', 'Small line'),
+        btext('title', 'العنوان', 'Headline'),
+        btext('highlight', 'كلمة لامعة من العنوان', 'Shining word from the headline'),
+        btext('text', 'النص', 'Text', fmt='textarea'),
+        btext('cta_text', 'نص الزر', 'Button text'),
+        burl('cta_url', 'رابط الزر', 'Button link'),
+        btext('cta2_text', 'نص الزر الثاني', 'Second button text'),
+        burl('cta2_url', 'رابط الزر الثاني', 'Second button link'),
+        bf('show_card', 'boolean', 'إظهار بطاقة التوقيع', 'Show the signature card', format='switch', value=True, selected=True),
+        bf('product', 'items', 'منتج بطاقة التوقيع', 'Signature card product', format='dropdown-list', source='products', multichoice=False, searchable=True, options=[], selected=[], value=None, description='Its scent tags fill the pyramid. Empty: your latest product.'),
+    ]),
+    block(K['mj-looks'], 'mj-looks', 'مِجمر: الإطلالات القابلة للتسوق', 'Majmar: Shoppable Looks', 'sicon-image-carousel', [
+        btext('overline', 'سطر صغير', 'Small line'),
+        btext('title', 'العنوان', 'Title'),
+        coll('items', 'الإطلالات', 'Looks', [
+            bimg('image', 'الصورة', 'Image', '900×1150 px.'),
+            btext('title', 'العنوان', 'Title'),
+            bf('product', 'items', 'المنتج', 'Product', format='dropdown-list', source='products', multichoice=False, searchable=True, options=[], selected=[], value=None),
+            bf('x', 'number', 'موضع النقطة أفقياً (٪)', 'Hotspot left (%)', format='integer', value=50),
+            bf('y', 'number', 'موضع النقطة عمودياً (٪)', 'Hotspot top (%)', format='integer', value=55),
+        ], 0, 4, L('إطلالة', 'Look')),
+    ]),
+    block(K['mj-timeline'], 'mj-timeline', 'مِجمر: رحلتنا', 'Majmar: Timeline', 'sicon-history', [
+        btext('overline', 'سطر صغير', 'Small line'),
+        btext('title', 'العنوان', 'Title'),
+        coll('items', 'المحطات', 'Steps', [
+            btext('year', 'السنة', 'Year'),
+            btext('title', 'العنوان', 'Title'),
+            btext('text', 'النص', 'Text', fmt='textarea'),
+        ], 0, 8, L('محطة', 'Step')),
+    ]),
     block(K['mj-slider'], 'mj-slider', 'مِجمر: السلايدر الرئيسي مع العرض السريع', 'Majmar: Main Slider with Flash Offer', 'sicon-image-carousel', [
         coll('slides', 'الشرائح', 'Slides', [
             bimg('image', 'الصورة', 'Image', '1600×720 px. Keep the product on the side opposite the text.'),

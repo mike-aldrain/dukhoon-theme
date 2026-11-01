@@ -33,4 +33,4 @@ const glob = {
 };
 
 /** The bundled frame set for a palette. */
-export const framesFor = (palette: Palette) => glob[palette] ?? glob.emerald;
+export const framesFor = (palette: Palette) => (palette === 'oxblood' ? glob.oxblood : glob.emerald);

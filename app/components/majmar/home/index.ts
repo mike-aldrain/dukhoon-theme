@@ -23,3 +23,6 @@ export { PromoPair } from './PromoPair';
 export { WideBanner } from './WideBanner';
 export { SpinShowcase } from './SpinShowcase';
 export { Occasions } from './Occasions';
+export { NoirHero } from './NoirHero';
+export { ShopLookbook } from './ShopLookbook';
+export { Timeline } from './Timeline';
