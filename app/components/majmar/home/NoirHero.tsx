@@ -16,6 +16,7 @@ import { scentProfile } from '../../../lib/scentProfile';
 import { openMiniCart } from '../MiniCart';
 import { priceOf } from './conversionUtils';
 import { urlOf, useBlockText } from './shared';
+import { HeroStage } from './HeroStage';
 
 export interface NoirHeroData {
   image?: string;
@@ -31,6 +32,8 @@ export interface NoirHeroData {
   product?: unknown;
   show_card?: boolean;
   ghost?: unknown;
+  /** 'photo' or '3d' (default): the turning 3D flacon in the mashrabiya arch. */
+  media?: unknown;
   position?: number;
   [key: string]: unknown;
 }
@@ -129,6 +132,9 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
   const [adding, setAdding] = useState(false);
   useAtmosphere(canvasRef, motion);
   const isLead = (data.position ?? 1) === 1;
+  const rawMedia = Array.isArray(data.media) ? data.media[0] : data.media;
+  const mediaVal = typeof rawMedia === 'object' && rawMedia ? (rawMedia as { value?: unknown }).value : rawMedia;
+  const is3d = mediaVal !== 'photo';
 
   const title = tx(data.title, 'mj.noir.title', 'Oud that stays after you');
   const hl = tx(data.highlight, 'mj.noir.highlight', 'stays');
@@ -151,7 +157,7 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
   };
 
   return (
-    <section className="mj-noir" aria-label={title}>
+    <section className={`mj-noir${is3d ? ' mj-noir--3d' : ''}`} aria-label={title}>
       <picture className="mj-noir__media">
         {data.mobile_image && <source media="(max-width: 760px)" srcSet={data.mobile_image} />}
         <img
@@ -163,6 +169,13 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
           {...(isLead ? { fetchPriority: 'high' as const } : {})}
         />
       </picture>
+      {is3d && (
+        <div className="mj-noir__stage">
+          <span className="mj-noir__halo" aria-hidden="true" />
+          <HeroStage sticker="" stickerBadge="" label={title} priority={isLead} showPrice={false} />
+          <span className="mj-noir__plinth" aria-hidden="true" />
+        </div>
+      )}
       <canvas ref={canvasRef} className="mj-noir__fx" aria-hidden="true" />
       <span className="mj-noir__arch" aria-hidden="true" />
       <span className="mj-noir__scrim" aria-hidden="true" />

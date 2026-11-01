@@ -24,6 +24,12 @@ const glob = {
     filmWide: sorted(import.meta.glob('../assets/frames/emerald/film-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
     filmTall: sorted(import.meta.glob('../assets/frames/emerald/film-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
   },
+  noir: {
+    loopWide: sorted(import.meta.glob('../assets/frames/noir/loop-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    loopTall: sorted(import.meta.glob('../assets/frames/noir/loop-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    filmWide: sorted(import.meta.glob('../assets/frames/noir/film-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+    filmTall: sorted(import.meta.glob('../assets/frames/noir/film-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
+  },
   oxblood: {
     loopWide: sorted(import.meta.glob('../assets/frames/oxblood/loop-w-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
     loopTall: sorted(import.meta.glob('../assets/frames/oxblood/loop-t-*.webp', { eager: true, query: '?url', import: 'default' }) as Glob),
@@ -33,4 +39,4 @@ const glob = {
 };
 
 /** The bundled frame set for a palette. */
-export const framesFor = (palette: Palette) => (palette === 'oxblood' ? glob.oxblood : glob.emerald);
+export const framesFor = (palette: Palette) => (glob[palette].loopWide.length ? glob[palette] : glob.emerald);

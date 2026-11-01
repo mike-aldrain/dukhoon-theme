@@ -165,6 +165,7 @@ K = {p: str(uuid.uuid5(uuid.NAMESPACE_URL, f'majmar/{p}')) for p in ['mj-noir', 
 COMPONENTS = [
     block(K['mj-noir'], 'mj-noir', 'مِجمر: الواجهة السينمائية الليلية', 'Majmar: Cinematic Night Hero', 'sicon-image', [
         bimg('image', 'الصورة', 'Image', '1600×900 px, dark and atmospheric, product on the side opposite the text.'),
+        bdrop('media', 'العرض', 'Display', [('3d', 'قارورة ثلاثية الأبعاد تدور', '3D turning bottle'), ('photo', 'الصورة فقط', 'Photo only')], '3d'),
         bimg('mobile_image', 'صورة الجوال (اختياري)', 'Phone image (optional)', '900×1200 px.'),
         btext('overline', 'سطر صغير', 'Small line'),
         btext('title', 'العنوان', 'Headline'),

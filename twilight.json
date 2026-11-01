@@ -876,6 +876,31 @@
           "description": "1600×900 px, dark and atmospheric, product on the side opposite the text."
         },
         {
+          "id": "media",
+          "type": "items",
+          "label": "العرض · Display",
+          "required": false,
+          "format": "dropdown-list",
+          "multichoice": false,
+          "options": [
+            {
+              "label": "قارورة ثلاثية الأبعاد تدور · 3D turning bottle",
+              "value": "3d"
+            },
+            {
+              "label": "الصورة فقط · Photo only",
+              "value": "photo"
+            }
+          ],
+          "selected": [
+            {
+              "label": "قارورة ثلاثية الأبعاد تدور · 3D turning bottle",
+              "value": "3d"
+            }
+          ],
+          "value": "3d"
+        },
+        {
           "id": "mobile_image",
           "type": "string",
           "label": "صورة الجوال (اختياري) · Phone image (optional)",
