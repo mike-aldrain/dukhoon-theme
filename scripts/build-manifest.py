@@ -192,6 +192,7 @@ COMPONENTS = [
         btext('overline', 'سطر صغير', 'Small line'),
         btext('title', 'العنوان', 'Title'),
         coll('items', 'المحطات', 'Steps', [
+            bimg('image', 'صورة المحطة', 'Step image', '600×760 px, shown in an arch.'),
             btext('year', 'السنة', 'Year'),
             btext('title', 'العنوان', 'Title'),
             btext('text', 'النص', 'Text', fmt='textarea'),

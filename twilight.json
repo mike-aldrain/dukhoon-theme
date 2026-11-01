@@ -1103,6 +1103,15 @@
           "format": "collection",
           "fields": [
             {
+              "id": "items.image",
+              "type": "string",
+              "label": "صورة المحطة · Step image",
+              "required": false,
+              "format": "image",
+              "value": null,
+              "description": "600×760 px, shown in an arch."
+            },
+            {
               "id": "items.year",
               "type": "string",
               "label": "السنة · Year",
