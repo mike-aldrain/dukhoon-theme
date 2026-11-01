@@ -21,3 +21,5 @@ export { HeroSlider } from './HeroSlider';
 export { CategoryGrid } from './CategoryGrid';
 export { PromoPair } from './PromoPair';
 export { WideBanner } from './WideBanner';
+export { SpinShowcase } from './SpinShowcase';
+export { Occasions } from './Occasions';

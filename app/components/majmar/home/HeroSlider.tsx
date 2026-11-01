@@ -98,7 +98,7 @@ export function HeroSlider({ data }: { data: HeroSliderData }) {
       }))
     : [
         {
-          image: '',
+          image: banner('hero'),
           mobile: '',
           overline: t('mj.slider.s1_over', 'New 2026 edition'),
           title: t('mj.slider.s1_title', 'Oud Royal: oud that stays after you'),
@@ -106,15 +106,15 @@ export function HeroSlider({ data }: { data: HeroSliderData }) {
           button: t('mj.slider.shop', 'Shop now'),
           url: '/products',
           dark: true,
-          is3d: true,
+          is3d: false,
         },
         {
-          image: banner('slide-oils'),
+          image: banner('promo-majlis'),
           mobile: '',
-          overline: t('mj.slider.s2_over', 'Oud oils'),
-          title: t('mj.slider.s2_title', 'Genuine oud oils'),
-          text: t('mj.slider.s2_text', 'Cambodi, Hindi and mukhallat. One tola lasts for months.'),
-          button: t('mj.slider.s2_button', 'Discover the oils'),
+          overline: t('mj.slider.s2_over', 'For the majlis'),
+          title: t('mj.slider.s2_title', 'Hospitality you can smell'),
+          text: t('mj.slider.s2_text', 'Bakhoor, burners and oud oils for a welcoming majlis.'),
+          button: t('mj.slider.s2_button', 'Discover the collection'),
           url: '/products',
           dark: true,
           is3d: false,
@@ -149,7 +149,7 @@ export function HeroSlider({ data }: { data: HeroSliderData }) {
   }, [active, paused, motionAllowed, slides.length]);
 
   // Offer card: one real product.
-  const showOffer = data.show_offer !== false;
+  const showOffer = data.show_offer === true;
   const { products } = usePickedProducts(data.offer_product, 1);
   const offer = showOffer ? products[0] : undefined;
   const countdown = useCountdown(valueOf(data.offer_ends));

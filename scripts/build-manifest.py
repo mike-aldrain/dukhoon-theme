@@ -160,7 +160,7 @@ def block(key, path, ar, en, icon, fields):
 
 
 # Stable keys so re-running keeps merchant block instances valid.
-K = {p: str(uuid.uuid5(uuid.NAMESPACE_URL, f'majmar/{p}')) for p in ['mj-slider', 'mj-categories', 'mj-promos', 'mj-wide', 'mj-hero', 'mj-marquee', 'mj-film', 'mj-collections', 'mj-showcase', 'mj-story', 'mj-lookbook', 'mj-testimonials', 'mj-social', 'mj-newsletter', 'mj-trust']}
+K = {p: str(uuid.uuid5(uuid.NAMESPACE_URL, f'majmar/{p}')) for p in ['mj-slider', 'mj-spin', 'mj-occasions', 'mj-categories', 'mj-promos', 'mj-wide', 'mj-hero', 'mj-marquee', 'mj-film', 'mj-collections', 'mj-showcase', 'mj-story', 'mj-lookbook', 'mj-testimonials', 'mj-social', 'mj-newsletter', 'mj-trust']}
 
 COMPONENTS = [
     block(K['mj-slider'], 'mj-slider', 'مِجمر: السلايدر الرئيسي مع العرض السريع', 'Majmar: Main Slider with Flash Offer', 'sicon-image-carousel', [
@@ -182,14 +182,37 @@ COMPONENTS = [
         btext('offer_ends', 'نهاية العرض (اختياري)', 'Offer ends (optional)', ml=False,
               description='Example: 2026-12-31 23:59. The countdown only shows when an end time is set.'),
     ]),
+    block(K['mj-spin'], 'mj-spin', 'مِجمر: عرض القارورة ٣٦٠°', 'Majmar: 360° Showcase', 'sicon-rotate', [
+        btext('overline', 'سطر صغير', 'Small line'),
+        btext('title', 'العنوان (افتراضياً اسم المنتج)', 'Title (product name by default)'),
+        btext('text', 'النص', 'Text', fmt='textarea'),
+        bf('product', 'items', 'المنتج', 'Product', format='dropdown-list', source='products', multichoice=False, searchable=True, options=[], selected=[], value=None,
+           description='Its scent tags (قمة/قلب/قاعدة/ثبات/فوحان) fill the scent pyramid and meters.'),
+        bf('frames_url', 'string', 'رابط إطارات التدوير مع {n}', 'Turntable frame URL with {n}', format='url', value=None,
+           description='Your own 360° frames, numbered 0001, 0002... Empty: the bottle that ships with the theme.'),
+        bf('frames_count', 'number', 'عدد الإطارات', 'Number of frames', format='integer', value=0),
+    ]),
+    block(K['mj-occasions'], 'mj-occasions', 'مِجمر: هدايا المناسبات', 'Majmar: Occasion Gifts', 'sicon-gift', [
+        btext('overline', 'سطر صغير', 'Small line'),
+        btext('title', 'العنوان', 'Title'),
+        coll('items', 'المناسبات', 'Occasions', [
+            bdrop('icon', 'الأيقونة', 'Icon', [('ramadan', 'رمضان', 'Ramadan'), ('eid', 'العيد', 'Eid'), ('founding', 'يوم التأسيس', 'Founding Day'), ('wedding', 'الأعراس', 'Weddings'), ('gift', 'هدية', 'Gift')], 'gift'),
+            bimg('image', 'أو صورة (اختياري)', 'Or a photo (optional)', '800×800 px. Replaces the icon.'),
+            btext('title', 'الاسم', 'Name'),
+            btext('text', 'سطر قصير', 'Short line'),
+            burl('url', 'الرابط', 'Link'),
+        ], 0, 6, L('مناسبة', 'Occasion')),
+    ]),
     block(K['mj-categories'], 'mj-categories', 'مِجمر: شبكة التصنيفات', 'Majmar: Category Grid', 'sicon-layout-grid', [
+        bdrop('layout', 'الشكل', 'Layout', [('stories', 'دوائر القصص', 'Story circles'), ('bento', 'شبكة صور', 'Photo grid')], 'stories'),
+        btext('overline', 'سطر صغير', 'Small line'),
         btext('title', 'العنوان', 'Title'),
         coll('items', 'التصنيفات', 'Categories', [
             bimg('image', 'الصورة', 'Image', 'The first tile is tall: 800×1000 px; others 800×800 px.'),
             btext('title', 'الاسم', 'Name'),
             btext('caption', 'ملاحظة قصيرة', 'Short note'),
             burl('url', 'الرابط', 'Link'),
-        ], 0, 5, L('تصنيف', 'Category')),
+        ], 0, 10, L('تصنيف', 'Category')),
         btext('link_text', 'نص رابط الكل', 'View all text'),
         burl('link_url', 'رابط الكل', 'View all link'),
     ]),

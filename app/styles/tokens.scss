@@ -26,7 +26,8 @@
 }
 
 /*
- * Two palettes, each a deep brand-colour page with gold detail and ivory "islands":
+ * Heritage modern: a warm sand page with deep brand-colour bands (header, hero, 360 showcase,
+ * film, footer) framed by gold Najdi crenellations. Older notes below describe the islands:
  * product cards, the offer card and feature cards are ivory with dark ink (the `--mj-l-*`
  * set, applied by the light-island scope below), so product photos stay bright.
  * Banners and blocks on the brand colour use the `--mj-d-*` set.
@@ -36,23 +37,23 @@
  */
 :root,
 [data-mj-palette='emerald'] {
-  --mj-bg-rgb: 11 35 28; /* #0B231C */
-  --mj-surface-rgb: 16 44 36;
-  --mj-raised-rgb: 22 56 46;
-  --mj-gold-rgb: 212 175 106; /* #D4AF6A */
-  --mj-gold-hover-rgb: 230 199 140;
-  --mj-gold-ink-rgb: 212 175 106;
-  --mj-copper-rgb: 184 132 76;
-  --mj-ivory-rgb: 244 238 226; /* text #F4EEE2 */
-  --mj-muted-rgb: 185 196 182;
-  --mj-on-gold-rgb: 11 35 28;
-  --mj-cta-rgb: 212 175 106;
-  --mj-on-cta-rgb: 11 35 28;
-  --mj-line-rgb: 244 238 226;
+  --mj-bg-rgb: 244 236 221; /* sand #F4ECDD */
+  --mj-surface-rgb: 255 253 248;
+  --mj-raised-rgb: 233 220 196;
+  --mj-gold-rgb: 184 145 74; /* #B8914A fills and rules */
+  --mj-gold-hover-rgb: 160 124 58;
+  --mj-gold-ink-rgb: 125 90 28; /* gold as text, 5.3:1 on sand */
+  --mj-copper-rgb: 140 106 76;
+  --mj-ivory-rgb: 16 39 32; /* ink #102720, 13.4:1 on sand */
+  --mj-muted-rgb: 85 100 92; /* 5.3:1 */
+  --mj-on-gold-rgb: 16 39 32;
+  --mj-cta-rgb: 13 42 34;
+  --mj-on-cta-rgb: 212 175 106;
+  --mj-line-rgb: 16 39 32;
   --mj-line-alpha: 0.12;
-  --mj-success-rgb: 150 205 172;
-  --mj-warning-rgb: 232 192 112;
-  --mj-error-rgb: 240 150 130;
+  --mj-success-rgb: 30 110 72;
+  --mj-warning-rgb: 140 100 20;
+  --mj-error-rgb: 154 58 44;
   --mj-glow-strength: 0.2;
   --mj-deep-rgb: 6 20 16;
 
@@ -71,29 +72,29 @@
   --mj-l-gold-ink-rgb: 128 94 34;
   --mj-l-ink-rgb: 14 42 34;
   --mj-l-muted-rgb: 74 90 82;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 /* Oxblood and gold. Page: ivory text 15.5:1, muted 9.6:1, gold 9.1:1.
    Islands: ink 14.8:1, muted 7.2:1, gold text 5.5:1. */
 [data-mj-palette='oxblood'] {
-  --mj-bg-rgb: 46 11 16; /* #2E0B10 */
-  --mj-surface-rgb: 58 15 20;
-  --mj-raised-rgb: 72 22 28;
-  --mj-gold-rgb: 216 180 106; /* #D8B46A */
-  --mj-gold-hover-rgb: 234 204 142;
-  --mj-gold-ink-rgb: 216 180 106;
-  --mj-copper-rgb: 196 128 84;
-  --mj-ivory-rgb: 247 237 228;
-  --mj-muted-rgb: 211 184 176;
-  --mj-on-gold-rgb: 46 11 16;
-  --mj-cta-rgb: 216 180 106;
-  --mj-on-cta-rgb: 46 11 16;
-  --mj-line-rgb: 247 237 228;
+  --mj-bg-rgb: 246 236 230; /* rose sand #F6ECE6 */
+  --mj-surface-rgb: 255 252 249;
+  --mj-raised-rgb: 236 220 210;
+  --mj-gold-rgb: 190 150 80;
+  --mj-gold-hover-rgb: 166 128 60;
+  --mj-gold-ink-rgb: 125 88 30;
+  --mj-copper-rgb: 150 96 70;
+  --mj-ivory-rgb: 58 15 20; /* ink, 14.4:1 */
+  --mj-muted-rgb: 107 75 75; /* 6.6:1 */
+  --mj-on-gold-rgb: 58 15 20;
+  --mj-cta-rgb: 58 15 20;
+  --mj-on-cta-rgb: 216 180 106;
+  --mj-line-rgb: 58 15 20;
   --mj-line-alpha: 0.12;
-  --mj-success-rgb: 160 205 170;
-  --mj-warning-rgb: 236 196 116;
-  --mj-error-rgb: 244 160 140;
+  --mj-success-rgb: 30 110 72;
+  --mj-warning-rgb: 140 100 20;
+  --mj-error-rgb: 154 58 44;
   --mj-glow-strength: 0.2;
   --mj-deep-rgb: 31 7 10;
 
@@ -112,7 +113,7 @@
   --mj-l-gold-ink-rgb: 128 90 34;
   --mj-l-ink-rgb: 58 15 20;
   --mj-l-muted-rgb: 104 72 72;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 :root,
@@ -137,9 +138,9 @@
 
 
   /* Typography: Arabic first; the LTR block below swaps the order. */
-  --mj-font-display: 'El Messiri', 'Fraunces', 'Mj Serif Fallback', serif;
-  --mj-font-body: 'Readex Pro', 'Mj Sans Fallback', system-ui, sans-serif;
-  --mj-font-latin: 'Fraunces', 'Mj Serif Fallback', Georgia, serif;
+  --mj-font-display: 'Reem Kufi', 'IBM Plex Sans Arabic', 'Mj Serif Fallback', serif;
+  --mj-font-body: 'IBM Plex Sans Arabic', 'Mj Sans Fallback', system-ui, sans-serif;
+  --mj-font-latin: 'Cormorant Garamond', 'Mj Serif Fallback', Georgia, serif;
   --mj-fs-display: #{fluid(48, 104)};
   --mj-fs-h1: #{fluid(38, 76)};
   --mj-fs-h2: #{fluid(28, 44)};
@@ -190,8 +191,8 @@
 }
 
 html[dir='ltr'] {
-  --mj-font-display: 'Fraunces', 'El Messiri', 'Mj Serif Fallback', serif;
-  --mj-font-body: 'Readex Pro', 'Mj Sans Fallback', system-ui, sans-serif;
+  --mj-font-display: 'Cormorant Garamond', 'Reem Kufi', 'Mj Serif Fallback', serif;
+  --mj-font-body: 'IBM Plex Sans Arabic', 'Mj Sans Fallback', system-ui, sans-serif;
   --mj-lh-body: 1.6;
 }
 
@@ -222,6 +223,9 @@ html[dir='ltr'] {
 .mj-ritual,
 .mj-newsletter,
 .store-footer,
+.site-header,
+.mj-spin,
+.mj-occ__tile,
 .mj-slide--dark,
 .mj-promo,
 .mj-wide__box,
@@ -326,10 +330,9 @@ html[dir='ltr'] {
   isolation: isolate;
   background-color: var(--mj-bg);
   background-image:
-    radial-gradient(70rem 40rem at 85% -5%, rgb(var(--mj-gold-rgb) / 0.13), transparent 60%),
-    radial-gradient(55rem 35rem at 5% 45%, rgb(var(--mj-gold-rgb) / 0.07), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23D4AF6A' stroke-opacity='.075' stroke-width='1'%3E%3Cpath d='M48 20l8.2 19.8L76 48l-19.8 8.2L48 76l-8.2-19.8L20 48l19.8-8.2z'/%3E%3Cpath d='M28.2 28.2h39.6v39.6H28.2z'/%3E%3Cpath d='M0 48h20M76 48h20M48 0v20M48 76v20'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: auto, auto, 96px 96px;
+    radial-gradient(60rem 30rem at 50% 0%, rgb(var(--mj-raised-rgb) / 0.6), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23B8914A' stroke-opacity='.06' stroke-width='1'%3E%3Cpath d='M48 20l8.2 19.8L76 48l-19.8 8.2L48 76l-8.2-19.8L20 48l19.8-8.2z'/%3E%3Cpath d='M28.2 28.2h39.6v39.6H28.2z'/%3E%3Cpath d='M0 48h20M76 48h20M48 0v20M48 76v20'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: auto, 96px 96px;
   color: var(--mj-ivory);
 }
 /* Fine grain over the whole page, like printed luxury packaging. */
@@ -339,6 +342,6 @@ html[dir='ltr'] {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }

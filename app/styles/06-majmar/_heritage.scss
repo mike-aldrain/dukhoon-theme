@@ -1,0 +1,357 @@
+/*
+ * Heritage modern: Saudi oud house details on the sand page.
+ * - Najdi crenellations (sharafat) in gold edge every brand-colour band.
+ * - A Sadu woven strip under the main slider.
+ * - Story-style category circles with gold rings.
+ * - 360 showcase and occasion arches on the brand colour, with the khatam lattice.
+ */
+
+$sharafat: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='18' viewBox='0 0 36 18'%3E%3Cpath fill='%23D4AF6A' d='M6 18V12H9V7H12V3H14V0H22V3H24V7H27V12H30V18Z'/%3E%3C/svg%3E");
+$sadu: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='28' viewBox='0 0 48 28'%3E%3Crect width='48' height='28' fill='%2317110d'/%3E%3Crect width='48' height='4' fill='%237a1e22'/%3E%3Crect y='24' width='48' height='4' fill='%237a1e22'/%3E%3Cpath d='M24 5l9 9-9 9-9-9z' fill='%23efe3cc'/%3E%3Cpath d='M24 9l5 5-5 5-5-5z' fill='%2317110d'/%3E%3Cpath d='M24 12l2 2-2 2-2-2z' fill='%23c8933a'/%3E%3Cpath d='M0 5l6 9-6 9zM48 5l-6 9 6 9z' fill='%23c8933a'/%3E%3C/svg%3E");
+$khatam: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23D4AF6A' stroke-opacity='.08'%3E%3Cpath d='M48 20l8.2 19.8L76 48l-19.8 8.2L48 76l-8.2-19.8L20 48l19.8-8.2z'/%3E%3Cpath d='M28.2 28.2h39.6v39.6H28.2z'/%3E%3C/g%3E%3C/svg%3E");
+
+%mj-band {
+  background-color: rgb(var(--mj-d-bg-rgb));
+  background-image:
+    radial-gradient(60rem 30rem at 85% 0%, rgb(var(--mj-d-gold-rgb) / 0.14), transparent 60%),
+    $khatam;
+}
+
+.mj-najdi-edge {
+  display: block;
+  height: 18px;
+  background: $sharafat repeat-x center bottom / 36px 18px;
+  &--down {
+    transform: scaleY(-1);
+  }
+}
+
+/* ---------- Header: emerald band with a gold crenellated lower edge ---------- */
+.site-header__topnav,
+.site-header__bar-outer {
+  @extend %mj-band;
+  color: rgb(var(--mj-d-ivory-rgb));
+}
+.site-header .site-header__bar,
+.site-header .site-header__bar.is-scrolled,
+.site-header .site-header__topnav {
+  background-color: rgb(var(--mj-d-bg-rgb));
+  border-color: rgb(var(--mj-d-gold-rgb) / 0.2);
+}
+.site-header__bar-outer {
+  position: relative;
+}
+.site-header__bar-outer::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -17px;
+  z-index: 5;
+  height: 18px;
+  background: $sharafat repeat-x center bottom / 36px 18px;
+  transform: scaleY(-1);
+  pointer-events: none;
+}
+.site-header .main-menu > li > a,
+.site-header .site-header__mainmenu a {
+  color: rgb(var(--mj-d-ivory-rgb));
+}
+
+/* ---------- Main slider: full width when there is no offer card, Sadu strip below ---------- */
+.mj-store-hero {
+  padding-block: 0;
+}
+.mj-store-hero__grid.is-solo {
+  max-width: none;
+  padding-inline: 0;
+  .mj-slider {
+    border-radius: 0;
+  }
+  .mj-slide {
+    aspect-ratio: 16 / 7;
+    min-height: 0;
+    @media (max-width: 760px) {
+      aspect-ratio: 4 / 5.4;
+    }
+  }
+}
+@media (min-width: 761px) {
+  .mj-store-hero__grid.is-solo {
+    .mj-slider,
+    .mj-slider__track,
+    .mj-slide {
+      height: auto;
+    }
+  }
+}
+.mj-store-hero::after {
+  content: '';
+  display: block;
+  height: 28px;
+  background: $sadu repeat-x center / 48px 28px;
+}
+.mj-slide--dark .mj-slide__copy {
+  background: linear-gradient(to left, rgb(var(--mj-deep-rgb) / 0.92) 0%, rgb(var(--mj-deep-rgb) / 0.7) 36%, transparent 64%);
+  html[dir='ltr'] & {
+    background: linear-gradient(to right, rgb(var(--mj-deep-rgb) / 0.92) 0%, rgb(var(--mj-deep-rgb) / 0.7) 36%, transparent 64%);
+  }
+}
+.mj-slide__title {
+  font-size: clamp(2.2rem, 5.2vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+.mj-slide__over::before,
+.mj-slide__over::after {
+  content: ' ✦ ';
+  font-size: 0.7em;
+}
+
+/* ---------- Section heads: Kufic title, gold ornament ---------- */
+.mj-head .mj-h2 {
+  font-weight: 600;
+}
+.mj-head--center .mj-head__text::after {
+  content: '';
+  width: 120px;
+  height: 12px;
+  margin-top: 0.25rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='12' viewBox='0 0 120 12'%3E%3Cg fill='%23B8914A'%3E%3Crect x='0' y='5.5' width='48' height='1'/%3E%3Crect x='72' y='5.5' width='48' height='1'/%3E%3Cpath d='M60 0l2 4 4 2-4 2-2 4-2-4-4-2 4-2z'/%3E%3Ccircle cx='51' cy='6' r='1.4'/%3E%3Ccircle cx='69' cy='6' r='1.4'/%3E%3C/g%3E%3C/svg%3E") no-repeat center;
+}
+.mj-head--center .mj-rule {
+  display: none;
+}
+
+/* ---------- Story circles ---------- */
+.mj-stories {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  @media (max-width: 760px) {
+    justify-content: flex-start;
+  }
+}
+.mj-stories__item {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  width: clamp(84px, 9vw, 128px);
+  color: var(--mj-ivory);
+  text-align: center;
+  b {
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+}
+.mj-stories__ring {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 4px;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, #d4af6a, #f3dfae, #b8914a, #d4af6a);
+  transition: transform 400ms var(--mj-ease);
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--mj-bg);
+  }
+}
+.mj-stories__item:hover .mj-stories__ring {
+  transform: translateY(-4px) rotate(-3deg);
+}
+
+/* ---------- Product cards on sand: arch, gold hairline, dark pill button ---------- */
+.mj-card .s-product-card-entry {
+  border-radius: 160px 160px 14px 14px;
+  padding: 10px 10px 14px;
+  text-align: center;
+}
+.mj-card .s-product-card-image {
+  border-radius: 150px 150px 10px 10px;
+}
+.mj-card .s-product-card-content-title,
+.mj-card .s-product-card-content-title a {
+  font-family: var(--mj-font-display);
+  font-size: 1.05rem;
+}
+
+/* ---------- 360 showcase band ---------- */
+.mj-spin {
+  @extend %mj-band;
+  margin-block: var(--mj-section);
+  color: var(--mj-ivory);
+}
+.mj-spin__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  @media (max-width: 820px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.mj-spin__stage {
+  position: relative;
+  border-radius: 50% 50% 18px 18px / 36% 36% 18px 18px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.45);
+  .mj-hero__stage {
+    width: 100%;
+  }
+  .mj-hero__hint {
+    color: var(--mj-muted);
+  }
+}
+.mj-spin__title {
+  margin: 0.25rem 0 0.75rem;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-weight: 700;
+}
+.mj-spin__text {
+  max-width: 40ch;
+  color: var(--mj-muted);
+}
+.mj-spin__pyr {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.4rem 0;
+  div {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.6rem 0.9rem;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.3);
+  }
+  dt {
+    font-family: var(--mj-font-display);
+    color: var(--mj-gold);
+  }
+  dd {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}
+.mj-spin__meters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--mj-muted);
+  i {
+    display: block;
+    height: 4px;
+    margin-top: 0.4rem;
+    border-radius: 2px;
+    background: rgb(255 255 255 / 0.12);
+    overflow: hidden;
+    &::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: var(--v);
+      background: linear-gradient(90deg, var(--mj-gold-hover), var(--mj-gold));
+    }
+  }
+}
+.mj-spin__buy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.mj-btn--line {
+  background: transparent;
+  color: var(--mj-gold);
+  box-shadow: inset 0 0 0 1px var(--mj-gold);
+}
+
+/* ---------- Occasion arches ---------- */
+.mj-occ__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+.mj-occ__tile {
+  @extend %mj-band;
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  height: 100%;
+  padding: 2rem 1rem 1.4rem;
+  border-radius: 200px 200px 14px 14px;
+  text-align: center;
+  color: var(--mj-ivory);
+  box-shadow: inset 0 0 0 1px rgb(var(--mj-gold-rgb) / 0.4);
+  transition: transform 400ms var(--mj-ease);
+  &:hover {
+    transform: translateY(-6px);
+  }
+}
+.mj-occ__icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 0.4rem;
+  fill: none;
+  stroke: var(--mj-gold);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.mj-occ__img {
+  width: 72%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.4rem;
+}
+.mj-occ__name {
+  font-family: var(--mj-font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.mj-occ__text {
+  font-size: 0.85rem;
+  color: var(--mj-muted);
+}
+.mj-occ__go {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--mj-gold);
+}
+
+/* ---------- Footer: crenellated top edge ---------- */
+.store-footer {
+  @extend %mj-band;
+  position: relative;
+  margin-top: 18px;
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: -17px;
+    height: 18px;
+    background: $sharafat repeat-x center bottom / 36px 18px;
+  }
+}
+
+/* One ornament per title: the centred heads use the star ornament, so drop the store rule. */
+.mj-head--center .mj-h2::after {
+  display: none;
+}

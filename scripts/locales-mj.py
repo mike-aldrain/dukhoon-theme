@@ -188,6 +188,41 @@ NA.update({
     'mj.trust.gift_text': ('مع بطاقة مكتوبة باليد', 'With a handwritten card'),
 })
 
+# Heritage modern (Nov 2026).
+NA.update({
+    'mj.slider.s1_over': ('إصدار الدرعية ٢٠٢٦', 'Diriyah edition 2026'),
+    'mj.slider.s1_title': ('عودٌ يبقى بعدك', 'Oud that stays after you'),
+    'mj.slider.s1_text': ('عود رويال: عود كمبودي معتّق عشر سنوات مع لمسة زعفران، اثنتا عشرة ساعة على البشرة.', 'Oud Royal: Cambodian oud aged ten years with a touch of saffron. Twelve hours on skin.'),
+    'mj.slider.shop': ('تسوّق العود', 'Shop the oud'),
+    'mj.slider.s2_over': ('للمجلس', 'For the majlis'),
+    'mj.slider.s2_title': ('ضيافة تُشمّ قبل أن تُرى', 'Hospitality you can smell'),
+    'mj.slider.s2_text': ('بخور ومباخر ودهون عود لمجلس يعبق بالترحيب.', 'Bakhoor, burners and oud oils for a welcoming majlis.'),
+    'mj.slider.s2_button': ('اكتشف المجموعة', 'Discover the collection'),
+    'mj.cats.overline': ('تسوّق حسب الفئة', 'Shop by category'),
+    'mj.cats.stories_title': ('عالم العود', 'The world of oud'),
+    'mj.cats.mukhallat': ('المخلّط', 'Mukhallat'),
+    'mj.spin.overline': ('القارورة من كل الزوايا', 'The flacon from every angle'),
+    'mj.spin.title': ('عود رويال', 'Oud Royal'),
+    'mj.spin.text': ('قارورة من الزجاج الثقيل بغطاء مذهّب، تحمل عوداً كمبودياً معتّقاً يتطوّر على البشرة ساعة بعد ساعة.', 'A heavy glass flacon with a gilded cap, holding aged Cambodian oud that unfolds on skin hour after hour.'),
+    'mj.occ.overline': ('لكل مناسبة عودها', 'An oud for every occasion'),
+    'mj.occ.title': ('هدايا المناسبات', 'Occasion gifts'),
+    'mj.occ.ramadan': ('رمضان', 'Ramadan'),
+    'mj.occ.ramadan_text': ('هدايا الضيافة والسحور', 'Hospitality gifts for suhoor and iftar'),
+    'mj.occ.eid': ('العيد', 'Eid'),
+    'mj.occ.eid_text': ('عيدية تليق بأحبابك', 'An eidiya worthy of your loved ones'),
+    'mj.occ.founding': ('يوم التأسيس', 'Founding Day'),
+    'mj.occ.founding_text': ('مجموعة الدرعية', 'The Diriyah collection'),
+    'mj.occ.wedding': ('الأعراس', 'Weddings'),
+    'mj.occ.wedding_text': ('أطقم العروس والعريس', 'Sets for the bride and groom'),
+    'mj.occ.shop': ('تسوّق', 'Shop'),
+    'mj.showcase.overline': ('الأكثر طلباً هذا الشهر', 'Most wanted this month'),
+    'mj.showcase.title': ('مختارات الدار', 'The house selection'),
+    'mj.wide.title': ('هدية الضيافة', 'The hospitality gift'),
+    'mj.wide.text': ('صندوق فاخر من أربعة عطور، مع تغليف ذهبي وبطاقة إهداء بخط اليد.', 'A box of four perfumes, gold-wrapped, with a handwritten card.'),
+    'mj.wide.button': ('صمّم هديتك', 'Build your gift'),
+    'mj.announcement.default': ('شحن مجاني لجميع مناطق المملكة فوق ٣٠٠ ر.س · عود أصلي ١٠٠٪ · قسّطها مع تابي وتمارا', 'Free delivery across the Kingdom over 300 SAR · 100% genuine oud · Pay in 4 with Tabby or Tamara'),
+})
+
 for lang, idx in (('ar', 0), ('en', 1)):
     path = f'locales/{lang}.json'
     with io.open(path, encoding='utf8') as fh:
