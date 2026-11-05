@@ -47,7 +47,7 @@ export function SpinShowcase({ data }: { data: SpinShowcaseData }) {
     if (!product) return;
     setAdding(true);
     try {
-      await window.salla?.cart?.addItem?.(Number(product.id), 1);
+      await window.salla?.cart?.addItem?.({ id: Number(product.id), quantity: 1 });
       openMiniCart();
     } catch {
       if (product.url) window.location.assign(product.url);

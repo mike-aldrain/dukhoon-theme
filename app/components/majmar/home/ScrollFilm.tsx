@@ -207,7 +207,7 @@ export function ScrollFilm({ data }: { data: ScrollFilmData }) {
     if (!item) return;
     setAdding(true);
     try {
-      await window.salla?.cart?.addItem?.(Number(item.id), 1);
+      await window.salla?.cart?.addItem?.({ id: Number(item.id), quantity: 1 });
       openMiniCart();
     } catch {
       // Products with options need the product page.

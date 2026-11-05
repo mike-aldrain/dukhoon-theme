@@ -27,7 +27,7 @@ export const priceOf = (p: Product): number =>
 export async function addAllToBag(ids: number[]): Promise<boolean> {
   try {
     for (const id of ids) {
-      await window.salla?.cart?.addItem?.(id, 1);
+      await window.salla?.cart?.addItem?.({ id, quantity: 1 });
     }
     return true;
   } catch {

@@ -157,7 +157,7 @@ export function HeroSlider({ data }: { data: HeroSliderData }) {
     if (!offer) return;
     setAdding(true);
     try {
-      await window.salla?.cart?.addItem?.(Number(offer.id), 1);
+      await window.salla?.cart?.addItem?.({ id: Number(offer.id), quantity: 1 });
       openMiniCart();
     } catch {
       if (offer.url) window.location.assign(offer.url);
