@@ -1,11 +1,11 @@
 {
   "type": "react",
   "name": {
-    "ar": "مِجمر",
-    "en": "Majmar"
+    "ar": "دخون",
+    "en": "Dukhoon"
   },
-  "repository": "https://github.com/SallaApp/theme-raed-react",
-  "author_email": "support@salla.sa",
+  "repository": "https://github.com/mike-aldrain/dukhoon-theme",
+  "author_email": "mike@javalogix.ca",
   "features": [
     "mega-menu",
     "fonts",
