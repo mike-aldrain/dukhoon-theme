@@ -182,7 +182,7 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
       <span className="mj-noir__ghost" aria-hidden="true">{tx(data.ghost, 'mj.noir.ghost', 'Oud')}</span>
       <span className="mj-noir__frame" aria-hidden="true" />
       <span className="mj-noir__vert" aria-hidden="true">
-        MAJMAR · MAISON D&apos;OUD · {tx(data.overline, 'mj.noir.overline', 'Diriyah edition 2026')}
+        DUKHOON · MAISON D&apos;OUD · {tx(data.overline, 'mj.noir.overline', 'Diriyah edition 2026')}
       </span>
       <div className="mj-container mj-noir__in">
         <div className="mj-noir__copy">

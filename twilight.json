@@ -351,7 +351,7 @@
       "id": "mj-g-branding",
       "type": "static",
       "format": "title",
-      "value": "مِجمر: الهوية · Majmar: Branding",
+      "value": "دخون: الهوية · Dukhoon: Branding",
       "variant": "h6"
     },
     {
@@ -414,7 +414,7 @@
       "required": false,
       "options": [
         {
-          "label": "خطوط مِجمر (المسيري، ريدكس برو، فراونسس) · Majmar fonts (El Messiri, Readex Pro, Fraunces)",
+          "label": "خطوط دخون (المسيري، ريدكس برو، فراونسس) · Dukhoon fonts (El Messiri, Readex Pro, Fraunces)",
           "value": "majmar"
         },
         {
@@ -424,7 +424,7 @@
       ],
       "selected": [
         {
-          "label": "خطوط مِجمر (المسيري، ريدكس برو، فراونسس) · Majmar fonts (El Messiri, Readex Pro, Fraunces)",
+          "label": "خطوط دخون (المسيري، ريدكس برو، فراونسس) · Dukhoon fonts (El Messiri, Readex Pro, Fraunces)",
           "value": "majmar"
         }
       ],
@@ -509,7 +509,7 @@
       "id": "mj-g-header",
       "type": "static",
       "format": "title",
-      "value": "مِجمر: الترويسة · Majmar: Header",
+      "value": "دخون: الترويسة · Dukhoon: Header",
       "variant": "h6"
     },
     {
@@ -571,7 +571,7 @@
       "id": "mj-g-card",
       "type": "static",
       "format": "title",
-      "value": "مِجمر: بطاقة المنتج · Majmar: Product card",
+      "value": "دخون: بطاقة المنتج · Dukhoon: Product card",
       "variant": "h6"
     },
     {
@@ -653,7 +653,7 @@
       "id": "mj-g-pdp",
       "type": "static",
       "format": "title",
-      "value": "مِجمر: صفحة المنتج · Majmar: Product page",
+      "value": "دخون: صفحة المنتج · Dukhoon: Product page",
       "variant": "h6"
     },
     {
@@ -699,7 +699,7 @@
       "id": "mj-g-footer",
       "type": "static",
       "format": "title",
-      "value": "مِجمر: التذييل · Majmar: Footer",
+      "value": "دخون: التذييل · Dukhoon: Footer",
       "variant": "h6"
     },
     {
@@ -729,7 +729,7 @@
       "id": "mj-g-social",
       "type": "static",
       "format": "title",
-      "value": "مِجمر: التواصل · Majmar: Social",
+      "value": "دخون: التواصل · Dukhoon: Social",
       "variant": "h6"
     },
     {
@@ -814,7 +814,7 @@
       "id": "mj-g-advanced",
       "type": "static",
       "format": "title",
-      "value": "مِجمر: متقدم · Majmar: Advanced",
+      "value": "دخون: متقدم · Dukhoon: Advanced",
       "variant": "h6"
     },
     {
@@ -860,8 +860,8 @@
     {
       "key": "b6fedcc5-831d-5789-a27b-1534a1edc624",
       "title": {
-        "ar": "مِجمر: الواجهة السينمائية الليلية",
-        "en": "Majmar: Cinematic Night Hero"
+        "ar": "دخون: الواجهة السينمائية الليلية",
+        "en": "Dukhoon: Cinematic Night Hero"
       },
       "icon": "sicon-image",
       "path": "home.mj-noir",
@@ -1007,8 +1007,8 @@
     {
       "key": "ee1db5e3-9093-5801-b028-077fe225052b",
       "title": {
-        "ar": "مِجمر: الإطلالات القابلة للتسوق",
-        "en": "Majmar: Shoppable Looks"
+        "ar": "دخون: الإطلالات القابلة للتسوق",
+        "en": "Dukhoon: Shoppable Looks"
       },
       "icon": "sicon-image-carousel",
       "path": "home.mj-looks",
@@ -1096,8 +1096,8 @@
     {
       "key": "1eaf9bf0-ea4a-537f-9e0b-c8ddcd45db0b",
       "title": {
-        "ar": "مِجمر: رحلتنا",
-        "en": "Majmar: Timeline"
+        "ar": "دخون: رحلتنا",
+        "en": "Dukhoon: Timeline"
       },
       "icon": "sicon-history",
       "path": "home.mj-timeline",
@@ -1174,8 +1174,8 @@
     {
       "key": "cfc72f8b-bc6a-5c1f-87d3-3e7fb30f3def",
       "title": {
-        "ar": "مِجمر: السلايدر الرئيسي مع العرض السريع",
-        "en": "Majmar: Main Slider with Flash Offer"
+        "ar": "دخون: السلايدر الرئيسي مع العرض السريع",
+        "en": "Dukhoon: Main Slider with Flash Offer"
       },
       "icon": "sicon-image-carousel",
       "path": "home.mj-slider",
@@ -1352,8 +1352,8 @@
     {
       "key": "6c5c155c-4878-5821-b86a-04206391ef0f",
       "title": {
-        "ar": "مِجمر: عرض القارورة ٣٦٠°",
-        "en": "Majmar: 360° Showcase"
+        "ar": "دخون: عرض القارورة ٣٦٠°",
+        "en": "Dukhoon: 360° Showcase"
       },
       "icon": "sicon-rotate",
       "path": "home.mj-spin",
@@ -1421,8 +1421,8 @@
     {
       "key": "20959098-8e85-59a8-a709-ee2ebbb0943e",
       "title": {
-        "ar": "مِجمر: هدايا المناسبات",
-        "en": "Majmar: Occasion Gifts"
+        "ar": "دخون: هدايا المناسبات",
+        "en": "Dukhoon: Occasion Gifts"
       },
       "icon": "sicon-gift",
       "path": "home.mj-occasions",
@@ -1535,8 +1535,8 @@
     {
       "key": "a21145b2-ec9d-5e82-a9be-bb8d0ea4a474",
       "title": {
-        "ar": "مِجمر: شبكة التصنيفات",
-        "en": "Majmar: Category Grid"
+        "ar": "دخون: شبكة التصنيفات",
+        "en": "Dukhoon: Category Grid"
       },
       "icon": "sicon-layout-grid",
       "path": "home.mj-categories",
@@ -1654,8 +1654,8 @@
     {
       "key": "f7b83ce6-a3c0-5e25-a1b7-745c98652433",
       "title": {
-        "ar": "مِجمر: بانرين ترويجيين",
-        "en": "Majmar: Promo Banners"
+        "ar": "دخون: بانرين ترويجيين",
+        "en": "Dukhoon: Promo Banners"
       },
       "icon": "sicon-image",
       "path": "home.mj-promos",
@@ -1731,8 +1731,8 @@
     {
       "key": "38cf9457-1507-598a-b7e6-fdd0576a9513",
       "title": {
-        "ar": "مِجمر: بانر عريض",
-        "en": "Majmar: Wide Banner"
+        "ar": "دخون: بانر عريض",
+        "en": "Dukhoon: Wide Banner"
       },
       "icon": "sicon-image",
       "path": "home.mj-wide",
@@ -1795,8 +1795,8 @@
     {
       "key": "0a290bf1-9d17-5d0c-a051-b0bb28c427f6",
       "title": {
-        "ar": "مِجمر: الواجهة السينمائية",
-        "en": "Majmar: Cinematic Hero"
+        "ar": "دخون: الواجهة السينمائية",
+        "en": "Dukhoon: Cinematic Hero"
       },
       "icon": "sicon-image",
       "path": "home.mj-hero",
@@ -1956,8 +1956,8 @@
     {
       "key": "17f6e36a-35ea-5be8-8a8c-8748959101bc",
       "title": {
-        "ar": "مِجمر: شريط النوتات المتحرك",
-        "en": "Majmar: Scent Marquee"
+        "ar": "دخون: شريط النوتات المتحرك",
+        "en": "Dukhoon: Scent Marquee"
       },
       "icon": "sicon-text",
       "path": "home.mj-marquee",
@@ -1977,8 +1977,8 @@
     {
       "key": "643a3eff-8614-5af1-8c99-57c4ff414c42",
       "title": {
-        "ar": "مِجمر: فيلم المنتج بالتمرير",
-        "en": "Majmar: Scroll Product Film"
+        "ar": "دخون: فيلم المنتج بالتمرير",
+        "en": "Dukhoon: Scroll Product Film"
       },
       "icon": "sicon-image-carousel",
       "path": "home.mj-film",
@@ -2138,8 +2138,8 @@
     {
       "key": "9c07ddb1-3e21-52cf-9771-eda24840bf5a",
       "title": {
-        "ar": "مِجمر: المجموعات المختارة",
-        "en": "Majmar: Featured Collections"
+        "ar": "دخون: المجموعات المختارة",
+        "en": "Dukhoon: Featured Collections"
       },
       "icon": "sicon-layout-grid",
       "path": "home.mj-collections",
@@ -2215,8 +2215,8 @@
     {
       "key": "6f8d4d93-d3ae-5678-8a7e-6e2a560d031c",
       "title": {
-        "ar": "مِجمر: عرض المنتجات",
-        "en": "Majmar: Product Showcase"
+        "ar": "دخون: عرض المنتجات",
+        "en": "Dukhoon: Product Showcase"
       },
       "icon": "sicon-store",
       "path": "home.mj-showcase",
@@ -2287,8 +2287,8 @@
     {
       "key": "e558bc24-6458-58cb-8814-8c7e3b38f6cf",
       "title": {
-        "ar": "مِجمر: قصة العلامة",
-        "en": "Majmar: Brand Story"
+        "ar": "دخون: قصة العلامة",
+        "en": "Dukhoon: Brand Story"
       },
       "icon": "sicon-book-open",
       "path": "home.mj-story",
@@ -2394,8 +2394,8 @@
     {
       "key": "ee47df2e-27d3-5c57-a280-e3e38ad2bc96",
       "title": {
-        "ar": "مِجمر: كتالوج الصور",
-        "en": "Majmar: Lookbook"
+        "ar": "دخون: كتالوج الصور",
+        "en": "Dukhoon: Lookbook"
       },
       "icon": "sicon-image-carousel",
       "path": "home.mj-lookbook",
@@ -2453,8 +2453,8 @@
     {
       "key": "83791427-2379-52b7-886a-8f8461635ecc",
       "title": {
-        "ar": "مِجمر: آراء العملاء",
-        "en": "Majmar: Testimonials"
+        "ar": "دخون: آراء العملاء",
+        "en": "Dukhoon: Testimonials"
       },
       "icon": "sicon-chat-conversation-alt",
       "path": "home.mj-testimonials",
@@ -2530,8 +2530,8 @@
     {
       "key": "62faf97a-c31c-589c-9b31-c6fc6ba99a8f",
       "title": {
-        "ar": "مِجمر: شبكة التواصل",
-        "en": "Majmar: Social Grid"
+        "ar": "دخون: شبكة التواصل",
+        "en": "Dukhoon: Social Grid"
       },
       "icon": "sicon-instagram",
       "path": "home.mj-social",
@@ -2606,8 +2606,8 @@
     {
       "key": "39269706-c7f7-551f-a1ed-f33b05bed037",
       "title": {
-        "ar": "مِجمر: النشرة البريدية",
-        "en": "Majmar: Newsletter"
+        "ar": "دخون: النشرة البريدية",
+        "en": "Dukhoon: Newsletter"
       },
       "icon": "sicon-mail",
       "path": "home.mj-newsletter",
@@ -2661,8 +2661,8 @@
     {
       "key": "fa687259-6e3e-52ed-a83e-6198e6a30be5",
       "title": {
-        "ar": "مِجمر: شريط الثقة",
-        "en": "Majmar: Trust Bar"
+        "ar": "دخون: شريط الثقة",
+        "en": "Dukhoon: Trust Bar"
       },
       "icon": "sicon-award-ribbon",
       "path": "home.mj-trust",
@@ -2791,8 +2791,8 @@
     {
       "key": "4e3a4eba-0784-565d-9b95-253c2051a9a7",
       "title": {
-        "ar": "مِجمر: عدّ تنازلي للمناسبة",
-        "en": "Majmar: Occasion Countdown"
+        "ar": "دخون: عدّ تنازلي للمناسبة",
+        "en": "Dukhoon: Occasion Countdown"
       },
       "icon": "sicon-award-ribbon",
       "path": "home.mj-countdown",
@@ -2846,8 +2846,8 @@
     {
       "key": "d4c36e57-8f6d-52a4-b38b-a1aaf2a7b8f9",
       "title": {
-        "ar": "مِجمر: عائلات العطور",
-        "en": "Majmar: Scent Families"
+        "ar": "دخون: عائلات العطور",
+        "en": "Dukhoon: Scent Families"
       },
       "icon": "sicon-layout-grid",
       "path": "home.mj-families",
@@ -2914,8 +2914,8 @@
     {
       "key": "f2546461-77bd-5877-92a6-8b1964f5237d",
       "title": {
-        "ar": "مِجمر: مستكشف العطر",
-        "en": "Majmar: Scent Finder"
+        "ar": "دخون: مستكشف العطر",
+        "en": "Dukhoon: Scent Finder"
       },
       "icon": "sicon-award-ribbon",
       "path": "home.mj-finder",
@@ -2979,8 +2979,8 @@
     {
       "key": "5f02e11c-875e-584d-a180-ea48eef00cd4",
       "title": {
-        "ar": "مِجمر: طقس متكامل",
-        "en": "Majmar: Ritual Bundle"
+        "ar": "دخون: طقس متكامل",
+        "en": "Dukhoon: Ritual Bundle"
       },
       "icon": "sicon-store",
       "path": "home.mj-ritual",
@@ -3030,8 +3030,8 @@
     {
       "key": "d028bbfe-394f-5f19-9e2c-93f0a435ba52",
       "title": {
-        "ar": "مِجمر: صمّم صندوق هديتك",
-        "en": "Majmar: Gift Box Builder"
+        "ar": "دخون: صمّم صندوق هديتك",
+        "en": "Dukhoon: Gift Box Builder"
       },
       "icon": "sicon-store",
       "path": "home.mj-giftbox",
@@ -3093,8 +3093,8 @@
     {
       "key": "cc8acfae-4cf9-587c-8138-f9575920865f",
       "title": {
-        "ar": "مِجمر: الأسئلة الشائعة",
-        "en": "Majmar: FAQ"
+        "ar": "دخون: الأسئلة الشائعة",
+        "en": "Dukhoon: FAQ"
       },
       "icon": "sicon-chat-conversation-alt",
       "path": "home.mj-faq",
@@ -3153,8 +3153,8 @@
     {
       "key": "8bd82337-a7ee-5f60-a81a-ff3c2c389e9a",
       "title": {
-        "ar": "مِجمر: ريلز المنتجات",
-        "en": "Majmar: Product Reels"
+        "ar": "دخون: ريلز المنتجات",
+        "en": "Dukhoon: Product Reels"
       },
       "icon": "sicon-image-carousel",
       "path": "home.mj-reels",
