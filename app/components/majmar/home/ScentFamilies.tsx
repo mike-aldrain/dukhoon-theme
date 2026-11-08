@@ -9,6 +9,8 @@
 import { Link } from '@salla.sa/twilight-theme-engine/common';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { itemsOf, MjMedia, SectionHead, urlOf, useBlockText, type ArtKind } from './shared';
+import { MEDIA_CDN } from '../../../lib/mediaCdn';
+
 
 interface FamilyItem {
   image?: string;
@@ -23,9 +25,8 @@ export interface ScentFamiliesData {
   [key: string]: unknown;
 }
 
-/** Default card photos, bundled so the block shows oud even before the store has products. */
-const PHOTOS = import.meta.glob('../../../assets/families/*.webp', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
-const photo = (name: string) => PHOTOS[`../../../assets/families/${name}.webp`];
+/** Default card photos (media CDN), so the block shows oud even before the store has products. */
+const photo = (name: string) => `${MEDIA_CDN}/families/${name}.webp`;
 
 /** [translation key, English fallback, art] for the default families. */
 const DEFAULTS: [string, string, ArtKind][] = [

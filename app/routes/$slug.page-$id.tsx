@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { page as pageApi } from '@salla.sa/twilight-theme-engine/api/page';
 import { PageSingle as EnginePageSingle } from '@salla.sa/twilight-theme-engine/routes/page';
 import { withHead } from '@salla.sa/twilight-theme-engine/tanstack';
+import { HookSlot } from '@salla.sa/twilight-theme-engine/hooks';
 import { PageSingle, type PageSingleProps } from '../components/page/PageSingle';
 
 export const Route = createFileRoute('/{-$locale}/$slug/page-{$id}')({
@@ -27,5 +28,12 @@ export const Route = createFileRoute('/{-$locale}/$slug/page-{$id}')({
 
 function PageSingleComponent() {
   const data = Route.useLoaderData();
-  return <PageSingle {...data} />;
+  // Hook points kept around the forked page so partner apps can inject before and after it.
+  return (
+    <>
+      <HookSlot name="page:start" />
+      <PageSingle {...data} />
+      <HookSlot name="page:end" />
+    </>
+  );
 }

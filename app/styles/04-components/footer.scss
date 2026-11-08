@@ -99,3 +99,13 @@ body.footer-is-dark .store-footer {
     @apply border-white/10 text-white;
   }
 }
+
+/* Phones: the footer columns are hidden, so the trust badges (commercial registration,
+   freelance certificate) get their own strip under the footer. Never hidden. */
+.mj-trust-mobile {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem calc(1rem + var(--mobile-bottom-bar-h, 64px));
+  background: rgb(var(--mj-surface-rgb, 20 15 11));
+  border-top: 1px solid rgb(var(--mj-line-rgb, 230 220 200) / 0.12);
+}

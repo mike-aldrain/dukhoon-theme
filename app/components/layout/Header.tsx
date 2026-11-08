@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouterState } from '@tanstack/react-router';
-import { SallaSearch } from '@salla.sa/twilight-components-react/search';
+import { SallaCartSummary } from '@salla.sa/twilight-components-react/cart-summary';
 import { SallaSocial } from '@salla.sa/twilight-components-react/social';
 import { SallaUserMenu } from '@salla.sa/twilight-components-react/user-menu';
 import { useTwilight, useIsHome } from '@salla.sa/twilight-theme-engine/providers';
@@ -9,7 +9,7 @@ import { HookSlot } from '@salla.sa/twilight-theme-engine/hooks';
 import { Image } from '@salla.sa/twilight-theme-engine/common';
 import { PageAdvertisements } from '@salla.sa/twilight-theme-engine/layout';
 import { MapPinIcon, SearchIcon } from '../icons';
-import { MiniCartButton } from '../majmar/MiniCart';
+import { openMiniCart } from '../majmar/MiniCart';
 import { useMajmar } from '../../hooks/useMajmar';
 import { useHydrated } from '../../hooks/useHydrated';
 import { useAppSafeAreaTop } from '../../hooks/useAppSafeAreaTop';
@@ -18,7 +18,7 @@ import { HeaderMainMenu } from './HeaderMainMenu';
 import { HeaderNav } from './HeaderNav';
 import { HeaderTopnav } from './HeaderTopnav';
 
-/** Opens the Salla search modal (the `<SallaSearch />` at the end of the header). */
+/** Opens the Salla search modal (the `<SallaSearch />` in the root layout). */
 const openSearch = () => window.salla?.event?.dispatch('search::open');
 
 const openScopes = () => window.salla?.event?.dispatch('scopes::open');
@@ -104,7 +104,7 @@ function HeaderIntro() {
  *
  * The menu opens a slide-in drawer at every breakpoint ({@link HeaderNav}); the
  * search icon opens the Salla search modal through the `search::open` event
- * (the `<SallaSearch />` instance mounted at the end of this header). Styling
+ * (the `<SallaSearch />` instance mounted in ThemeLayout). Styling
  * lives in `styles/04-components/header.scss`. The `header:start` / `header:end`
  * hook slots are kept for installed apps.
  *
@@ -299,8 +299,18 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
               {store?.scope && (
                 <ScopeButton label={store.scope.name || t('blocks.header.branches', 'Branches')} />
               )}
-              {/* Majmar: the bag opens the mini-cart drawer instead of the cart page. */}
-              <MiniCartButton />
+              {/* Salla's cart summary (count and total, kept in sync by the SDK). A click opens
+                  the theme's mini-cart drawer instead of leaving the page. */}
+              <span
+                className="header-action mj-cart-summary"
+                onClickCapture={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  openMiniCart();
+                }}
+              >
+                <SallaCartSummary />
+              </span>
               <SearchButton label={searchLabel} />
             </div>
           </div>
@@ -311,7 +321,6 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
 
       <HeaderNav open={navOpen} onClose={() => setNavOpen(false)} />
 
-      <SallaSearch suppressHydrationWarning />
 
       <HookSlot name="header:end" />
     </header>

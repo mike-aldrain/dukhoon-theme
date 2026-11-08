@@ -6,6 +6,8 @@ import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useUser } from '@salla.sa/twilight-theme-engine/hooks/useUser';
 import { Footer } from '@salla.sa/twilight-theme-engine/layout';
+import { SallaSearch } from '@salla.sa/twilight-components-react/search';
+import { SallaTrustBadges } from '@salla.sa/twilight-components-react/trust-badges';
 import { MajmarShell, majmarDataAttrs } from '../majmar/MajmarShell';
 import { useMajmar } from '../../hooks/useMajmar';
 import { AnnouncementBar } from '../majmar/AnnouncementBar';
@@ -182,6 +184,14 @@ export function ThemeLayout({ children }: ThemeLayoutProps) {
         <Suspense fallback={null}>
           <Footer />
         </Suspense>
+        {/* Phones hide the footer columns (their widgets move to the account sheet), so the
+            commercial registration / freelance badges are repeated here. Always shown when the
+            store has them; there is deliberately no setting to hide them. */}
+        <div className="mj-trust-mobile md:hidden">
+          <SallaTrustBadges />
+        </div>
+        {/* Search lives in the root layout so it stays available when the mobile app hides the header. */}
+        <SallaSearch suppressHydrationWarning />
         <MobileBottomBar
           navOpen={navOpen}
           onOpenNav={() => setNavOpen(true)}

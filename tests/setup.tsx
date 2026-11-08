@@ -92,3 +92,14 @@ vi.mock('@salla.sa/twilight-components-react', () => ({
     );
   },
 }));
+
+// Salla widget wrappers hydrate lazily with IntersectionObserver, which jsdom lacks; tests use plain stand-ins.
+vi.mock('@salla.sa/twilight-components-react/search', () => ({
+  SallaSearch: () => <salla-search />,
+}));
+vi.mock('@salla.sa/twilight-components-react/trust-badges', () => ({
+  SallaTrustBadges: () => <div data-testid="trust-badges" />,
+}));
+vi.mock('@salla.sa/twilight-components-react/cart-summary', () => ({
+  SallaCartSummary: () => <div data-testid="cart-summary" />,
+}));

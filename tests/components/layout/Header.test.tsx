@@ -96,9 +96,10 @@ describe('Header', () => {
     expect(container.querySelector('header.site-header')).toBeTruthy();
     expect(container.querySelector('.site-header__brand img')).toBeTruthy();
     expect(container.querySelector('salla-user-menu')).toBeTruthy();
-    // Majmar: the bag button opens the mini-cart drawer.
-    expect(container.querySelector('button.mj-bag')).toBeTruthy();
-    expect(container.querySelector('salla-search')).toBeTruthy();
+    // Salla's cart summary sits in the header actions (it opens the mini-cart drawer).
+    expect(container.querySelector('.mj-cart-summary salla-cart-summary')).toBeTruthy();
+    // The search modal lives in the root layout (ThemeLayout), not the header.
+    expect(container.querySelector('salla-search')).toBeNull();
     // One search trigger, in the actions group opposite the menu button.
     expect(getAllByLabelText('Search')).toHaveLength(1);
     expect(container.querySelector('[data-hook-slot="header:start"]')).toBeTruthy();

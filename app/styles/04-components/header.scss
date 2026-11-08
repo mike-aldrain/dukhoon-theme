@@ -1095,3 +1095,14 @@ body.topnav-is-dark .site-header--lite .site-header__bar {
 .site-header__mainmenu {
   @apply hidden;
 }
+
+/* Salla's cart summary in the header actions, styled like the other header icons. */
+.mj-cart-summary {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  salla-cart-summary {
+    color: inherit;
+  }
+}
