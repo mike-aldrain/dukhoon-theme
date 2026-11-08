@@ -2777,13 +2777,49 @@
               "value": "mastercard"
             }
           ],
-          "selected": [],
+          "selected": [
+            {
+              "label": "mada",
+              "value": "mada"
+            },
+            {
+              "label": "Apple Pay",
+              "value": "applepay"
+            },
+            {
+              "label": "STC Pay",
+              "value": "stcpay"
+            },
+            {
+              "label": "tabby",
+              "value": "tabby"
+            },
+            {
+              "label": "tamara",
+              "value": "tamara"
+            }
+          ],
           "value": [
-            "mada",
-            "applepay",
-            "stcpay",
-            "tabby",
-            "tamara"
+            {
+              "label": "mada",
+              "value": "mada"
+            },
+            {
+              "label": "Apple Pay",
+              "value": "applepay"
+            },
+            {
+              "label": "STC Pay",
+              "value": "stcpay"
+            },
+            {
+              "label": "tabby",
+              "value": "tabby"
+            },
+            {
+              "label": "tamara",
+              "value": "tamara"
+            }
           ]
         }
       ]
