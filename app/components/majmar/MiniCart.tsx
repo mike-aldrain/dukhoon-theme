@@ -73,7 +73,9 @@ export function MiniCartDrawer({ startOpen = false }: { startOpen?: boolean }) {
   const { format } = useMoney();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [cartId, setCartId] = useState<number | null>(null);
+  // Cart ids can exceed Number.MAX_SAFE_INTEGER (e.g. 3313977287877157684), so keep the
+  // SDK's id as text; Number() would round it to another cart and the drawer would look empty.
+  const [cartId, setCartId] = useState<string | null>(null);
   const opened = useRef(false);
   const [busy, setBusy] = useState<string | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -83,7 +85,7 @@ export function MiniCartDrawer({ startOpen = false }: { startOpen?: boolean }) {
       setOpen(true);
       window.salla?.cart?.api
         ?.getCurrentCartId?.()
-        .then((id: unknown) => setCartId(Number(id) || null))
+        .then((id: unknown) => setCartId(id == null || id === '' || id === 0 ? null : String(id)))
         .catch(() => setCartId(null));
     };
     window.addEventListener('mj:minicart', onOpen);
@@ -105,7 +107,8 @@ export function MiniCartDrawer({ startOpen = false }: { startOpen?: boolean }) {
   useDialogFocus(panelRef, open);
   useScrollLock(open);
 
-  const query = cartApi.queries.detail(cartId ?? 0);
+  // The engine types the id as number but only interpolates it into the request URL.
+  const query = cartApi.queries.detail((cartId ?? 0) as unknown as number);
   const { data, isLoading } = useQuery({ ...query, enabled: open && !!cartId });
 
   const refresh = useCallback(
