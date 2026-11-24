@@ -28,35 +28,36 @@ import {
 } from './components/home/FeaturedProducts';
 import { PhotosSliderWithText } from './components/home/PhotosSliderWithText';
 import { registerThemeHooks } from './hooks';
-import {
-  BrandStory,
-  CinematicHero,
-  Marquee,
-  HeroSlider,
-  CategoryGrid,
-  PromoPair,
-  WideBanner,
-  SpinShowcase,
-  Occasions,
-  NoirHero,
-  ShopLookbook,
-  Timeline,
-  ScrollFilm,
-  OccasionCountdown,
-  ScentFamilies,
-  ScentFinder,
-  RitualBundle,
-  GiftBoxBuilder,
-  Faq,
-  ProductReels,
-  FeaturedCollections,
-  Lookbook,
-  Newsletter,
-  ProductShowcase,
-  SocialGrid,
-  Testimonials,
-  TrustBar,
-} from './components/majmar/home';
+// Hero blocks usually open the page, so they stay in the main bundle. Every other Dukhoon
+// block downloads its own small file when the page uses it (see lazyBlock).
+import { CinematicHero } from './components/majmar/home/CinematicHero';
+import { HeroSlider } from './components/majmar/home/HeroSlider';
+import { NoirHero } from './components/majmar/home/NoirHero';
+import { lazyBlock } from './components/majmar/home/lazyBlock';
+const BrandStory = lazyBlock(() => import('./components/majmar/home/BrandStory').then((m) => m.BrandStory));
+const Marquee = lazyBlock(() => import('./components/majmar/home/Marquee').then((m) => m.Marquee));
+const CategoryGrid = lazyBlock(() => import('./components/majmar/home/CategoryGrid').then((m) => m.CategoryGrid));
+const PromoPair = lazyBlock(() => import('./components/majmar/home/PromoPair').then((m) => m.PromoPair));
+const WideBanner = lazyBlock(() => import('./components/majmar/home/WideBanner').then((m) => m.WideBanner));
+const SpinShowcase = lazyBlock(() => import('./components/majmar/home/SpinShowcase').then((m) => m.SpinShowcase));
+const Occasions = lazyBlock(() => import('./components/majmar/home/Occasions').then((m) => m.Occasions));
+const ShopLookbook = lazyBlock(() => import('./components/majmar/home/ShopLookbook').then((m) => m.ShopLookbook));
+const Timeline = lazyBlock(() => import('./components/majmar/home/Timeline').then((m) => m.Timeline));
+const ScrollFilm = lazyBlock(() => import('./components/majmar/home/ScrollFilm').then((m) => m.ScrollFilm));
+const OccasionCountdown = lazyBlock(() => import('./components/majmar/home/OccasionCountdown').then((m) => m.OccasionCountdown));
+const ScentFamilies = lazyBlock(() => import('./components/majmar/home/ScentFamilies').then((m) => m.ScentFamilies));
+const ScentFinder = lazyBlock(() => import('./components/majmar/home/ScentFinder').then((m) => m.ScentFinder));
+const RitualBundle = lazyBlock(() => import('./components/majmar/home/RitualBundle').then((m) => m.RitualBundle));
+const GiftBoxBuilder = lazyBlock(() => import('./components/majmar/home/GiftBoxBuilder').then((m) => m.GiftBoxBuilder));
+const Faq = lazyBlock(() => import('./components/majmar/home/Faq').then((m) => m.Faq));
+const ProductReels = lazyBlock(() => import('./components/majmar/home/ProductReels').then((m) => m.ProductReels));
+const FeaturedCollections = lazyBlock(() => import('./components/majmar/home/FeaturedCollections').then((m) => m.FeaturedCollections));
+const Lookbook = lazyBlock(() => import('./components/majmar/home/Lookbook').then((m) => m.Lookbook));
+const Newsletter = lazyBlock(() => import('./components/majmar/home/Newsletter').then((m) => m.Newsletter));
+const ProductShowcase = lazyBlock(() => import('./components/majmar/home/ProductShowcase').then((m) => m.ProductShowcase));
+const SocialGrid = lazyBlock(() => import('./components/majmar/home/SocialGrid').then((m) => m.SocialGrid));
+const Testimonials = lazyBlock(() => import('./components/majmar/home/Testimonials').then((m) => m.Testimonials));
+const TrustBar = lazyBlock(() => import('./components/majmar/home/TrustBar').then((m) => m.TrustBar));
 import { ProductListSkeleton } from './components/product/ProductListSkeleton';
 
 const ProductListPage = lazy(() =>
