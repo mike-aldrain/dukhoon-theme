@@ -227,11 +227,25 @@ export function urlOf(raw: unknown): string {
 /** A collection field as an array of plain objects (tolerates `slides.image` style keys). */
 export function itemsOf<T extends object>(raw: unknown, prefix: string): T[] {
   if (!Array.isArray(raw)) return [];
-  return raw.map((item) => {
-    const out: Record<string, unknown> = {};
-    Object.entries((item ?? {}) as Record<string, unknown>).forEach(([k, v]) => {
-      out[k.startsWith(`${prefix}.`) ? k.slice(prefix.length + 1) : k] = v;
-    });
-    return out as T;
-  });
+  return raw
+    .map((item) => {
+      const out: Record<string, unknown> = {};
+      Object.entries((item ?? {}) as Record<string, unknown>).forEach(([k, v]) => {
+        out[k.startsWith(`${prefix}.`) ? k.slice(prefix.length + 1) : k] = v;
+      });
+      return out;
+    })
+    // Salla's editor saves a new collection with one blank row; a row with no content would
+    // replace the block's default content with an empty tile, so blank rows are dropped.
+    .filter((out) => Object.values(out).some(hasContent)) as T[];
+}
+
+/** True for a value a merchant actually filled in (text, image, link, list or choice). */
+function hasContent(v: unknown): boolean {
+  if (v == null || v === false) return false;
+  if (typeof v === 'string') return v.trim() !== '';
+  if (typeof v === 'number') return true;
+  if (Array.isArray(v)) return v.some(hasContent);
+  if (typeof v === 'object') return Object.values(v as Record<string, unknown>).some(hasContent);
+  return Boolean(v);
 }
