@@ -240,11 +240,14 @@ export function itemsOf<T extends object>(raw: unknown, prefix: string): T[] {
     .filter((out) => Object.values(out).some(hasContent)) as T[];
 }
 
-/** True for a value a merchant actually filled in (text, image, link, list or choice). */
+/**
+ * True for a value a merchant actually filled in (text, image, link, product or choice).
+ * Numbers and switches do not count: the editor pre-fills them (e.g. a hotspot at 50%)
+ * in every new row, so they say nothing about whether the row was used.
+ */
 function hasContent(v: unknown): boolean {
-  if (v == null || v === false) return false;
-  if (typeof v === 'string') return v.trim() !== '';
-  if (typeof v === 'number') return true;
+  if (v == null || typeof v === 'boolean' || typeof v === 'number') return false;
+  if (typeof v === 'string') return v.trim() !== '' && Number.isNaN(Number(v));
   if (Array.isArray(v)) return v.some(hasContent);
   if (typeof v === 'object') return Object.values(v as Record<string, unknown>).some(hasContent);
   return Boolean(v);
