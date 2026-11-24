@@ -320,7 +320,7 @@ export function CartItem({ item, isFirst = false, onMutated }: CartItemProps) {
               />
 
               {isFreeProduct && (
-                <div className="free-ribbon absolute top-[11px] right-[-38px] w-32 bg-red-600 text-white text-xs font-bold text-center py-1 rotate-45 shadow-md">
+                <div className="free-ribbon absolute top-[11px] end-[-38px] w-32 rtl:-rotate-45 ltr:rotate-45 bg-red-600 text-white text-xs font-bold text-center py-1 shadow-md">
                   {t('pages.loyalty_program.free_product', 'Free')}
                 </div>
               )}

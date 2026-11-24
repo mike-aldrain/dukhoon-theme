@@ -367,5 +367,10 @@
   "mj.tl.d2": "We launched our first oud oil aged ten years.",
   "mj.tl.d3": "We reached every city in the Kingdom and the Gulf.",
   "mj.tl.d4": "A collection inspired by Najdi architecture and majlis hospitality.",
-  "mj.cats.discover": "Discover"
+  "mj.cats.discover": "Discover",
+  "mj.pdp.spin_open": "View in 360°",
+  "mj.pdp.spin_label": "360° view of {{name}}",
+  "mj.pdp.spin_angle": "Rotation",
+  "mj.pdp.spin_hint": "Drag or use the arrow keys to turn the piece.",
+  "mj.share": "Share"
 }

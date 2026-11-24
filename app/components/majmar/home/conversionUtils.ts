@@ -24,7 +24,8 @@ export const priceOf = (p: Product): number =>
  * Adds each product (quantity 1) to the bag, one after another. Resolves true when all
  * were added; false on the first failure (usually a product that needs options chosen).
  */
-export async function addAllToBag(ids: number[]): Promise<boolean> {
+/** Ids pass through unchanged: product ids can exceed Number.MAX_SAFE_INTEGER. */
+export async function addAllToBag(ids: (number | string)[]): Promise<boolean> {
   try {
     for (const id of ids) {
       await window.salla?.cart?.addItem?.({ id, quantity: 1 });

@@ -54,7 +54,7 @@ export function GiftBoxBuilder({ data }: { data: GiftBoxBuilderData }) {
 
   const addBox = async () => {
     setBusy(true);
-    const ok = await addAllToBag(chosen.map((p) => Number(p.id)));
+    const ok = await addAllToBag(chosen.map((p) => p.id));
     setBusy(false);
     if (ok) {
       setChosen([]);

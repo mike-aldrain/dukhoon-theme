@@ -112,6 +112,11 @@ function useAtmosphere(canvasRef: React.RefObject<HTMLCanvasElement | null>, on:
       if (visible && !raf) raf = requestAnimationFrame(loop);
     });
     io.observe(c);
+    // Reduced motion: draw nothing moving (the turntable frames still show the bottle).
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      io.disconnect();
+      return;
+    }
     const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(fit) : null;
     ro?.observe(c);
     raf = requestAnimationFrame(loop);
@@ -147,7 +152,7 @@ export function NoirHero({ data }: { data: NoirHeroData }) {
     if (!product) return;
     setAdding(true);
     try {
-      await window.salla?.cart?.addItem?.({ id: Number(product.id), quantity: 1 });
+      await window.salla?.cart?.addItem?.({ id: product.id, quantity: 1 });
       openMiniCart();
     } catch {
       if (product.url) window.location.assign(product.url);

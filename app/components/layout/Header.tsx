@@ -6,7 +6,7 @@ import { SallaUserMenu } from '@salla.sa/twilight-components-react/user-menu';
 import { useTwilight, useIsHome } from '@salla.sa/twilight-theme-engine/providers';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { HookSlot } from '@salla.sa/twilight-theme-engine/hooks';
-import { Image } from '@salla.sa/twilight-theme-engine/common';
+import { Image, Link } from '@salla.sa/twilight-theme-engine/common';
 import { PageAdvertisements } from '@salla.sa/twilight-theme-engine/layout';
 import { MapPinIcon, SearchIcon } from '../icons';
 import { openMiniCart } from '../majmar/MiniCart';
@@ -274,7 +274,7 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
               </button>
             </div>
 
-            <a className="site-header__brand" href={store?.url || '/'}>
+            <Link className="site-header__brand" to="/">
               <Image
                 src={store?.logo}
                 alt={`${store?.name || 'Store'} logo`}
@@ -283,7 +283,7 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
                 height={48}
               />
               <span className="sr-only">{store?.name || 'Store'}</span>
-            </a>
+            </Link>
 
             {isDefaultLayout && (
               <nav

@@ -321,7 +321,7 @@ export function AddProductToast() {
         <button
           type="button"
           className="s-add-product-toast__close"
-          aria-label="Close"
+          aria-label={t('mj.close', 'Close')}
           onClick={close}
         >
           <i className="sicon-cancel" />

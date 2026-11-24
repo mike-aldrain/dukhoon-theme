@@ -208,10 +208,10 @@ function NavHead({ canGoBack, onBack, onClose }: NavHeadProps) {
         >
           <ArrowLeftIcon aria-hidden="true" />
         </button>
-        <a className="site-nav-drawer__brand" href={store?.url || '/'} onClick={onClose}>
+        <Link className="site-nav-drawer__brand" to="/" onClick={onClose}>
           <Image src={store?.logo} alt={`${storeName} logo`} width={140} height={44} priority />
           <span className="sr-only">{storeName}</span>
-        </a>
+        </Link>
       </div>
       <button
         type="button"

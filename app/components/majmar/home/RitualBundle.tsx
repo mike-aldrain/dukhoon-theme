@@ -41,7 +41,7 @@ export function RitualBundle({ data }: { data: RitualBundleData }) {
   const addRitual = async () => {
     if (!items.length) return;
     setBusy(true);
-    const ok = await addAllToBag(items.map((p) => Number(p.id)));
+    const ok = await addAllToBag(items.map((p) => p.id));
     setBusy(false);
     if (ok) openMiniCart();
     else if (items[0]?.url) window.location.assign(items[0].url);

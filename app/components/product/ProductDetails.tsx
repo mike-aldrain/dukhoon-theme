@@ -80,7 +80,7 @@ export function ProductDetails({
             On mobile these move to the gallery overlay bar (`ProductGallery`),
             so this copy is hidden — see `product.scss`. */}
         <div className="product-details__title-actions flex shrink-0">
-          <SallaSocialShare className="inline-flex" aria-label="social share" />
+          <SallaSocialShare className="inline-flex" aria-label={t('mj.share', 'Share')} />
 
           <TitleWishlistButton productId={Number(product.id)} />
         </div>
@@ -167,7 +167,7 @@ export function ProductDetails({
                   className="group text-primary flex items-center justify-center"
                 >
                   <span>{t('pages.products.select_branch')}</span>
-                  <span className="sicon-keyboard_arrow_left mr-2 transition-transform group-hover:-translate-x-1"></span>
+                  <span className="sicon-keyboard_arrow_left me-2 transition-transform ltr:rotate-180 group-hover:-translate-x-1 ltr:group-hover:translate-x-1"></span>
                 </a>
               </div>
             </div>

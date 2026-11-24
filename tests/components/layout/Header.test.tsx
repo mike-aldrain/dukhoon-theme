@@ -45,6 +45,11 @@ vi.mock('@salla.sa/twilight-theme-engine/common', () => ({
   Image: (props: Record<string, unknown>) => (
     <img alt={String(props.alt ?? '')} src={String(props.src ?? '')} />
   ),
+  Link: ({ to, children, ...rest }: { to: string; children?: React.ReactNode } & Record<string, unknown>) => (
+    <a href={to} {...(rest as Record<string, never>)}>
+      {children}
+    </a>
+  ),
 }));
 
 vi.mock('../../../app/components/layout/HeaderMainMenu', () => ({
