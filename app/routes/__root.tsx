@@ -30,6 +30,11 @@ const FONTS_URL =
   '&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600' +
   '&display=swap';
 
+// Static string (no merchant input): turn the font sheet on once it has loaded.
+const FONTS_ASYNC_SCRIPT =
+  '(function(){var l=document.getElementById("dk-fonts");if(!l)return;' +
+  'if(l.sheet){l.media="all"}else{l.onload=function(){this.media="all"}}})();';
+
 export const Route = createTwilightRootRoute()({
   shellComponent: RootComponent,
 });
@@ -55,7 +60,14 @@ function RootComponent() {
             keep text visible and still while they load. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="stylesheet" href={FONTS_URL} />
+        {/* Non-blocking, like the engine's own #salla-theme-font: fetched early via preload,
+            applied as media="print" and switched to "all" once loaded, so it never delays first paint. */}
+        <link rel="preload" as="style" href={FONTS_URL} />
+        <link id="dk-fonts" rel="stylesheet" href={FONTS_URL} media="print" />
+        <script dangerouslySetInnerHTML={{ __html: FONTS_ASYNC_SCRIPT }} />
+        <noscript>
+          <link rel="stylesheet" href={FONTS_URL} />
+        </noscript>
         <ThemeStylesheet href={appCssUrl} critical={CRITICAL_CSS} />
         <ThemeHeadContent />
       </head>

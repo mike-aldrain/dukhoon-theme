@@ -1,0 +1,14 @@
+/*
+ * First-screen subset of the Majmar layer, for critical.scss only.
+ * Leaves out below-the-fold block styles (conversion blocks, scroll film); app.css loads them.
+ * Keep this list in the same order as _index.scss.
+ */
+@import './base';
+@import './motion';
+@import './layout';
+@import './home';
+@import './product';
+@import './components';
+@import './store';
+@import './heritage';
+@import './noir';
